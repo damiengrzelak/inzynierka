@@ -18,4 +18,8 @@
         </activity>
     </application>
 
+    <meta-data
+        android:name="wfiis.pizzerialesna.glide.HqGlideModule"
+        android:value="GlideModule" />
+
 </manifest>

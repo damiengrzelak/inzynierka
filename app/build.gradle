@@ -18,6 +18,7 @@ android {
         }
     }
 }
+def dbflow_version = "3.1.1"
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -27,4 +28,17 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
+    //database
+    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+    compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
+    compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
+
+    //swipe layout
+    compile "com.daimajia.swipelayout:library:1.2.0@aar"
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'org.jsoup:jsoup:1.10.3'
+    testCompile 'junit:junit:4.12'
 }
+
