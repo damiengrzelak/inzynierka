@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "697997670676",
+    "firebase_url": "https://pizzerialesnaapp.firebaseio.com",
+    "project_id": "pizzerialesnaapp",
+    "storage_bucket": "pizzerialesnaapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697997670676:android:f75c629ef93f08a3",
+        "android_client_info": {
+          "package_name": "wfiis.pizzerialesna"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "697997670676-6oke189nirdncc7vmc0g3iqvcofvun51.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "wfiis.pizzerialesna",
+            "certificate_hash": "16be88dbed3d4d43d36f4665fd3464cc71b67044"
+          }
+        },
+        {
+          "client_id": "697997670676-rhs4umspbq19vjhf78dm7ofsdlo8o7s0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAET7j2wEwwi1APDL7GTstV_JxX6CDQVHM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "697997670676-vbrmgh50r5ivcig3uopevaltq763acvp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.PizzeriaLesnaApp"
+              }
+            },
+            {
+              "client_id": "697997670676-rhs4umspbq19vjhf78dm7ofsdlo8o7s0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,13 +1,22 @@
 package wfiis.pizzerialesna.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.inverce.mod.core.IM;
 import com.inverce.mod.core.Ui;
 
 import wfiis.pizzerialesna.R;
@@ -17,7 +26,7 @@ import wfiis.pizzerialesna.tools.AppendMessage;
 import wfiis.pizzerialesna.tools.SpanUtils;
 import wfiis.pizzerialesna.validation.Validator;
 
-public class LoginFragment extends BaseFragment implements View.OnClickListener{
+public class LoginFragment extends BaseFragment implements View.OnClickListener {
 
     private InputEditTextView email;
     private InputEditTextView password;
@@ -25,6 +34,8 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener{
     private TextView registerTextView;
 
     private boolean isValid;
+
+    private FirebaseAuth mAuth;
 
     public static LoginFragment newInstance() {
         return new LoginFragment();
@@ -61,17 +72,15 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener{
         switch (id) {
             case R.id.fragment_login_login_button:
                 validate();
-                if (isValid) {
-                    getActions().navigateTo(HomeFragment.newInstance(), false);
-                }
+                authUser(email.getText(), password.getText());
                 break;
             case R.id.fragment_login_register_textView:
+                getActions().navigateTo(RegisterFragment.newInstance(), true);
                 break;
         }
     }
 
     private void validate() {
-        String error_text;
         if (Validator.isEmailValid(email.getText())) {
             email.setError(false);
         } else {
@@ -91,5 +100,26 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener{
             AppendMessage.showSuccessOrError();
             isValid = false;
         }
+    }
+
+    private boolean authUser(String email, String password) {
+        mAuth = FirebaseAuth.getInstance();
+        if (isValid) {
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(IM.activity(), new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                isValid = true;
+                                getActions().navigateTo(HomeFragment.newInstance(), false);
+                            } else {
+                                AppendMessage.appendMessage(R.string.incorrect_sing_in_pass);
+                                isValid = false;
+                                AppendMessage.showSuccessOrError();
+                            }
+                        }
+                    });
+        }
+        return isValid;
     }
 }

@@ -65,7 +65,7 @@ public class Validator {
     }
 
     public static boolean isPasswordValid(String text) {
-        String pattern = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W_]).{8,15}+$";
+        String pattern = "^.{8,}+$";
         if (Util.nullOrEmpty(text)) {
             return false;
         } else {

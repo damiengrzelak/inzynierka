@@ -47,7 +47,7 @@ public class InputEditTextView extends LinearLayout implements View.OnFocusChang
 
     private ImageView eye;
     private int redBorder;
-    private int grayBorder;
+    private int brownBorder;
     private int red;
     private int black;
     private int gray;
@@ -156,7 +156,7 @@ public class InputEditTextView extends LinearLayout implements View.OnFocusChang
 
     private void setResources() {
         redBorder = R.drawable.red_border_edit_text;
-        grayBorder = R.drawable.gray_border_edit_text;
+        brownBorder = R.drawable.brown_border_edit_text;
         red = ResourcesCompat.getColor(getResources(), R.color.red, null);
         black = ResourcesCompat.getColor(getResources(), R.color.black, null);
         gray = ResourcesCompat.getColor(getResources(), R.color.gray_light, null);
@@ -244,7 +244,7 @@ public class InputEditTextView extends LinearLayout implements View.OnFocusChang
             edit.setTextColor(red);
             edit.setHintTextColor(red);
         } else {
-            view.setBackgroundResource(grayBorder);
+            view.setBackgroundResource(brownBorder);
             view.setHintTextAppearance(R.style.FloatingLabel);
             edit.setTextColor(black);
             edit.setHintTextColor(gray);

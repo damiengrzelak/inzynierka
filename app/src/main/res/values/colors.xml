@@ -11,6 +11,8 @@
     <color name="success_text">#006112</color>
 
 
+    <!-- Buttons -->
+    <color name="base_brown">#936744</color>
     <!--TEMPORARY-->
     <color name="gray_light">#999999</color>
     <color name="base_blue">#0072b7</color>
