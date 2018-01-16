@@ -11,7 +11,9 @@
         android:id="@+id/fragment_login_logo"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:padding="20dp"
+        android:layout_marginLeft="@dimen/left_right_padding"
+        android:layout_marginRight="@dimen/left_right_padding"
+        android:layout_marginBottom="60dp"
         android:src="@drawable/pizzeria_logo" />
 
     <LinearLayout
@@ -35,7 +37,9 @@
             android:layout_height="wrap_content"
             app:hint="@string/password"
             android:layout_marginBottom="@dimen/between_input_margin"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            app:password="true"
+            />
 
         <Button
             android:background="@drawable/rounded_button_background"
