@@ -1,5 +1,6 @@
 package wfiis.pizzerialesna;
 
+import android.content.pm.ActivityInfo;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -7,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import wfiis.pizzerialesna.base.BaseFragment;
+import wfiis.pizzerialesna.fragments.HomeFragment;
+import wfiis.pizzerialesna.fragments.LoginFragment;
 import wfiis.pizzerialesna.interactions.ActivityInteractions;
 import wfiis.pizzerialesna.interactions.TopBarInteractions;
 
@@ -17,14 +20,15 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         setContentView(R.layout.activity_main);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        //topBar = (TopBarInteractions) fragmentManager.findFragmentById(R.id.top_fragment);
+        topBar = (TopBarInteractions) fragmentManager.findFragmentById(R.id.top_fragment);
         fragmentManager.addOnBackStackChangedListener(this);
 
         if (savedInstanceState == null) {
-           // navigateTo(FIRSTVIEW.newInstance(), false);
+            navigateTo(LoginFragment.newInstance(), false);
         }
     }
 

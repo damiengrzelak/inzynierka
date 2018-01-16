@@ -14,14 +14,13 @@ import wfiis.pizzerialesna.interactions.TopBarInteractions;
 
 public class TopBarFragment extends BaseFragment implements TopBarInteractions, View.OnClickListener {
     private View goBackBtn;
-    private TextView title;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_top_bar, container, false);
 
-        //goBackBtn = view.findViewById(R.id.go_back_btn);
+        goBackBtn = view.findViewById(R.id.go_back_btn);
         //title = view.findViewById(R.id.top_bar_title);
 
         goBackBtn.setOnClickListener(this);
@@ -36,7 +35,6 @@ public class TopBarFragment extends BaseFragment implements TopBarInteractions, 
 
     @Override
     public void setTitle(@StringRes int res) {
-        title.setText(res);
     }
 
     @Override
@@ -46,9 +44,9 @@ public class TopBarFragment extends BaseFragment implements TopBarInteractions, 
         }
 
         switch (view.getId()) {
-            //case R.id.go_back_btn:
-            //    getActions().navigateBack();
-            //    break;
+            case R.id.go_back_btn:
+                getActions().navigateBack();
+                break;
         }
     }
 }
