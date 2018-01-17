@@ -1,5 +1,9 @@
 package wfiis.pizzerialesna.fragments;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -18,6 +22,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
     private RelativeLayout fb;
     private RelativeLayout events;
     private RelativeLayout address;
+
+    public static String FACEBOOK_URL = "https://www.facebook.com/Pizzeria-Le%C5%9Bna-w-Kro%C5%9Bniewicach-457823184290541/";
+    public static String FACEBOOK_PAGE_ID = "Pizzeria-Leśna-w-Krośniewicach-457823184290541";
 
     public static HomeFragment newInstance(){
         return new HomeFragment();
@@ -64,6 +71,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
             case R.id.fragment_menu_promo:
                 break;
             case R.id.fragment_menu_fb:
+                goToFacebook(getContext());
                 break;
             case R.id.fragment_menu_party:
                 break;
@@ -71,5 +79,26 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
                 getActions().navigateTo(ContactFragment.newInstance(), true);
                 break;
         }
+    }
+
+    public static String getFacebookPageURL(Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        try {
+            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
+            if (versionCode >= 3002850) {
+                return "fb://facewebmodal/f?href=" + FACEBOOK_URL;
+            } else {
+                return "fb://page/" + FACEBOOK_PAGE_ID;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            return FACEBOOK_URL;
+        }
+    }
+
+    public void goToFacebook(Context context) {
+        Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+        String facebookUrl = getFacebookPageURL(context);
+        facebookIntent.setData(Uri.parse(facebookUrl));
+        startActivity(facebookIntent);
     }
 }
