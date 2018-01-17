@@ -4,9 +4,184 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_menu">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/fragment_menu_pizza"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0">
+
+                <ImageView
+                    android:id="@+id/block_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/pizza_menu" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/block_1"
+                    android:text="@string/menu_pizze"
+                    android:textColor="@color/black"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/fragment_menu_obiad"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0">
+
+                <ImageView
+                    android:id="@+id/block_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/menu_pizza" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/block_2"
+                    android:text="@string/obiady"
+                    android:textColor="@color/black"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:orientation="horizontal">
+            <RelativeLayout
+                android:id="@+id/fragment_menu_promo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0">
+
+                <ImageView
+                    android:id="@+id/block_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/promotion" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/block_3"
+                    android:text="@string/promocje"
+                    android:textColor="@color/black"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/fragment_menu_fb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0">
+
+                <ImageView
+                    android:id="@+id/block_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/facebook" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/block_4"
+                    android:text="@string/fb"
+                    android:textColor="@color/black"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:orientation="horizontal">
+            <RelativeLayout
+                android:id="@+id/fragment_menu_party"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0">
+
+                <ImageView
+                    android:id="@+id/block_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/events" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/block_5"
+                    android:text="@string/imprezy"
+                    android:textColor="@color/black"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/fragment_menu_adress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0">
+
+                <ImageView
+                    android:id="@+id/block_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/map" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/block_6"
+                    android:text="@string/adres"
+                    android:textColor="@color/black"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>
