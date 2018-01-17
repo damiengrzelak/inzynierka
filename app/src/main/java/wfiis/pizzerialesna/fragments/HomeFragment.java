@@ -65,6 +65,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
         int id = view.getId();
         switch (id){
             case R.id.fragment_menu_pizza:
+                getActions().navigateTo(PizzaMenuFragment.newInstance(), true);
                 break;
             case R.id.fragment_menu_obiad:
                 break;
