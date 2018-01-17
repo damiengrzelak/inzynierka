@@ -1,15 +1,14 @@
 package wfiis.pizzerialesna;
 
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import wfiis.pizzerialesna.base.BaseFragment;
-import wfiis.pizzerialesna.fragments.HomeFragment;
-import wfiis.pizzerialesna.fragments.LoginFragment;
+import wfiis.pizzerialesna.fragments.SplashFragment;
 import wfiis.pizzerialesna.interactions.ActivityInteractions;
 import wfiis.pizzerialesna.interactions.TopBarInteractions;
 
@@ -28,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
         fragmentManager.addOnBackStackChangedListener(this);
 
         if (savedInstanceState == null) {
-            navigateTo(LoginFragment.newInstance(), false);
+            navigateTo(SplashFragment.newInstance(), false);
         }
     }
 

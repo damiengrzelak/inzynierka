@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "697997670676-h6lv6lvjc1jt14vt3m4n5fv4to5sm9pk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "wfiis.pizzerialesna",
+            "certificate_hash": "b307db7d969c5ed46f99820e6bb69c5f03bc00d3"
+          }
+        },
+        {
           "client_id": "697997670676-6oke189nirdncc7vmc0g3iqvcofvun51.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

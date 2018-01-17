@@ -1,107 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/baground_gray"
-    android:paddingLeft="@dimen/left_right_padding"
-    android:paddingRight="@dimen/left_right_padding"
-    android:paddingTop="@dimen/left_right_padding"
-    app:layout_goneMarginRight="@dimen/left_right_padding"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
 
-    <wfiis.pizzerialesna.customViews.InputEditTextView
-        android:id="@+id/fragment_register_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/between_input_margin"
-        app:hint="@string/name" />
-
-    <wfiis.pizzerialesna.customViews.InputEditTextView
-        android:id="@+id/fragment_register_surname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/between_input_margin"
-        app:hint="@string/surnamee" />
-
-    <wfiis.pizzerialesna.customViews.InputEditTextView
-        android:id="@+id/fragment_register_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/between_input_margin"
-        app:hint="@string/email" />
-
-    <wfiis.pizzerialesna.customViews.InputEditTextView
-        android:id="@+id/fragment_register_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/between_input_margin"
-        app:hint="@string/password"
-        app:password="true"/>
-
-    <wfiis.pizzerialesna.customViews.InputEditTextView
-        android:id="@+id/fragment_register_tel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/between_input_margin"
-        app:hint="@string/phone_nr" />
+    android:focusable="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/left_right_padding"
+        android:paddingRight="@dimen/left_right_padding"
+        android:paddingTop="@dimen/left_right_padding"
+        app:layout_goneMarginRight="@dimen/left_right_padding"
+        android:background="@drawable/baground_gray">
 
         <wfiis.pizzerialesna.customViews.InputEditTextView
-            android:id="@+id/fragment_register_street"
+            android:id="@+id/fragment_register_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/between_input_margin"
-            android:layout_marginRight="@dimen/between_input_margin"
-            android:layout_weight="1.0"
-            app:hint="@string/street" />
+            app:hint="@string/name" />
 
         <wfiis.pizzerialesna.customViews.InputEditTextView
-            android:id="@+id/fragment_register_street_nr"
+            android:id="@+id/fragment_register_surname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/between_input_margin"
-            android:layout_weight="1.5"
-            app:hint="@string/house_nr" />
+            app:hint="@string/surnamee" />
+
+        <wfiis.pizzerialesna.customViews.InputEditTextView
+            android:id="@+id/fragment_register_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/between_input_margin"
+            app:hint="@string/email" />
+
+        <wfiis.pizzerialesna.customViews.InputEditTextView
+            android:id="@+id/fragment_register_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/between_input_margin"
+            app:hint="@string/password"
+            app:password="true" />
+
+        <wfiis.pizzerialesna.customViews.InputEditTextView
+            android:id="@+id/fragment_register_tel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/between_input_margin"
+            android:inputType="number"
+            app:hint="@string/phone_nr" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <wfiis.pizzerialesna.customViews.InputEditTextView
+                android:id="@+id/fragment_register_street"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/between_input_margin"
+                android:layout_marginRight="@dimen/between_input_margin"
+                android:layout_weight="1.0"
+                app:hint="@string/street" />
+
+            <wfiis.pizzerialesna.customViews.InputEditTextView
+                android:id="@+id/fragment_register_street_nr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/between_input_margin"
+                android:layout_weight="1.5"
+                app:hint="@string/house_nr" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <wfiis.pizzerialesna.customViews.InputEditTextView
+                android:id="@+id/fragment_register_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/between_input_margin"
+                android:layout_marginRight="@dimen/between_input_margin"
+                android:layout_weight="1.0"
+                app:hint="@string/city" />
+
+            <wfiis.pizzerialesna.customViews.InputEditTextView
+                android:id="@+id/fragment_register_zip_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/between_input_margin"
+                android:layout_weight="1.5"
+                android:inputType="number"
+                app:hint="@string/zip_code" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/fragment_register_register_button"
+            style="@style/DefaultRoundedButton"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/form_input_height"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/rounded_button_background"
+            android:text="@string/register"
+            android:layout_marginBottom="@dimen/view_spacing_small"/>
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <wfiis.pizzerialesna.customViews.InputEditTextView
-            android:id="@+id/fragment_register_city"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/between_input_margin"
-            android:layout_marginRight="@dimen/between_input_margin"
-            android:layout_weight="1.0"
-            app:hint="@string/city" />
-
-        <wfiis.pizzerialesna.customViews.InputEditTextView
-            android:id="@+id/fragment_register_zip_code"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/between_input_margin"
-            android:layout_weight="1.5"
-            app:hint="@string/zip_code" />
-
-    </LinearLayout>
-
-    <Button
-        android:background="@drawable/rounded_button_background"
-        style="@style/DefaultRoundedButton"
-        android:id="@+id/fragment_register_register_button"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/form_input_height"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/button_bottom_text_small"
-        android:text="@string/register"/>
-
-</LinearLayout>
+</ScrollView>
