@@ -1,3 +1,46 @@
 <resources>
-    <string name="app_name">Pizzeria Lesna</string>
+    <string name="app_name">Pizzeria Leśna</string>
+
+    <string name="register">Zarejestruj</string>
+    <string name="login">Zaloguj</string>
+    <string name="loggout">Wyloguj</string>
+    <string name="dont_have_acc_register">Nie masz konta? Zarejestruj się!</string>
+    <string name="register_success">Zarejestrowano!</string>
+    <string name="open_app">Uruchamianie aplikacji</string>
+
+    <!-- Validation -->
+    <string name="name_incorect">Wprowadź poprawne imię</string>
+    <string name="last_name_incorect">Wprowadź poprawne nazwisko</string>
+    <string name="email_incorect">Wprowadź poprawny adres email</string>
+    <string name="password_incorect">Hasło powinno zawierać minimum 8 znaków</string>
+    <string name="phone_incorect">Wprowadź poprawny numer telefonu</string>
+    <string name="street_incorrect">Wprowadź poprawną nazwę ulicy</string>
+    <string name="street_nr_incorect">Wprowadź poprawny numer domu</string>
+    <string name="city_incorrect">Wprowadź poprawną nazwę miejscowości</string>
+    <string name="zip_code_incorrect">Wprowadź poprawny kod pocztowy</string>
+    <string name="incorrect_sing_in_pass">Niepoprany email lub hasło</string>
+    <string name="register_problem">Nieudało się zarejestrować użytkownika</string>
+    
+    <!-- Data -->
+    <string name="name">Imię</string>
+    <string name="surnamee">Nazwisko</string>
+    <string name="email">Adres email</string>
+    <string name="password">Hasło</string>
+    <string name="phone_nr">Numer telefonu</string>
+    <string name="street">Ulica</string>
+    <string name="house_nr">Nr domu</string>
+    <string name="city">Miejscowość</string>
+    <string name="zip_code">Kod pocztowy</string>
+    
+    <!-- Menu -->
+    <string name="menu_pizze">Menu Pizze</string>
+    <string name="obiady">Dania obiadowe i inne</string>
+    <string name="promocje">Propocje</string>
+    <string name="fb">Facebook</string>
+    <string name="imprezy">Imprezy okolicznościowe</string>
+    <string name="adres">Adres i kontakt</string>
+
+    <!-- UTILS -->
+    <string name="google_android_map_api_key">AIzaSyBTl94XORxuPnN7QkTc_9JImOK3o6VJp3k</string>
+
 </resources>

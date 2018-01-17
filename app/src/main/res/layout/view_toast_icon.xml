@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_login_custom_toast_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/view_toast_icon_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/error_background">
+
+        <ImageView
+            android:id="@+id/view_toast_icon_exclamation"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"/>
+
+        <TextView
+            android:id="@+id/fragment_login_toast_message_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/view_toast_icon_exclamation"
+            android:layout_toRightOf="@+id/view_toast_icon_exclamation"
+            android:gravity="left"
+            android:paddingBottom="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/l_warning_red"
+            tools:text="Attention attention attention attention attention attention attention" />
+
+        <ImageView
+            android:id="@+id/snackbar_close_button"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:padding="10dp"
+            android:src="@drawable/close_black"/>
+
+
+    </RelativeLayout>
+</RelativeLayout>

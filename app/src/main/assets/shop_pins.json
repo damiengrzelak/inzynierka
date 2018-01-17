@@ -1,0 +1,212 @@
+[
+  {
+    "name": "CH Suwałki Plaza",
+    "address": "ul. Dwernickiego 15",
+    "city": "Suwałki",
+    "zip-code": "16-400",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 54.107558,
+    "longitude": 22.9338
+  },
+  {
+    "name": "Ełk Brama Mazur",
+    "address": "ul. Plac Miejski 1",
+    "city": "Ełk",
+    "zip-code": "19-300",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 53.822955,
+    "longitude": 22.361362
+  },
+  {
+    "name": "Białystok Galeria Jurowiecka",
+    "address": "ul. Jurowiecka 1",
+    "city": "Białystok",
+    "zip-code": "15-101",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 53.136297,
+    "longitude": 23.16428
+  },
+  {
+    "name": "CH Galeria Biała",
+    "address": "ul. Czesława Miłosza 2",
+    "city": "Białystok",
+    "zip-code": "15-265",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 53.123057,
+    "longitude": 23.177876
+  },
+  {
+    "name": "Białystok Outlet Center",
+    "address": "ul. Narodowych Sił Zbrojnych 15B",
+    "city": "Białystok",
+    "zip-code": "15-690",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 53.149277,
+    "longitude": 23.079598
+  },
+  {
+    "name": "CH Auchan Hetmańska",
+    "address": "ul. Hetmańska 16",
+    "city": "Białystok",
+    "zip-code": "15-727",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 53.135596,
+    "longitude": 23.117509
+  },
+  {
+    "name": "Galeria Warmińska Megastore",
+    "address": "ul. Tuwima 26",
+    "city": "Olsztyn",
+    "zip-code": "10-748",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 53.753953,
+    "longitude": 20.48491
+  },
+  {
+    "name": "Elbląg Ogrody",
+    "address": "ul. Płk. Dąbka 152",
+    "city": "Elbląg",
+    "zip-code": "82-300",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 54.177648,
+    "longitude": 19.405071
+  },
+  {
+    "name": "CH Port Łódź",
+    "address": "ul. Pabianicka 245",
+    "city": "Łódź",
+    "zip-code": "93-457",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 51.704026,
+    "longitude": 19.41657
+  },
+  {
+    "name": "CH Galeria Łódzka",
+    "address": "ul. Piłsuckiego 15/23",
+    "city": "Łódź",
+    "zip-code": "90-307",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 51.777701,
+    "longitude": 19.438951
+  },
+  {
+    "name": "CH Manufaktura",
+    "address": "ul. Karskiego 5",
+    "city": "Łódź",
+    "zip-code": "91-071",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 51.759336,
+    "longitude": 19.465354
+  },
+  {
+    "name": "CH Chmielna",
+    "address": "ul. Chmielna 25",
+    "city": "Warszawa",
+    "zip-code": "00-021",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 52.23209,
+    "longitude": 21.01397
+  },
+  {
+    "name": "CH Złote Tarasy",
+    "address": "ul. Złota 59",
+    "city": "Warszawa",
+    "zip-code": "00-120",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 52.230108,
+    "longitude": 21.002687
+  },
+  {
+    "name": "CH Arkadia",
+    "address": "ul. Al. Jana Pawła II 82",
+    "city": "Warszawa",
+    "zip-code": "00-175",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 52.257373,
+    "longitude": 20.984583
+  },
+  {
+    "name": "CH Blue City",
+    "address": "ul. Al. Jerozolimskie 179",
+    "city": "Warszawa",
+    "zip-code": "02-222",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 52.212875,
+    "longitude": 20.955478
+  },
+  {
+    "name": "CH Plac Unii City Shopping",
+    "address": "ul. Puławska 2",
+    "city": "Warszawa",
+    "zip-code": "02-566",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 52.212703,
+    "longitude": 21.019792
+  },
+  {
+    "name": "CH Galeria Mokotów",
+    "address": "ul. Wołoska 12",
+    "city": "Warszawa",
+    "zip-code": "02-675",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 52.179706,
+    "longitude": 21.004454
+  },
+  {
+    "name": "CH Sadyba Best Mall",
+    "address": "ul. Powsińska 31",
+    "city": "Warszawa",
+    "zip-code": "02-903",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 52.18726,
+    "longitude": 21.062221
+  },
+  {
+    "name": "Poznań Stary Browar",
+    "address": "ul. Półwiejska 42",
+    "city": "Poznań",
+    "zip-code": "61-888",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 52.401175,
+    "longitude": 16.928189
+  },
+  {
+    "name": "Galeria Posnania",
+    "address": "ul. Pleszewska 1",
+    "city": "Poznań",
+    "zip-code": "61-136",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 52.398092,
+    "longitude": 16.953278
+  },
+  {
+    "name": "CH Avenida Poznań",
+    "address": "ul. Stanisława Matyi 2",
+    "city": "Poznań",
+    "zip-code": "61-586",
+    "phone": "(22) 448 00 00",
+    "hours": "pon - sob: \t 09:00 - 21:00 \n niedziela: \t 10:00 - 20:00",
+    "latitude": 52.402982,
+    "longitude": 16.914613
+  }
+]
