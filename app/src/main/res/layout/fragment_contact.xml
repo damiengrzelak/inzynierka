@@ -46,13 +46,14 @@
             android:textColor="@color/black" />
 
         <TextView
+            android:id="@+id/fragment_contact_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/teltext"
             android:paddingLeft="2dp"
             android:paddingRight="@dimen/left_right_padding"
             android:text="781 509 851"
-            android:textColor="@color/black"
+            android:textColor="@color/base_blue"
             android:textSize="16dp"
             android:textStyle="bold" />
     </RelativeLayout>

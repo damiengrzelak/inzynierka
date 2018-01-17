@@ -3,6 +3,9 @@ package wfiis.pizzerialesna.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +21,12 @@ import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.base.BaseFragment;
 import wfiis.pizzerialesna.customViews.InputEditTextView;
 import wfiis.pizzerialesna.customViews.TopToast;
+import wfiis.pizzerialesna.customViews.ZipCodeListener;
 import wfiis.pizzerialesna.tools.AppendMessage;
 import wfiis.pizzerialesna.tools.Util;
 import wfiis.pizzerialesna.validation.Validator;
 
-public class RegisterFragment extends BaseFragment implements View.OnClickListener {
+public class RegisterFragment extends BaseFragment implements View.OnClickListener, TextWatcher{
 
     private InputEditTextView name;
     private InputEditTextView surname;
@@ -37,6 +41,8 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
     private boolean isValid;
     private FirebaseAuth mAuth;
+    private int PHONELENGT = 9;
+    private int ZIP_CODE_LENGTH = 6;
 
     public static RegisterFragment newInstance(){
         return new RegisterFragment();
@@ -49,6 +55,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         assert getActions() != null;
 
         findViews(view);
+        prepareViews();
         setListeners();
 
         getActions().topBar().showBackIcon(false);
@@ -57,6 +64,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
 
     private void setListeners() {
         register.setOnClickListener(this);
+        zipCode.getEdit().addTextChangedListener(new ZipCodeListener(zipCode.getEdit()));
     }
 
     private void findViews(View view) {
@@ -70,6 +78,11 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         city = view.findViewById(R.id.fragment_register_city);
         zipCode = view.findViewById(R.id.fragment_register_zip_code);
         register = view.findViewById(R.id.fragment_register_register_button);
+
+    }
+
+    public void prepareViews(){
+        phone.getEdit().setFilters(new InputFilter[] {new InputFilter.LengthFilter(PHONELENGT)});
     }
 
     @Override
@@ -171,5 +184,20 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         if(!isValid) {
             AppendMessage.showSuccessOrError();
         }
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+
     }
 }

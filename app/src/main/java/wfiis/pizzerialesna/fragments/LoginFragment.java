@@ -3,27 +3,22 @@ package wfiis.pizzerialesna.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.inverce.mod.core.IM;
-import com.inverce.mod.core.Ui;
 
 import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.base.BaseFragment;
 import wfiis.pizzerialesna.customViews.InputEditTextView;
 import wfiis.pizzerialesna.tools.AppendMessage;
-import wfiis.pizzerialesna.tools.SpanUtils;
 import wfiis.pizzerialesna.validation.Validator;
 
 public class LoginFragment extends BaseFragment implements View.OnClickListener {
@@ -49,6 +44,10 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
 
         findViews(view);
         setListeners();
+
+        //TO REMOVE ONLY FOR TESt
+        email.setText("damiengrzelak@gmail.com");
+        password.setText("haslotest");
 
         getActions().topBar().showBackIcon(false);
         return view;
