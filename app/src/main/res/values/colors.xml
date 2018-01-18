@@ -3,6 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="yellow">#dec324</color>
+
 
     <!-- TopToast -->
     <color name="error_background">#fad3d8</color>
