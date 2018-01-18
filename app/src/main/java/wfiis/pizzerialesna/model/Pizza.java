@@ -9,20 +9,23 @@ import java.util.Map;
 @IgnoreExtraProperties
 public class Pizza {
 
-    public String name;
-    public String content;
-    public double price28;
-    public double price34;
-    public double price44;
-    public int type;
+    private String name;
+    private String ingredients;
+    private int number;
+    private double price28;
+    private double price34;
+    private double price44;
+    private int type;
+
 
     public Pizza(){
 
     }
 
-    public Pizza(String name, String content, double price28, double price34, double price44, int type) {
+    public Pizza(String name, String ingredients, int number, double price28, double price34, double price44, int type) {
         this.name = name;
-        this.content = content;
+        this.ingredients = ingredients;
+        this.number = number;
         this.price28 = price28;
         this.price34 = price34;
         this.price44 = price44;
@@ -33,7 +36,7 @@ public class Pizza {
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("name", name);
-        result.put("ingredients", content);
+        result.put("ingredients", ingredients);
         result.put("price28", price28);
         result.put("price34", price34);
         result.put("price44", price44);
@@ -50,12 +53,12 @@ public class Pizza {
         this.name = name;
     }
 
-    public String getContent() {
-        return content;
+    public String getIngredients() {
+        return ingredients;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
     }
 
     public double getPrice28() {
@@ -85,4 +88,12 @@ public class Pizza {
     public int getType() { return type; }
 
     public void setType(int type) { this.type = type; }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
 }

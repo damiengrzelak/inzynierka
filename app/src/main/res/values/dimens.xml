@@ -13,6 +13,10 @@
     <!-- TEXT SIZES -->
     <dimen name="small_text">12sp</dimen>
     <dimen name="normall_text">16sp</dimen>
+    <dimen name="bigl_text">18sp</dimen>
+    
+    <dimen name="normal2">15sp</dimen>
+    <dimen name="normal4">14sp</dimen>
 
     <!--TEMPORARY DIMENS-->
 
