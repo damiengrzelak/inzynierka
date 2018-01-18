@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ import wfiis.pizzerialesna.base.BaseFragment;
 
 public class ContactFragment extends BaseFragment implements View.OnClickListener, OnMapReadyCallback {
 
+    public static String TAG = "fragment_contact";
     private TextView phone;
     private MapView mapView;
 
@@ -59,9 +61,9 @@ public class ContactFragment extends BaseFragment implements View.OnClickListene
 
     private void initMap(View view, Bundle savedInstanceState) {
         mapView.onCreate(savedInstanceState);
-        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
         if (mapView != null) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
             mapView.getMapAsync(this);
         }
     }
@@ -73,7 +75,7 @@ public class ContactFragment extends BaseFragment implements View.OnClickListene
     private void callToRestaurant(View view) {
         Intent callIntent = new Intent(Intent.ACTION_CALL);
         callIntent.setData(Uri.parse("tel:" + phone.getText()));
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             //request permission from user if the app hasn't got the required permission
             ActivityCompat.requestPermissions(getActivity(),
                     new String[]{Manifest.permission.CALL_PHONE},   //request specific permission from user
@@ -99,10 +101,10 @@ public class ContactFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     public void onResume() {
-        mapView.onResume();
         super.onResume();
-    }
+        mapView.onResume();
 
+    }
     @Override
     public void onPause() {
         super.onPause();
@@ -124,8 +126,8 @@ public class ContactFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onMapReady(GoogleMap map) {
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        if (ActivityCompat.checkSelfPermission(IM.context(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(IM.context(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(IM.context(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(IM.context(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         map.setMyLocationEnabled(true);

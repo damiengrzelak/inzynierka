@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/baground_gray"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:tag="fragment_contact">
 
     <TextView
         android:layout_width="match_parent"
