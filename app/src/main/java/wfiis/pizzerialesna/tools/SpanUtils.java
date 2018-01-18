@@ -34,6 +34,10 @@ public class SpanUtils {
         builder = new SpannableStringBuilder();
     }
 
+    public void convertToMoney(double money){
+       tw.setText(String.valueOf(Util.decimPlace(money, 2))+IM.context().getResources().getString(R.string.zl));
+    }
+
     public SpanUtils asterisks(@ColorRes int colorRes) {
         return coloredText("*", colorRes);
     }

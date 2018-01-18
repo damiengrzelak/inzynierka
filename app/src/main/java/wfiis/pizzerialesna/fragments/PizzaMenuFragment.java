@@ -2,6 +2,7 @@ package wfiis.pizzerialesna.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,6 +49,7 @@ public class PizzaMenuFragment extends BaseFragment {
         prepareList();
         setListeners();
 
+
         getActions().topBar().showBackIcon(false);
         return view;
     }
@@ -64,7 +66,8 @@ public class PizzaMenuFragment extends BaseFragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                     Pizza p = singleSnapshot.getValue(Pizza.class);
-                    pizzaList.add(p);
+                    pizzaList.add(new Pizza(p.getName(), p.getIngredients(), p.getNumber(), p.getPrice28(), p.getPrice34(), p.getPrice44(), p.getType()));
+                    pizzaMenuAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -74,9 +77,14 @@ public class PizzaMenuFragment extends BaseFragment {
             }
         });
 
+
     }
 
     private void prepareList() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
         pizzaMenuAdapter = new PizzaMenuAdapter(pizzaList);
         recyclerView.setAdapter(pizzaMenuAdapter);
     }

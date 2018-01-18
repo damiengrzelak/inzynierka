@@ -48,6 +48,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
         //TO REMOVE ONLY FOR TESt
         email.setText("damiengrzelak@gmail.com");
         password.setText("haslotest");
+        //
 
         getActions().topBar().showBackIcon(false);
         return view;
