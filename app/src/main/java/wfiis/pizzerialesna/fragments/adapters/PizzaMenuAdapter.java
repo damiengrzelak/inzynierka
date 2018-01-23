@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.inverce.mod.core.IM;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +37,7 @@ public class PizzaMenuAdapter extends RecyclerView.Adapter<PizzaMenuAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         Pizza pizza = data.get(position);
 
-        holder.pizzaName.setText(pizza.getNumber() +". "+pizza.getName());
+        holder.pizzaName.setText(pizza.getNumber() + ". " + pizza.getName());
         holder.pizzaContent.setText(pizza.getIngredients());
         SpanUtils.on(holder.cm28).convertToMoney(data.get(position).getPrice28());
         SpanUtils.on(holder.cm34).convertToMoney(data.get(position).getPrice34());
@@ -64,6 +62,12 @@ public class PizzaMenuAdapter extends RecyclerView.Adapter<PizzaMenuAdapter.View
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public void updateAdapter(List<Pizza> pizzaList) {
+        data.clear();
+        this.data = pizzaList;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
