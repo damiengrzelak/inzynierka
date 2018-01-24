@@ -15,21 +15,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wfiis.pizzerialesna.R;
-import wfiis.pizzerialesna.model.Obiad;
 import wfiis.pizzerialesna.model.PizzaStatusType;
+import wfiis.pizzerialesna.model.Salatka;
 import wfiis.pizzerialesna.tools.SpanUtils;
 
-public class OtherMenuAdapter extends RecyclerView.Adapter<OtherMenuAdapter.ViewHolder> {
+public class SalatMenuAdapter extends RecyclerView.Adapter<SalatMenuAdapter.ViewHolder> {
 
-    private List<Obiad> obiady = new ArrayList<>();
+    private List<Salatka> salatki = new ArrayList<>();
     private Drawable d;
 
-    public OtherMenuAdapter(List<Obiad> obiady) {
-        this.obiady = obiady;
+    public SalatMenuAdapter(List<Salatka> salatkaList) {
+        this.salatki = salatkaList;
     }
 
     @Override
-    public OtherMenuAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SalatMenuAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_other_item, parent, false);
 
         return new ViewHolder(rootView);
@@ -37,26 +37,26 @@ public class OtherMenuAdapter extends RecyclerView.Adapter<OtherMenuAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Obiad o = obiady.get(position);
+        Salatka s = salatki.get(position);
 
         if (position == 0) {
             holder.header.setVisibility(View.VISIBLE);
-            holder.headerText.setText(IM.context().getResources().getString(R.string.fast_food));
+            holder.headerText.setText(IM.context().getResources().getString(R.string.salat));
         } else {
             holder.header.setVisibility(View.GONE);
         }
 
-        holder.otherName.setText(o.getName());
-        holder.otherContent.setText(o.getIngredients());
-        SpanUtils.on(holder.ontherPrize).convertToMoney(obiady.get(position).getPrice());
+        holder.otherName.setText(s.getName());
+        holder.otherContent.setText(s.getIngredients());
+        SpanUtils.on(holder.ontherPrize).convertToMoney(salatki.get(position).getPrice());
 
-        if (obiady.get(position).getType() != 0) {
+        if (salatki.get(position).getType() != 0) {
             holder.statusType.setVisibility(View.VISIBLE);
-            if (obiady.get(position).getType() == 1) {
+            if (salatki.get(position).getType() == 1) {
                 d = PizzaStatusType.HOT.d;
-            } else if (obiady.get(position).getType() == 2) {
+            } else if (salatki.get(position).getType() == 2) {
                 d = PizzaStatusType.NEW.d;
-            } else if (obiady.get(position).getType() == 3) {
+            } else if (salatki.get(position).getType() == 3) {
                 d = PizzaStatusType.OUR.d;
             }
 
@@ -64,7 +64,6 @@ public class OtherMenuAdapter extends RecyclerView.Adapter<OtherMenuAdapter.View
         } else {
             holder.statusType.setVisibility(View.GONE);
         }
-
     }
 
     @Override
@@ -74,7 +73,7 @@ public class OtherMenuAdapter extends RecyclerView.Adapter<OtherMenuAdapter.View
 
     @Override
     public int getItemCount() {
-        return obiady.size();
+        return salatki.size();
     }
 
 

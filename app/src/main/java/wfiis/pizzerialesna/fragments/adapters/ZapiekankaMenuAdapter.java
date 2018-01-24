@@ -15,21 +15,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wfiis.pizzerialesna.R;
-import wfiis.pizzerialesna.model.Obiad;
 import wfiis.pizzerialesna.model.PizzaStatusType;
+import wfiis.pizzerialesna.model.Zapiekanka;
 import wfiis.pizzerialesna.tools.SpanUtils;
 
-public class OtherMenuAdapter extends RecyclerView.Adapter<OtherMenuAdapter.ViewHolder> {
+public class ZapiekankaMenuAdapter extends RecyclerView.Adapter<ZapiekankaMenuAdapter.ViewHolder> {
 
-    private List<Obiad> obiady = new ArrayList<>();
+    private List<Zapiekanka> data = new ArrayList<>();
     private Drawable d;
 
-    public OtherMenuAdapter(List<Obiad> obiady) {
-        this.obiady = obiady;
+    public ZapiekankaMenuAdapter(List<Zapiekanka> data) {
+        this.data = data;
     }
 
     @Override
-    public OtherMenuAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ZapiekankaMenuAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_other_item, parent, false);
 
         return new ViewHolder(rootView);
@@ -37,26 +37,25 @@ public class OtherMenuAdapter extends RecyclerView.Adapter<OtherMenuAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Obiad o = obiady.get(position);
+        Zapiekanka z = data.get(position);
 
         if (position == 0) {
             holder.header.setVisibility(View.VISIBLE);
-            holder.headerText.setText(IM.context().getResources().getString(R.string.fast_food));
+            holder.headerText.setText(IM.context().getResources().getString(R.string.zapieksy));
         } else {
             holder.header.setVisibility(View.GONE);
         }
 
-        holder.otherName.setText(o.getName());
-        holder.otherContent.setText(o.getIngredients());
-        SpanUtils.on(holder.ontherPrize).convertToMoney(obiady.get(position).getPrice());
+        holder.otherName.setText(z.getName());
+        SpanUtils.on(holder.ontherPrize).convertToMoney(data.get(position).getPrice());
 
-        if (obiady.get(position).getType() != 0) {
+        if (data.get(position).getType() != 0) {
             holder.statusType.setVisibility(View.VISIBLE);
-            if (obiady.get(position).getType() == 1) {
+            if (data.get(position).getType() == 1) {
                 d = PizzaStatusType.HOT.d;
-            } else if (obiady.get(position).getType() == 2) {
+            } else if (data.get(position).getType() == 2) {
                 d = PizzaStatusType.NEW.d;
-            } else if (obiady.get(position).getType() == 3) {
+            } else if (data.get(position).getType() == 3) {
                 d = PizzaStatusType.OUR.d;
             }
 
@@ -74,13 +73,12 @@ public class OtherMenuAdapter extends RecyclerView.Adapter<OtherMenuAdapter.View
 
     @Override
     public int getItemCount() {
-        return obiady.size();
+        return data.size();
     }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView otherName;
-        private TextView otherContent;
         private TextView ontherPrize;
         private ImageView statusType;
 
@@ -91,7 +89,6 @@ public class OtherMenuAdapter extends RecyclerView.Adapter<OtherMenuAdapter.View
         public ViewHolder(View rootView) {
             super(rootView);
             otherName = rootView.findViewById(R.id.list_other_item_name);
-            otherContent = rootView.findViewById(R.id.list_other_item_content);
             ontherPrize = rootView.findViewById(R.id.list_other_item_price);
             statusType = rootView.findViewById(R.id.list_other_item_status_type);
 

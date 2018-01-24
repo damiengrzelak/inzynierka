@@ -22,8 +22,9 @@ import java.util.List;
 import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.base.BaseFragment;
 import wfiis.pizzerialesna.fragments.adapters.OtherMenuAdapter;
+import wfiis.pizzerialesna.fragments.adapters.SalatMenuAdapter;
+import wfiis.pizzerialesna.fragments.adapters.ZapiekankaMenuAdapter;
 import wfiis.pizzerialesna.model.Obiad;
-import wfiis.pizzerialesna.model.OtherMenuItems;
 import wfiis.pizzerialesna.model.Salatka;
 import wfiis.pizzerialesna.model.Zapiekanka;
 
@@ -36,7 +37,12 @@ public class OtherMenuFragment extends BaseFragment {
     private RecyclerView recyclerView;
     private OtherMenuAdapter otherMenuAdapter;
 
-    private List<OtherMenuItems> otherMenuItemsList = new ArrayList<>();
+    private RecyclerView salatRV;
+    private SalatMenuAdapter salatMenuAdapter;
+
+    private RecyclerView zapRV;
+    private ZapiekankaMenuAdapter zapiekankaMenuAdapter;
+
     private List<Obiad> otherList;
     private List<Zapiekanka> zapiekankaList;
     private List<Salatka> salatkaList;
@@ -80,26 +86,7 @@ public class OtherMenuFragment extends BaseFragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                     Obiad o = singleSnapshot.getValue(Obiad.class);
-                    //otherList.add(new Obiad(o.getName(), o.getIngredients(), o.getPrice(), o.getType()));
-                    otherMenuItemsList.add(new OtherMenuItems(new Obiad(o.getName(), o.getIngredients(), o.getPrice(), o.getType()), OtherMenuItems.OTHER_TYPE));
-                    otherMenuAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e("ERROR", "onCancelled", databaseError.toException());
-            }
-        });
-
-        zapiekankaQuerry.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
-                    Zapiekanka z = singleSnapshot.getValue(Zapiekanka.class);
-                    //zapiekankaList.add(new Zapiekanka(z.getName(), z.getPrice(), z.getType()));
-                    otherMenuItemsList.add(new OtherMenuItems(new Zapiekanka(z.getName(), z.getPrice(), z.getType()), OtherMenuItems.ZAP_TYPE));
+                    otherList.add(new Obiad(o.getName(), o.getIngredients(), o.getPrice(), o.getType()));
                     otherMenuAdapter.notifyDataSetChanged();
                 }
             }
@@ -117,8 +104,24 @@ public class OtherMenuFragment extends BaseFragment {
                 for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                     Salatka s = singleSnapshot.getValue(Salatka.class);
                     salatkaList.add(new Salatka(s.getName(), s.getIngredients(), s.getPrice(), s.getType()));
-                    otherMenuItemsList.add(new OtherMenuItems(new Salatka(s.getName(), s.getIngredients(), s.getPrice(), s.getType()), OtherMenuItems.SAL_TYPE));
-                    otherMenuAdapter.notifyDataSetChanged();
+                    salatMenuAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("ERROR", "onCancelled", databaseError.toException());
+            }
+        });
+
+        zapiekankaQuerry.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
+                    Zapiekanka z = singleSnapshot.getValue(Zapiekanka.class);
+                    zapiekankaList.add(new Zapiekanka(z.getName(), z.getPrice(), z.getType()));
+                    zapiekankaMenuAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -134,10 +137,23 @@ public class OtherMenuFragment extends BaseFragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
+        //
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
+        linearLayoutManager2.setOrientation(LinearLayoutManager.VERTICAL);
+        salatRV.setLayoutManager(linearLayoutManager2);
+        //
+        LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(getContext());
+        linearLayoutManager3.setOrientation(LinearLayoutManager.VERTICAL);
+        zapRV.setLayoutManager(linearLayoutManager3);
 
-        //otherMenuAdapter = new OtherMenuAdapter(otherList, zapiekankaList, salatkaList);
-        otherMenuAdapter = new OtherMenuAdapter(otherMenuItemsList);
+        otherMenuAdapter = new OtherMenuAdapter(otherList);
         recyclerView.setAdapter(otherMenuAdapter);
+        //
+        salatMenuAdapter = new SalatMenuAdapter(salatkaList);
+        salatRV.setAdapter(salatMenuAdapter);
+        //
+        zapiekankaMenuAdapter = new ZapiekankaMenuAdapter(zapiekankaList);
+        zapRV.setAdapter(zapiekankaMenuAdapter);
     }
 
     private void setListeners() {
@@ -145,5 +161,7 @@ public class OtherMenuFragment extends BaseFragment {
 
     private void findViews(View view) {
         recyclerView = view.findViewById(R.id.fragment_other_menu_rv);
+        salatRV = view.findViewById(R.id.fragment_other_menu_rv_salat);
+        zapRV = view.findViewById(R.id.fragment_other_menu_rv_zap);
     }
 }
