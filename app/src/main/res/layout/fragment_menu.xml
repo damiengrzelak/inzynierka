@@ -37,7 +37,7 @@
                     android:text="@string/menu_pizze"
                     android:textColor="@color/black"
                     android:layout_centerHorizontal="true"
-                    android:textStyle="bold"/>
+                    android:textAppearance="@style/CustomBold"/>
 
             </RelativeLayout>
 
@@ -63,7 +63,7 @@
                     android:text="@string/obiady"
                     android:textColor="@color/black"
                     android:layout_centerHorizontal="true"
-                    android:textStyle="bold"/>
+                    android:textAppearance="@style/CustomBold"/>
 
             </RelativeLayout>
         </LinearLayout>
@@ -95,7 +95,7 @@
                     android:text="@string/promocje"
                     android:textColor="@color/black"
                     android:layout_centerHorizontal="true"
-                    android:textStyle="bold"/>
+                    android:textAppearance="@style/CustomBold"/>
 
             </RelativeLayout>
 
@@ -121,7 +121,7 @@
                     android:text="@string/fb"
                     android:textColor="@color/black"
                     android:layout_centerHorizontal="true"
-                    android:textStyle="bold"/>
+                    android:textAppearance="@style/CustomBold"/>
 
             </RelativeLayout>
         </LinearLayout>
@@ -153,7 +153,7 @@
                     android:text="@string/imprezy"
                     android:textColor="@color/black"
                     android:layout_centerHorizontal="true"
-                    android:textStyle="bold"/>
+                    android:textAppearance="@style/CustomBold"/>
 
             </RelativeLayout>
 
@@ -179,7 +179,7 @@
                     android:text="@string/adres"
                     android:textColor="@color/black"
                     android:layout_centerHorizontal="true"
-                    android:textStyle="bold"/>
+                    android:textAppearance="@style/CustomBold"/>
 
             </RelativeLayout>
         </LinearLayout>

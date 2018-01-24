@@ -19,6 +19,7 @@ import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.base.BaseFragment;
 import wfiis.pizzerialesna.customViews.InputEditTextView;
 import wfiis.pizzerialesna.tools.AppendMessage;
+import wfiis.pizzerialesna.tools.sharedPref.UserUtils;
 import wfiis.pizzerialesna.validation.Validator;
 
 public class LoginFragment extends BaseFragment implements View.OnClickListener {
@@ -32,6 +33,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
 
     private FirebaseAuth mAuth;
 
+    private UserUtils userUtils = new UserUtils();
     public static LoginFragment newInstance() {
         return new LoginFragment();
     }
@@ -111,6 +113,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 isValid = true;
+                                userUtils.saveSession(task.getResult().getUser().getUid(), true);
                                 getActions().navigateTo(HomeFragment.newInstance(), false);
                             } else {
                                 AppendMessage.appendMessage(R.string.incorrect_sing_in_pass);

@@ -1,0 +1,190 @@
+
+# GSUB 
+
+
+lookup ligaStandardLigatureslookup0 {
+  lookupflag 0;
+    sub \f \f  by \uniFB00;
+    sub \f \i  by \uniFB01;
+    sub \f \f \i  by \uniFB03;
+    sub \t \i  by \ti;
+} ligaStandardLigatureslookup0;
+
+feature liga {
+
+  script DFLT;
+     language dflt ;
+      lookup ligaStandardLigatureslookup0;
+
+  script grek;
+     language dflt ;
+      lookup ligaStandardLigatureslookup0;
+
+  script latn;
+     language dflt ;
+      lookup ligaStandardLigatureslookup0;
+} liga;
+
+# GPOS 
+
+
+lookup kernHorizontalKerninglookup2 {
+  lookupflag 0;
+    pos \b \T -218;
+    pos \b \J -114;
+    pos \c \T -218;
+    pos \c \J 10;
+    pos \e \T -202;
+    pos \e \J -107;
+    pos \f \z -56;
+    pos \h \T -110;
+    pos \h \J -164;
+    pos \a \J -20;
+    pos \k \T -207;
+    pos \k \J -99;
+    pos \m \T -266;
+    pos \m \J 18;
+    pos \n \T -224;
+    pos \n \J -80;
+    pos \o \J -109;
+    pos \p \J -38;
+    pos \r \Z -101;
+    pos \r \t 78;
+    pos \r \T -200;
+    pos \r \J -283;
+    pos \s \T -182;
+    pos \s \J -22;
+    pos \t \T -111;
+    pos \t \J -71;
+    pos \u \J -64;
+    pos \v \T -195;
+    pos \v \J -78;
+    pos \w \T -183;
+    pos \w \J -91;
+    pos \x \T -182;
+    pos \x \J 82;
+    pos \z \T -154;
+    pos \z \J -22;
+    pos \A \J -76;
+    pos \B \J -97;
+    pos \C \y -123;
+    pos \C \t -96;
+    pos \C \j -71;
+    pos \D \J -90;
+    pos \F \z 8;
+    pos \F \q -98;
+    pos \F \j -117;
+    pos \F \g -67;
+    pos \F \e -32;
+    pos \F \d -142;
+    pos \F \A -169;
+    pos \K \y -69;
+    pos \L \y -143;
+    pos \L \Y -154;
+    pos \L \W -136;
+    pos \L \V -215;
+    pos \L \t -154;
+    pos \L \T -283;
+    pos \L \j -55;
+    pos \L \J -77;
+    pos \O \J -85;
+    pos \Q \J 62;
+    pos \T \z -196;
+    pos \T \y -122;
+    pos \T \x -99;
+    pos \T \w -203;
+    pos \T \v -198;
+    pos \T \u -259;
+    pos \T \t -95;
+    pos \T \s -228;
+    pos \T \r -269;
+    pos \T \q -284;
+    pos \T \p -204;
+    pos \T \o -295;
+    pos \T \n -203;
+    pos \T \m -207;
+    pos \T \j -90;
+    pos \T \g -231;
+    pos \T \G -63;
+    pos \T \e -309;
+    pos \T \d -237;
+    pos \T \c -268;
+    pos \T \a -267;
+    pos \T \A -90;
+} kernHorizontalKerninglookup2;
+
+feature kern {
+
+  script DFLT;
+     language dflt ;
+      lookup kernHorizontalKerninglookup2;
+
+  script grek;
+     language dflt ;
+      lookup kernHorizontalKerninglookup2;
+
+  script latn;
+     language dflt ;
+      lookup kernHorizontalKerninglookup2;
+} kern;
+#Mark attachment classes (defined in GDEF, used in lookupflags)
+
+@GDEF_Simple = [\b \c \d \e \f \g \h \i \a \j \k \l \m \n \o \p \space \q \r \s \t \u \v \w \x \y \z \A 
+	\B \C \D \E \F \G \H \I \J \K \L \M \N \O \P \Q \R \S \T \U \V \W \X \Y \Z \zero \one \two \three 
+	\four \five \six \seven \eight \nine \period \slash \comma \plus \hyphen \semicolon 
+	\colon \backslash \quotesingle \quotedbl \dollar \percent \equal \question 
+	\exclam \parenleft \parenright \asterisk \numbersign \less \greater \underscore 
+	\bar \ampersand \asciicircum \at \singlestorya \bracketleft \bracketright 
+	\grave \braceleft \braceright \asciitilde \exclamdown \cent \Euro \yen \uni00AD 
+	\macron \degree \plusminus \guillemotleft \guillemotright \logicalnot 
+	\registered \acute \dieresis \periodcentered \Scaron \scaron \Zcaron \zcaron \OE 
+	\oe \Ydieresis \Agrave \Aacute \OE \Atilde \Adieresis \Aring \Egrave \Eacute 
+	\Ecircumflex \Edieresis \Igrave \Iacute \Icircumflex \Idieresis \Ntilde \Ograve 
+	\Oacute \Ocircumflex \Otilde \Odieresis \Ugrave \Uacute \Ucircumflex \Udieresis 
+	\Yacute \agrave \aacute \acircumflex \atilde \adieresis \aring \egrave \eacute 
+	\ecircumflex \edieresis \ntilde \ograve \oacute \ocircumflex \otilde \odieresis 
+	\ugrave \uacute \ucircumflex \udieresis \yacute \ydieresis \questiondown 
+	\Acircumflex \multiply \section \Oslash \oslash \dotlessi \igrave \iacute 
+	\icircumflex \idieresis \divide \Ccedilla \cedilla \ccedilla \ordfeminine 
+	\ordmasculine \uni00B5 \paragraph \Eth \AE \Thorn \thorn \ae \germandbls \eth 
+	\sterling \doublestorya \dcroat \circumflex \tilde \ring \caron \uni02CB 
+	\uni02CA \uni02C9 \beta \eogonek \ogonek \Amacron \amacron \Aogonek \aogonek 
+	\Cacute \cacute \Ccircumflex \ccircumflex \Cdotaccent \cdotaccent \Ccaron 
+	\ccaron \Dcaron \dcaron \Dcroat \dotaccent \breve \Abreve \abreve \Emacron 
+	\emacron \Ebreve \ebreve \Edotaccent \edotaccent \Eogonek \Ecaron \ecaron 
+	\Gcircumflex \gcircumflex \Gbreve \gbreve \Gdotaccent \gdotaccent 
+	\Gcommaaccent \Hcircumflex \hcircumflex \Itilde \itilde \Imacron \imacron 
+	\Ibreve \ibreve \Iogonek \iogonek \Idotaccent \hungarumlaut \IJ \ij \Jcircumflex 
+	\jcircumflex \Kcommaaccent \kcommaaccent \Lacute \lacute \Lcommaaccent 
+	\lcommaaccent \Lcaron \lcaron \Ldot \ldot \Nacute \nacute \Ncommaaccent 
+	\ncommaaccent \Ncaron \ncaron \Omacron \omacron \Obreve \obreve \Ohungarumlaut 
+	\ohungarumlaut \uni0237 \Racute \racute \Rcommaaccent \rcommaaccent \Rcaron 
+	\rcaron \Sacute \sacute \Scircumflex \scircumflex \Scedilla \scedilla 
+	\Tcommaaccent \tcommaaccent \Tcaron \tcaron \Utilde \utilde \Umacron \umacron 
+	\Ubreve \ubreve \Uring \uring \Uhungarumlaut \uhungarumlaut \Uogonek \uogonek 
+	\Wcircumflex \wcircumflex \Ycircumflex \ycircumflex \Zacute \zacute 
+	\Zdotaccent \zdotaccent \gcommaaccent \Hbar \hbar \kgreenlandic \uni2010 
+	\uni2011 \figuredash \endash \emdash \afii00208 \Lslash \lslash \napostrophe 
+	\Eng \eng \Tbar \tbar \longs \uni0250 \uni0251 \uni0252 \uni0254 \uni0259 \uni0258 
+	\uni025B \uni025C \uni0261 \uni0268 \uni026A \uni0272 \uni0275 \uni0279 \uni027E 
+	\uni0280 \uni0281 \uni0283 \uni028A \uni028C \uni0289 \alpha \theta \quoteleft 
+	\quoteright \quotedblleft \quotedblright \dagger \guilsinglleft 
+	\guilsinglright \perthousand \uni2031 \minute \second \uni2034 \radical 
+	\uni221B \angle \uni2221 \uni2225 \uni2226 \logicaland \logicalor \therefore 
+	\uni2235 \uni2236 \uni2237 \similar \uni2243 \uni2244 \congruent \uni2246 
+	\uni2247 \approxequal \equivalence \notequal \lessequal \greaterequal \pi \mu 
+	\uni0292 \uni02D0 \uni02D1 \uni0189 \Ohorn \ohorn \Uhorn \uhorn \uni01C0 \uni01C1 
+	\uni01C4 \uni01C5 \uni01C6 \uni01C7 \uni01C8 \uni01C9 \uni01CA \uni01CB \uni01CC 
+	\uni01CD \uni01CE \uni01CF \uni01D0 \uni01D1 \uni01D2 \uni01D3 \uni01D4 \uni01D5 
+	\uni01D6 \uni01D7 \uni01D8 \uni01D9 \uni01DA \uni01DB \uni01DC \uni01DE \uni01DF 
+	\uni01E2 \uni01E3 \Gcaron \gcaron \uni01E8 \uni01E9 \uni01EA \uni01EB \uni01EC 
+	\uni01ED \uni01EF \uni01F0 \uni01F1 \uni01F2 \uni01F3 \uni01F4 \uni01F5 \uni01F8 
+	\uni01F9 \Aringacute \aringacute \AEacute \aeacute \Oslashacute \oslashacute 
+	\uni00A0 ];
+@GDEF_Ligature = [\uniFB00 \uniFB01 \uniFB03 \ti ];
+
+table GDEF {
+  GlyphClassDef @GDEF_Simple, @GDEF_Ligature,  ,  ;
+
+} GDEF;
+

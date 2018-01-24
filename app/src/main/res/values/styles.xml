@@ -8,6 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CustomBold" parent="AppTheme">
+        <item name="fontPath">fonts/Maritime_Tropical_Neue_Bold.ttf</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/normall_text</item>
+    </style>
+
     <style name="FloatingLabelInputLayout" parent="AppTheme">
 
         <item name="android:paddingLeft">12dp</item>
