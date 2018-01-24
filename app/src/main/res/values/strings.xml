@@ -39,6 +39,10 @@
     <string name="fb">Facebook</string>
     <string name="imprezy">Imprezy okolicznościowe</string>
     <string name="adres">Adres i kontakt</string>
+    <string name="price">Cena:</string>
+    <string name="fast_food">Dania obiadowe i fast foody</string>
+    <string name="salat">Sałatki</string>
+    <string name="zapieksy">Zapiekanki prosto z pieca!</string>
 
     <!-- UTILS -->
     <string name="google_android_map_api_key">AIzaSyBTl94XORxuPnN7QkTc_9JImOK3o6VJp3k</string>
