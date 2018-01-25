@@ -108,4 +108,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
         facebookIntent.setData(Uri.parse(facebookUrl));
         startActivity(facebookIntent);
     }
+
+
 }

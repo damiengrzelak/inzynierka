@@ -9,8 +9,7 @@
         android:id="@+id/loader"
         android:layout_width="@dimen/progress_bar_size"
         android:layout_height="@dimen/progress_bar_size"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
         android:layout_marginBottom="@dimen/toptoast_height"
         android:layout_marginLeft="@dimen/left_right_padding" />
 

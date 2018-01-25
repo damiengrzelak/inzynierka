@@ -10,7 +10,6 @@ import wfiis.pizzerialesna.interactions.ActivityInteractions;
 public class BaseFragment extends Fragment {
     ActivityInteractions actions;
 
-
     @Nullable
     public ActivityInteractions getActions() {
         return actions;
@@ -71,4 +70,6 @@ public class BaseFragment extends Fragment {
         Bundle args = getArguments();
         return args == null ? fallback : args.getString(name, fallback);
     }
+
+
 }

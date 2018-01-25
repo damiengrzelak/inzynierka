@@ -68,7 +68,6 @@ public class TopBarFragment extends BaseFragment implements TopBarInteractions, 
                 getActions().navigateBack();
                 break;
             case R.id.menu_btn:
-                Toast.makeText(getContext(), "klik", Toast.LENGTH_LONG).show();
                 onClickMenu(view);
                 break;
         }
@@ -80,5 +79,6 @@ public class TopBarFragment extends BaseFragment implements TopBarInteractions, 
             mainActivityInterface.get().changeDrawerMenuState();
         }
     }
+
 }
 
