@@ -18,6 +18,7 @@ import com.inverce.mod.core.IM;
 import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.base.BaseFragment;
 import wfiis.pizzerialesna.customViews.InputEditTextView;
+import wfiis.pizzerialesna.firebase.CheckConnectionToFirebase;
 import wfiis.pizzerialesna.tools.AppendMessage;
 import wfiis.pizzerialesna.tools.sharedPref.UserUtils;
 import wfiis.pizzerialesna.validation.Validator;
@@ -31,9 +32,11 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
 
     private boolean isValid;
 
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private CheckConnectionToFirebase checkConnectionToFirebase = new CheckConnectionToFirebase();
 
     private UserUtils userUtils = new UserUtils();
+
     public static LoginFragment newInstance() {
         return new LoginFragment();
     }
@@ -105,7 +108,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
     }
 
     private boolean authUser(String email, String password) {
-        mAuth = FirebaseAuth.getInstance();
+
         if (isValid) {
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(IM.activity(), new OnCompleteListener<AuthResult>() {

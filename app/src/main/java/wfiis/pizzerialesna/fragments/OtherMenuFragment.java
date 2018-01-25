@@ -47,6 +47,8 @@ public class OtherMenuFragment extends BaseFragment {
     private List<Zapiekanka> zapiekankaList;
     private List<Salatka> salatkaList;
 
+    private boolean downloadinEnded;
+
     public static OtherMenuFragment newInstance() {
         return new OtherMenuFragment();
     }
@@ -68,9 +70,9 @@ public class OtherMenuFragment extends BaseFragment {
     }
 
     private void getOtherMenu() {
-       otherList = new ArrayList<>();
-       zapiekankaList = new ArrayList<>();
-       salatkaList = new ArrayList<>();
+        otherList = new ArrayList<>();
+        zapiekankaList = new ArrayList<>();
+        salatkaList = new ArrayList<>();
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref = database.child(obiad_table);
@@ -80,6 +82,7 @@ public class OtherMenuFragment extends BaseFragment {
         Query zapiekankaQuerry = ref2;
         Query salatkaQuerry = ref3;
 
+        showPreloader();
         obiadQuerry.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
@@ -123,11 +126,13 @@ public class OtherMenuFragment extends BaseFragment {
                     zapiekankaList.add(new Zapiekanka(z.getName(), z.getPrice(), z.getType()));
                     zapiekankaMenuAdapter.notifyDataSetChanged();
                 }
+                dissMissPreloader();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e("ERROR", "onCancelled", databaseError.toException());
+                dissMissPreloader();
             }
         });
     }
@@ -163,5 +168,11 @@ public class OtherMenuFragment extends BaseFragment {
         recyclerView = view.findViewById(R.id.fragment_other_menu_rv);
         salatRV = view.findViewById(R.id.fragment_other_menu_rv_salat);
         zapRV = view.findViewById(R.id.fragment_other_menu_rv_zap);
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        dissMissPreloader();
     }
 }

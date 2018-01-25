@@ -18,4 +18,10 @@
        android:id="@+id/activity_content"
        android:layout_below="@id/top_fragment"
        />
+   <wfiis.pizzerialesna.customViews.Preloader
+       android:id="@+id/preloader"
+       class="wfiis.pizzerialesna.customViews.Preloader"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:visibility="gone"/>
 </RelativeLayout>

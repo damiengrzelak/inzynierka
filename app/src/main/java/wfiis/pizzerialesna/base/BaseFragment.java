@@ -10,9 +10,20 @@ import wfiis.pizzerialesna.interactions.ActivityInteractions;
 public class BaseFragment extends Fragment {
     ActivityInteractions actions;
 
+
     @Nullable
     public ActivityInteractions getActions() {
         return actions;
+    }
+
+    public void showPreloader() {
+        getActions().showPreloader();
+    }
+
+    public void dissMissPreloader() {
+        if (getActions() != null) {
+            getActions().disMissPreloader();
+        } 
     }
 
     @Override

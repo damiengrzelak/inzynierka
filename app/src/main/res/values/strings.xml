@@ -48,5 +48,6 @@
     <string name="google_android_map_api_key">AIzaSyBTl94XORxuPnN7QkTc_9JImOK3o6VJp3k</string>
     <string name="services_error">Błąd serwisu</string>
     <string name="zl">\u0020zł</string>
+    <string name="server_error">Błąd serwera. Sprawdź swoje połączenie z internetem</string>
 
 </resources>
