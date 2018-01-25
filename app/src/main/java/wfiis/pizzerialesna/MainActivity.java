@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import wfiis.pizzerialesna.base.BaseFragment;
+import wfiis.pizzerialesna.customViews.Preloader;
 import wfiis.pizzerialesna.fragments.SplashFragment;
 import wfiis.pizzerialesna.interactions.ActivityInteractions;
 import wfiis.pizzerialesna.interactions.TopBarInteractions;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
 
 
     TopBarInteractions topBar;
+    private Preloader preloader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
         FragmentManager fragmentManager = getSupportFragmentManager();
         topBar = (TopBarInteractions) fragmentManager.findFragmentById(R.id.top_fragment);
         fragmentManager.addOnBackStackChangedListener(this);
+
+        preloader = this.findViewById(R.id.preloader);
 
         if (savedInstanceState == null) {
             navigateTo(SplashFragment.newInstance(), false);
@@ -80,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
 
     @Override
     public boolean navigateBack() {
+        disMissPreloader();
         onBackPressed();
         return true;
     }
@@ -88,5 +93,24 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
     public TopBarInteractions topBar() {
         return topBar;
     }
+
+    @Override
+    public void showPreloader() {
+        preloader.show();
+    }
+
+    @Override
+    public void disMissPreloader() {
+        if (preloader != null) {
+            preloader.dissMiss();
+        }
+    }
+
+    @Override
+    public int getPreloader() {
+        return preloader.getVisibility();
+    }
+
+
 }
 

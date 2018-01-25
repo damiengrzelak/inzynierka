@@ -6,7 +6,6 @@ import android.support.annotation.StringRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.base.BaseFragment;
@@ -45,6 +44,9 @@ public class TopBarFragment extends BaseFragment implements TopBarInteractions, 
 
         switch (view.getId()) {
             case R.id.go_back_btn:
+                if (getActions().getPreloader() == 0) {
+                    getActions().disMissPreloader();
+                }
                 getActions().navigateBack();
                 break;
         }

@@ -63,6 +63,7 @@ public class PizzaMenuFragment extends BaseFragment implements View.OnClickListe
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref = database.child(pizza_table);
         Query pizzaQuery = ref;
+        showPreloader();
         pizzaQuery.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
@@ -72,11 +73,13 @@ public class PizzaMenuFragment extends BaseFragment implements View.OnClickListe
                     pizzaList.add(new Pizza(p.getName(), p.getIngredients(), p.getNumber(), p.getPrice28(), p.getPrice34(), p.getPrice44(), p.getType()));
                     pizzaMenuAdapter.notifyDataSetChanged();
                 }
+                dissMissPreloader();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e("ERROR", "onCancelled", databaseError.toException());
+                dissMissPreloader();
             }
         });
     }
@@ -87,6 +90,7 @@ public class PizzaMenuFragment extends BaseFragment implements View.OnClickListe
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref = database.child(special_table);
         Query pizzaQuery = ref;
+        showPreloader();
         pizzaQuery.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
@@ -96,11 +100,13 @@ public class PizzaMenuFragment extends BaseFragment implements View.OnClickListe
                     pizzaList.add(new Pizza(p.getName(), p.getIngredients(), p.getNumber(), p.getPrice28(), p.getPrice34(), p.getPrice44(), p.getType()));
                     pizzaMenuAdapter.notifyDataSetChanged();
                 }
+                dissMissPreloader();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e("ERROR", "onCancelled", databaseError.toException());
+                dissMissPreloader();
             }
         });
     }
@@ -159,6 +165,11 @@ public class PizzaMenuFragment extends BaseFragment implements View.OnClickListe
     @Override
     public void onStop() {
         super.onStop();
+    }
 
+    @Override
+    public void onPause(){
+        super.onPause();
+        dissMissPreloader();
     }
 }
