@@ -13,7 +13,7 @@ import java.util.List;
 
 import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.model.Pizza;
-import wfiis.pizzerialesna.model.PizzaStatusType;
+import wfiis.pizzerialesna.enums.PizzaStatusType;
 import wfiis.pizzerialesna.tools.SpanUtils;
 
 public class PizzaMenuAdapter extends RecyclerView.Adapter<PizzaMenuAdapter.ViewHolder> {

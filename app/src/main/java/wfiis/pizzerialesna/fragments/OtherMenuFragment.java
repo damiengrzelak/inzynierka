@@ -66,6 +66,7 @@ public class OtherMenuFragment extends BaseFragment {
 
 
         getActions().topBar().showBackIcon(false);
+        getActions().topBar().showMenuIcon(false);
         return view;
     }
 

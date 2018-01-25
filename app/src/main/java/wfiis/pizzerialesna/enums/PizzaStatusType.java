@@ -1,4 +1,4 @@
-package wfiis.pizzerialesna.model;
+package wfiis.pizzerialesna.enums;
 
 import android.graphics.drawable.Drawable;
 

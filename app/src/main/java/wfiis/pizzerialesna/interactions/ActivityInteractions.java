@@ -9,4 +9,5 @@ public interface ActivityInteractions {
     void showPreloader();
     void disMissPreloader();
     int getPreloader();
+    void changeDrawerMenuState();
 }
