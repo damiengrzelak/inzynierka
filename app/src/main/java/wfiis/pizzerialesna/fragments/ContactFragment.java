@@ -54,6 +54,7 @@ public class ContactFragment extends BaseFragment implements View.OnClickListene
         initMap(view, savedInstanceState);
 
         getActions().topBar().showBackIcon(true);
+        getActions().topBar().showMenuIcon(false);
         return view;
     }
 

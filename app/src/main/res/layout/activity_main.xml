@@ -6,22 +6,59 @@
     android:layout_height="match_parent"
     tools:context="wfiis.pizzerialesna.MainActivity">
 
-   <fragment
-       android:layout_width="match_parent"
-       android:layout_height="70dp"
-       class="wfiis.pizzerialesna.modules.TopBarFragment"
-       android:id="@+id/top_fragment"/>
+    <fragment
+        android:id="@+id/top_fragment"
+        class="wfiis.pizzerialesna.modules.TopBarFragment"
+        android:layout_width="match_parent"
+        android:layout_height="70dp" />
 
-   <FrameLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:id="@+id/activity_content"
-       android:layout_below="@id/top_fragment"
-       />
-   <wfiis.pizzerialesna.customViews.Preloader
-       android:id="@+id/preloader"
-       class="wfiis.pizzerialesna.customViews.Preloader"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:visibility="gone"/>
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/activity_main_drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/top_fragment"
+        android:background="@color/white"
+        tools:context="com.apptopus.tatawpracy.com.apptopus.macademiangirl.activities.MainActivity">
+
+        <FrameLayout
+            android:id="@+id/activity_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <wfiis.pizzerialesna.customViews.NavigationMenuView
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start" />
+
+    </android.support.v4.widget.DrawerLayout>
+
+
+    <!--<android.support.v4.widget.DrawerLayout-->
+        <!--android:id="@+id/activity_main_drawer_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_below="@id/top_fragment"-->
+        <!--android:visibility="visible"-->
+        <!--tools:context="wfiis.pizzerialesna.MainActivity">-->
+
+    <!--<FrameLayout-->
+        <!--android:id="@+id/activity_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_below="@id/top_fragment" />-->
+
+
+    <!--<wfiis.pizzerialesna.customViews.NavigationMenuView-->
+        <!--android:layout_below="@+id/top_fragment"-->
+        <!--android:layout_width="140dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--class="wfiis.pizzerialesna.customViews.NavigationMenuView"/>-->
+    <!--</android.support.v4.widget.DrawerLayout>-->
+
+    <wfiis.pizzerialesna.customViews.Preloader
+        android:id="@+id/preloader"
+        class="wfiis.pizzerialesna.customViews.Preloader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 </RelativeLayout>

@@ -37,6 +37,8 @@ public class SplashFragment extends BaseFragment {
         }
         waitAtSplash();
 
+        getActions().topBar().showMenuIcon(false);
+        getActions().topBar().showBackIcon(false);
         return view;
     }
 

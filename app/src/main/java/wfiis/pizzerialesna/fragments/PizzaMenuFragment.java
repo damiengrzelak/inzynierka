@@ -54,6 +54,7 @@ public class PizzaMenuFragment extends BaseFragment implements View.OnClickListe
 
 
         getActions().topBar().showBackIcon(false);
+        getActions().topBar().showMenuIcon(false);
         return view;
     }
 

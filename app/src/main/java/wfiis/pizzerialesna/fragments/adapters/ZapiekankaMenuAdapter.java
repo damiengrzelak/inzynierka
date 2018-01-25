@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wfiis.pizzerialesna.R;
-import wfiis.pizzerialesna.model.PizzaStatusType;
+import wfiis.pizzerialesna.enums.PizzaStatusType;
 import wfiis.pizzerialesna.model.Zapiekanka;
 import wfiis.pizzerialesna.tools.SpanUtils;
 

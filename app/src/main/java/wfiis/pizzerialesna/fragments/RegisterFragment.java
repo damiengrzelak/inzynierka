@@ -66,6 +66,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         setListeners();
 
         getActions().topBar().showBackIcon(false);
+        getActions().topBar().showMenuIcon(false);
         return view;
     }
 

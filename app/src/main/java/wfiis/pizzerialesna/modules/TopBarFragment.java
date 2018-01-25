@@ -6,13 +6,19 @@ import android.support.annotation.StringRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import java.lang.ref.WeakReference;
 
 import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.base.BaseFragment;
+import wfiis.pizzerialesna.interactions.ActivityInteractions;
 import wfiis.pizzerialesna.interactions.TopBarInteractions;
+import wfiis.pizzerialesna.tools.Tools;
 
 public class TopBarFragment extends BaseFragment implements TopBarInteractions, View.OnClickListener {
     private View goBackBtn;
+    private View menuBtn;
 
     @Nullable
     @Override
@@ -21,8 +27,10 @@ public class TopBarFragment extends BaseFragment implements TopBarInteractions, 
 
         goBackBtn = view.findViewById(R.id.go_back_btn);
         //title = view.findViewById(R.id.top_bar_title);
+        menuBtn = view.findViewById(R.id.menu_btn);
 
         goBackBtn.setOnClickListener(this);
+        menuBtn.setOnClickListener(this);
 
         return view;
     }
@@ -37,18 +45,39 @@ public class TopBarFragment extends BaseFragment implements TopBarInteractions, 
     }
 
     @Override
+    public void showMenuIcon(boolean visible) {
+        menuBtn.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public int isMenuIconVisible() {
+        return menuBtn.getVisibility();
+    }
+
+    @Override
     public void onClick(View view) {
-        if (getActions() == null) {
-            return;
-        }
+//        if (getActions() == null) {
+//            return;
+//        }
 
         switch (view.getId()) {
             case R.id.go_back_btn:
-                if (getActions().getPreloader() == 0) {
+                if (getActions() != null) {
                     getActions().disMissPreloader();
                 }
                 getActions().navigateBack();
                 break;
+            case R.id.menu_btn:
+                Toast.makeText(getContext(), "klik", Toast.LENGTH_LONG).show();
+                onClickMenu(view);
+                break;
+        }
+    }
+
+    private void onClickMenu(View view) {
+        WeakReference<ActivityInteractions> mainActivityInterface = Tools.getMainActivityInterface();
+        if (mainActivityInterface != null) {
+            mainActivityInterface.get().changeDrawerMenuState();
         }
     }
 }
