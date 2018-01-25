@@ -15,6 +15,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.inverce.mod.core.IM;
 
 import wfiis.pizzerialesna.R;
@@ -23,6 +25,7 @@ import wfiis.pizzerialesna.customViews.InputEditTextView;
 import wfiis.pizzerialesna.customViews.TopToast;
 import wfiis.pizzerialesna.customViews.ZipCodeListener;
 import wfiis.pizzerialesna.firebase.CheckConnectionToFirebase;
+import wfiis.pizzerialesna.model.User;
 import wfiis.pizzerialesna.tools.AppendMessage;
 import wfiis.pizzerialesna.tools.Util;
 import wfiis.pizzerialesna.validation.Validator;
@@ -46,6 +49,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     private int ZIP_CODE_LENGTH = 6;
 
     private CheckConnectionToFirebase checkConnectionToFirebase = new CheckConnectionToFirebase();
+    private DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
     public static RegisterFragment newInstance() {
         return new RegisterFragment();
@@ -106,6 +110,17 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
+                                    User user = new User(
+                                            name.getText(),
+                                            surname.getText(),
+                                            email.getText(),
+                                            password.getText(),
+                                            phone.getText(),
+                                            street.getText(),
+                                            homeNr.getText(),
+                                            city.getText(),
+                                            zipCode.getText());
+                                    saveUserToDB(task.getResult().getUser().getUid(), user);
                                     getActions().navigateTo(HomeFragment.newInstance(), false);
                                     TopToast.show(R.string.register_success, TopToast.TYPE_SUCCESS, TopToast.DURATION_SHORT);
                                 } else {
@@ -204,5 +219,10 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void afterTextChanged(Editable editable) {
 
+    }
+
+    private void saveUserToDB(String uid, User user){
+        DatabaseReference usersRef = ref.child("users/"+uid);
+        usersRef.setValue(user);
     }
 }
