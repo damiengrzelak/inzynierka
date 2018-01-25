@@ -23,7 +23,7 @@ public class BaseFragment extends Fragment {
     public void dissMissPreloader() {
         if (getActions() != null) {
             getActions().disMissPreloader();
-        } 
+        }
     }
 
     @Override
