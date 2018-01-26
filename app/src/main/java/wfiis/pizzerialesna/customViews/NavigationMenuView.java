@@ -76,7 +76,7 @@ public class NavigationMenuView extends LinearLayout implements AdapterView.OnIt
         menuItems.add(new MenuItem("My profile", null, ContextCompat.getDrawable(getContext(), R.drawable.my_profile_icon), "Mój profil", new MenuItem.ClickListener() {
             @Override
             public void onClick() {
-            //    MainFragmentNavigator.goToHome();
+                LeftMenuNavigator.toMyProfile();
             }
         }));
 //

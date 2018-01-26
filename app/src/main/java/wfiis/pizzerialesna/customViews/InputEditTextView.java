@@ -127,6 +127,7 @@ public class InputEditTextView extends LinearLayout implements View.OnFocusChang
         if (nextViewId != -1) {
             setKeyboardListener();
         }
+        UI.hideSoftInputForce();
     }
 
     private void setKeyboardListener() {

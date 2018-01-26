@@ -8,4 +8,6 @@ public class Cfg {
     public static String obiad_table = "obiady";
     public static String salatki_table = "salatki";
     public static String zapiekanki_table = "zapiekanki";
+
+    public static String users_table = "users";
 }

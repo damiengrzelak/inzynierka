@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -41,6 +42,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     private InputEditTextView homeNr;
     private InputEditTextView city;
     private InputEditTextView zipCode;
+    private CheckBox checkBox;
     private Button register;
 
     private boolean isValid;
@@ -86,6 +88,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         city = view.findViewById(R.id.fragment_register_city);
         zipCode = view.findViewById(R.id.fragment_register_zip_code);
         register = view.findViewById(R.id.fragment_register_register_button);
+        checkBox = view.findViewById(R.id.fragment_register_checkbox);
 
         password.getEdit().setTransformationMethod(null);
 
@@ -120,7 +123,8 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                                             street.getText(),
                                             homeNr.getText(),
                                             city.getText(),
-                                            zipCode.getText());
+                                            zipCode.getText(),
+                                            checkBox.isChecked());
                                     saveUserToDB(task.getResult().getUser().getUid(), user);
                                     getActions().navigateTo(HomeFragment.newInstance(), false);
                                     TopToast.show(R.string.register_success, TopToast.TYPE_SUCCESS, TopToast.DURATION_SHORT);

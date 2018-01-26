@@ -1,9 +1,5 @@
 package wfiis.pizzerialesna.model;
 
-/**
- * Created by Damian on 16.01.2018.
- */
-
 public class User {
 
     public String uid;
@@ -16,6 +12,7 @@ public class User {
     public String houseNr;
     public String city;
     public String zipCode;
+    public boolean permission;
 
 
     public String getName() {
@@ -90,7 +87,26 @@ public class User {
         this.zipCode = zipCode;
     }
 
-    public User(String name, String surnmale, String email, String password, String phone, String street, String houseNr, String city, String zipCode) {
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public boolean isPermission() {
+        return permission;
+    }
+
+    public void setPermission(boolean permission) {
+        this.permission = permission;
+    }
+
+    public User() {
+    }
+
+    public User(String name, String surnmale, String email, String password, String phone, String street, String houseNr, String city, String zipCode, boolean permission) {
         this.name = name;
         this.surnmale = surnmale;
         this.email = email;
@@ -100,5 +116,7 @@ public class User {
         this.houseNr = houseNr;
         this.city = city;
         this.zipCode = zipCode;
+        this.permission = permission;
     }
+
 }
