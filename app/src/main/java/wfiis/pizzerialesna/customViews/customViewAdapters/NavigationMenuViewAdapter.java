@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -44,23 +45,39 @@ public class NavigationMenuViewAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_navigation_menu, null);
 
             holder = new ViewHolder();
-//            holder.name = (TextView) convertView.findViewById(R.id.list_item_navigation_drawer_menu_name);
+
             holder.image = (ImageView) convertView.findViewById(R.id.list_item_navigation_menu_image);
+            holder.itemImg = convertView.findViewById(R.id.list_item_navigation_menu_image_img);
+            holder.itemTxt = convertView.findViewById(R.id.list_item_navigation_menu_image_txt);
+            holder.item = convertView.findViewById(R.id.list_item_navigation_menu_item);
 
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-//        holder.name.setText(menuItem.getName());
-        holder.image.setImageDrawable(menuItem.getDrawable());
+
+        if (menuItem.getDrawable() != null) {
+            holder.image.setVisibility(View.VISIBLE);
+            holder.image.setImageDrawable(menuItem.getDrawable());
+        } else {
+            holder.image.setVisibility(View.GONE);
+        }
+        if (menuItem.getItemImg() != null) {
+            holder.itemImg.setImageDrawable(menuItem.getItemImg());
+        }
+        if (menuItem.getItemName() != null && !menuItem.getItemName().equals("") && menuItem.getItemName().length() > 0){
+            holder.itemTxt.setText(menuItem.getItemName());
+        }
 
         return convertView;
     }
 
     //View Holder--------------------------------------------------------------------------------------
     private static class ViewHolder {
-        public TextView name;
         public ImageView image;
+        private ImageView itemImg;
+        private TextView itemTxt;
+        private LinearLayout item;
     }
 }
