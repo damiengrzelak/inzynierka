@@ -25,6 +25,7 @@
             android:layout_height="match_parent" />
 
         <wfiis.pizzerialesna.customViews.NavigationMenuView
+            android:id="@+id/activiy_navigation_menu_view"
             android:layout_width="140dp"
             android:layout_height="match_parent"
             android:layout_gravity="start" />
