@@ -20,8 +20,6 @@ import wfiis.pizzerialesna.interactions.ActivityInteractions;
 import wfiis.pizzerialesna.interactions.TopBarInteractions;
 
 public class MainActivity extends AppCompatActivity implements ActivityInteractions, FragmentManager.OnBackStackChangedListener, DrawerLayout.DrawerListener {
-
-
     TopBarInteractions topBar;
     private Preloader preloader;
     private boolean isDrawerMenuOpen;
@@ -55,20 +53,12 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
 
     @Override
     public void onBackPressed() {
-//        //Close drawer if it's open
-//        if (isDrawerMenuOpen) {
-//            changeDrawerMenuState();
-//            return;
-//        }
-
-        //This is to prevent being left with 0 fragments and empty content
-        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
-            this.finish();
+        if (isDrawerMenuOpen) {
+            changeDrawerMenuState();
         } else {
             super.onBackPressed();
         }
     }
-
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -83,10 +73,22 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
 
     @Override
     public boolean navigateTo(BaseFragment fragment, boolean addToBackstack) {
-        if (isDrawerMenuOpen) {
-            changeDrawerMenuState();
-        }
+        drawerMenu.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {}
 
+            @Override
+            public void onDrawerOpened(View drawerView) {}
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                changeDrawerMenuState();
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {}
+        });
+        
         FragmentManager manager = getSupportFragmentManager();
 
         // Activity must be initialized and fragment non null to proceed
@@ -177,7 +179,6 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
     public void onDrawerStateChanged(int newState) {
 
     }
-
 
 }
 
