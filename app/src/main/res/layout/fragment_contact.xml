@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/baground_gray"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:tag="fragment_contact">
 
     <TextView
         android:layout_width="match_parent"
@@ -14,7 +16,8 @@
         android:text="Pizzeria Leśna"
         android:textColor="@color/black"
         android:textSize="16dp"
-        android:textStyle="bold" />
+        android:textAppearance="@style/CustomBold"
+        />
 
     <TextView
         android:layout_width="match_parent"
@@ -55,7 +58,7 @@
             android:text="781 509 851"
             android:textColor="@color/base_blue"
             android:textSize="16dp"
-            android:textStyle="bold" />
+            android:textAppearance="@style/CustomBold" />
     </RelativeLayout>
 
     <TextView
@@ -91,7 +94,7 @@
             android:paddingRight="@dimen/left_right_padding"
             android:text="12:00 - 22:00"
             android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textAppearance="@style/CustomBold" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -116,7 +119,8 @@
             android:paddingRight="@dimen/left_right_padding"
             android:text="14:00 - 21:00"
             android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textSize="@dimen/normall_text"
+            android:textAppearance="@style/CustomBold" />
     </RelativeLayout>
 
     <com.google.android.gms.maps.MapView

@@ -1,24 +1,39 @@
 package wfiis.pizzerialesna;
 
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import wfiis.pizzerialesna.base.BaseFragment;
+import wfiis.pizzerialesna.customViews.Preloader;
 import wfiis.pizzerialesna.fragments.SplashFragment;
 import wfiis.pizzerialesna.interactions.ActivityInteractions;
 import wfiis.pizzerialesna.interactions.TopBarInteractions;
 
-public class MainActivity extends AppCompatActivity implements ActivityInteractions, FragmentManager.OnBackStackChangedListener {
-
+public class MainActivity extends AppCompatActivity implements ActivityInteractions, FragmentManager.OnBackStackChangedListener, DrawerLayout.DrawerListener {
     TopBarInteractions topBar;
+    private Preloader preloader;
+    private boolean isDrawerMenuOpen;
+    private DrawerLayout drawerMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/Maritime_Tropical_Neue.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         setContentView(R.layout.activity_main);
 
@@ -26,9 +41,29 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
         topBar = (TopBarInteractions) fragmentManager.findFragmentById(R.id.top_fragment);
         fragmentManager.addOnBackStackChangedListener(this);
 
+        preloader = this.findViewById(R.id.preloader);
+        isDrawerMenuOpen = false;
+        drawerMenu = findViewById(R.id.activity_main_drawer_layout);
+        drawerMenu.addDrawerListener(this);
+
         if (savedInstanceState == null) {
             navigateTo(SplashFragment.newInstance(), false);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isDrawerMenuOpen) {
+            changeDrawerMenuState();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+
     }
 
     @Override
@@ -65,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
 
     @Override
     public boolean navigateBack() {
+        disMissPreloader();
         onBackPressed();
         return true;
     }
@@ -73,5 +109,66 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
     public TopBarInteractions topBar() {
         return topBar;
     }
+
+    @Override
+    public void showPreloader() {
+        preloader.show();
+    }
+
+    @Override
+    public void disMissPreloader() {
+        if (preloader != null) {
+            preloader.dissMiss();
+        }
+    }
+
+    @Override
+    public int getPreloader() {
+        return preloader.getVisibility();
+    }
+
+    @Override
+    public void changeDrawerMenuState() {
+        if (isDrawerMenuOpen) {
+            drawerMenu.closeDrawer(GravityCompat.START);
+        } else {
+            drawerMenu.openDrawer(GravityCompat.START);
+        }
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        drawerMenu.addDrawerListener(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        drawerMenu.removeDrawerListener(this);
+    }
+
+
+    //Drawer layout listener--------------------------------------------------------------------------------------
+    @Override
+    public void onDrawerSlide(View drawerView, float slideOffset) {
+    }
+
+    @Override
+    public void onDrawerOpened(View drawerView) {
+        isDrawerMenuOpen = true;
+    }
+
+    @Override
+    public void onDrawerClosed(View drawerView) {
+        isDrawerMenuOpen = false;
+    }
+
+    @Override
+    public void onDrawerStateChanged(int newState) {
+
+    }
+
 }
 

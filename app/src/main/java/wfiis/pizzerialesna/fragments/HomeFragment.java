@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 
 import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.base.BaseFragment;
+import wfiis.pizzerialesna.tools.sharedPref.UserUtils;
 
 public class HomeFragment extends BaseFragment implements View.OnClickListener{
 
@@ -39,6 +40,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
         setListeners();
 
         getActions().topBar().showBackIcon(false );
+        getActions().topBar().showMenuIcon(true);
         return view;
     }
 
@@ -65,10 +67,15 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
         int id = view.getId();
         switch (id){
             case R.id.fragment_menu_pizza:
+                getActions().navigateTo(PizzaMenuFragment.newInstance(), true);
                 break;
             case R.id.fragment_menu_obiad:
+                getActions().navigateTo(OtherMenuFragment.newInstance(), true);
                 break;
             case R.id.fragment_menu_promo:
+                UserUtils userUtils = new UserUtils();
+                userUtils.logOut();
+                getActions().navigateTo(LoginFragment.newInstance(), false);
                 break;
             case R.id.fragment_menu_fb:
                 goToFacebook(getContext());
@@ -101,4 +108,5 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
         facebookIntent.setData(Uri.parse(facebookUrl));
         startActivity(facebookIntent);
     }
+
 }

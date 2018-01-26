@@ -15,6 +15,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.inverce.mod.core.IM;
 
 import wfiis.pizzerialesna.R;
@@ -22,11 +24,13 @@ import wfiis.pizzerialesna.base.BaseFragment;
 import wfiis.pizzerialesna.customViews.InputEditTextView;
 import wfiis.pizzerialesna.customViews.TopToast;
 import wfiis.pizzerialesna.customViews.ZipCodeListener;
+import wfiis.pizzerialesna.firebase.CheckConnectionToFirebase;
+import wfiis.pizzerialesna.model.User;
 import wfiis.pizzerialesna.tools.AppendMessage;
 import wfiis.pizzerialesna.tools.Util;
 import wfiis.pizzerialesna.validation.Validator;
 
-public class RegisterFragment extends BaseFragment implements View.OnClickListener, TextWatcher{
+public class RegisterFragment extends BaseFragment implements View.OnClickListener, TextWatcher {
 
     private InputEditTextView name;
     private InputEditTextView surname;
@@ -40,11 +44,14 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     private Button register;
 
     private boolean isValid;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth  mAuth = FirebaseAuth.getInstance();
     private int PHONELENGT = 9;
     private int ZIP_CODE_LENGTH = 6;
 
-    public static RegisterFragment newInstance(){
+    private CheckConnectionToFirebase checkConnectionToFirebase = new CheckConnectionToFirebase();
+    private DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+
+    public static RegisterFragment newInstance() {
         return new RegisterFragment();
     }
 
@@ -59,6 +66,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         setListeners();
 
         getActions().topBar().showBackIcon(false);
+        getActions().topBar().showMenuIcon(false);
         return view;
     }
 
@@ -79,58 +87,71 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         zipCode = view.findViewById(R.id.fragment_register_zip_code);
         register = view.findViewById(R.id.fragment_register_register_button);
 
+        password.getEdit().setTransformationMethod(null);
+
     }
 
-    public void prepareViews(){
-        phone.getEdit().setFilters(new InputFilter[] {new InputFilter.LengthFilter(PHONELENGT)});
+    public void prepareViews() {
+        phone.getEdit().setFilters(new InputFilter[]{new InputFilter.LengthFilter(PHONELENGT)});
+
     }
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.fragment_register_register_button){
+        if (view.getId() == R.id.fragment_register_register_button) {
             validate();
             register();
         }
     }
 
     private void register() {
-        mAuth = FirebaseAuth.getInstance();
-        if(isValid){
-            mAuth.createUserWithEmailAndPassword(email.getText(), password.getText())
-                    .addOnCompleteListener(IM.activity(), new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                getActions().navigateTo(HomeFragment.newInstance(), false);
-                                TopToast.show(R.string.register_success, TopToast.TYPE_SUCCESS, TopToast.DURATION_SHORT);
-                            } else {
-                                AppendMessage.appendMessage(R.string.register_problem);
-                                isValid = false;
-                                AppendMessage.showSuccessOrError();
-                            }
+            if (isValid) {
+                mAuth.createUserWithEmailAndPassword(email.getText(), password.getText())
+                        .addOnCompleteListener(IM.activity(), new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    User user = new User(
+                                            name.getText(),
+                                            surname.getText(),
+                                            email.getText(),
+                                            password.getText(),
+                                            phone.getText(),
+                                            street.getText(),
+                                            homeNr.getText(),
+                                            city.getText(),
+                                            zipCode.getText());
+                                    saveUserToDB(task.getResult().getUser().getUid(), user);
+                                    getActions().navigateTo(HomeFragment.newInstance(), false);
+                                    TopToast.show(R.string.register_success, TopToast.TYPE_SUCCESS, TopToast.DURATION_SHORT);
+                                } else {
+                                    AppendMessage.appendMessage(R.string.register_problem);
+                                    isValid = false;
+                                    AppendMessage.showSuccessOrError();
+                                }
 
-                        }
-                    });
-        }
+                            }
+                        });
+            }
     }
 
     private void validate() {
         isValid = true;
-        if(Validator.firstNameIsValid(name.getText()) && !Util.nullOrEmpty(name.getText())){
+        if (Validator.firstNameIsValid(name.getText()) && !Util.nullOrEmpty(name.getText())) {
             name.setError(false);
         } else {
             AppendMessage.appendMessage(R.string.name_incorect);
             name.setError(true);
             isValid = false;
         }
-        if(Validator.lastNameIsValid(surname.getText()) && !Util.nullOrEmpty(surname.getText())){
+        if (Validator.lastNameIsValid(surname.getText()) && !Util.nullOrEmpty(surname.getText())) {
             surname.setError(false);
         } else {
             AppendMessage.appendMessage(R.string.last_name_incorect);
             surname.setError(true);
             isValid = false;
         }
-        if(Validator.isEmailValid(email.getText()) && !Util.nullOrEmpty(email.getText())){
+        if (Validator.isEmailValid(email.getText()) && !Util.nullOrEmpty(email.getText())) {
             email.setError(false);
         } else {
             AppendMessage.appendMessage(R.string.email_incorect);
@@ -138,42 +159,42 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             isValid = false;
             isValid = false;
         }
-        if(Validator.isPasswordValid(password.getText()) && !Util.nullOrEmpty(password.getText())){
+        if (Validator.isPasswordValid(password.getText()) && !Util.nullOrEmpty(password.getText())) {
             password.setError(false);
         } else {
             AppendMessage.appendMessage(R.string.password_incorect);
             password.setError(true);
             isValid = false;
         }
-        if(Validator.phoneNumberFormatIsValid(phone.getText()) && !Util.nullOrEmpty(phone.getText())){
+        if (Validator.phoneNumberFormatIsValid(phone.getText()) && !Util.nullOrEmpty(phone.getText())) {
             phone.setError(false);
         } else {
             AppendMessage.appendMessage(R.string.phone_incorect);
             phone.setError(true);
             isValid = false;
         }
-        if(Validator.streetIsValid(street.getText()) && !Util.nullOrEmpty(street.getText())){
+        if (Validator.streetIsValid(street.getText()) && !Util.nullOrEmpty(street.getText())) {
             street.setError(false);
         } else {
             AppendMessage.appendMessage(R.string.street_incorrect);
             street.setError(true);
             isValid = false;
         }
-        if(Validator.isHouseNumberValid(homeNr.getText()) && !Util.nullOrEmpty(homeNr.getText())){
+        if (Validator.isHouseNumberValid(homeNr.getText()) && !Util.nullOrEmpty(homeNr.getText())) {
             homeNr.setError(false);
         } else {
             AppendMessage.appendMessage(R.string.street_nr_incorect);
             homeNr.setError(true);
             isValid = false;
         }
-        if(Validator.cityIsValid(city.getText()) && !Util.nullOrEmpty(city.getText())){
+        if (Validator.cityIsValid(city.getText()) && !Util.nullOrEmpty(city.getText())) {
             city.setError(false);
         } else {
             AppendMessage.appendMessage(R.string.city_incorrect);
             city.setError(true);
             isValid = false;
         }
-        if(Validator.zipCodeIsValid(zipCode.getText()) && !Util.nullOrEmpty(zipCode.getText())){
+        if (Validator.zipCodeIsValid(zipCode.getText()) && !Util.nullOrEmpty(zipCode.getText())) {
             zipCode.setError(false);
         } else {
             AppendMessage.appendMessage(R.string.zip_code_incorrect);
@@ -181,7 +202,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
             isValid = false;
         }
 
-        if(!isValid) {
+        if (!isValid) {
             AppendMessage.showSuccessOrError();
         }
     }
@@ -199,5 +220,10 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void afterTextChanged(Editable editable) {
 
+    }
+
+    private void saveUserToDB(String uid, User user){
+        DatabaseReference usersRef = ref.child("users/"+uid);
+        usersRef.setValue(user);
     }
 }

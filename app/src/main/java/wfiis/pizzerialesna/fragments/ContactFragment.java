@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
@@ -27,8 +28,9 @@ import com.inverce.mod.core.IM;
 import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.base.BaseFragment;
 
-public class ContactFragment extends BaseFragment implements View.OnClickListener, OnMapReadyCallback {
+public class ContactFragment extends BaseFragment implements View.OnClickListener, OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
 
+    public static String TAG = "fragment_contact";
     private TextView phone;
     private MapView mapView;
 
@@ -36,18 +38,23 @@ public class ContactFragment extends BaseFragment implements View.OnClickListene
         return new ContactFragment();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
         assert getActions() != null;
-
         findViews(view);
         prepareViews();
         setListeners();
         initMap(view, savedInstanceState);
 
         getActions().topBar().showBackIcon(true);
+        getActions().topBar().showMenuIcon(false);
         return view;
     }
 
@@ -58,34 +65,37 @@ public class ContactFragment extends BaseFragment implements View.OnClickListene
     }
 
     private void initMap(View view, Bundle savedInstanceState) {
-        mapView.onCreate(savedInstanceState);
         ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
+
+        mapView.onCreate(savedInstanceState);
         if (mapView != null) {
             mapView.getMapAsync(this);
         }
     }
 
     private void setListeners() {
-        phone.setOnClickListener(this::callToRestaurant);
+        phone.setOnClickListener(v -> {
+            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.CALL_PHONE},
+                        10);
+                return;
+            } else {
+                try {
+                    callToRestaurant();
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(IM.application().getApplicationContext(), "yourActivity is not founded", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
-    private void callToRestaurant(View view) {
+    private void callToRestaurant() {
         Intent callIntent = new Intent(Intent.ACTION_CALL);
         callIntent.setData(Uri.parse("tel:" + phone.getText()));
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            //request permission from user if the app hasn't got the required permission
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.CALL_PHONE},   //request specific permission from user
-                    10);
-            return;
-        } else {     //have got permission
-            try {
-                startActivity(callIntent);  //call activity and make phone call
-            } catch (android.content.ActivityNotFoundException ex) {
-                Toast.makeText(IM.application().getApplicationContext(), "yourActivity is not founded", Toast.LENGTH_SHORT).show();
-            }
-        }
+
+        startActivity(callIntent);
     }
 
     private void findViews(View view) {
@@ -99,8 +109,9 @@ public class ContactFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     public void onResume() {
-        mapView.onResume();
         super.onResume();
+        mapView.onResume();
+
     }
 
     @Override
@@ -124,8 +135,8 @@ public class ContactFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onMapReady(GoogleMap map) {
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        if (ActivityCompat.checkSelfPermission(IM.context(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(IM.context(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(IM.context(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(IM.context(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         map.setMyLocationEnabled(true);

@@ -15,6 +15,16 @@ public class BaseFragment extends Fragment {
         return actions;
     }
 
+    public void showPreloader() {
+        getActions().showPreloader();
+    }
+
+    public void dissMissPreloader() {
+        if (getActions() != null) {
+            getActions().disMissPreloader();
+        }
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -60,4 +70,6 @@ public class BaseFragment extends Fragment {
         Bundle args = getArguments();
         return args == null ? fallback : args.getString(name, fallback);
     }
+
+
 }

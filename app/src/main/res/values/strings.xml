@@ -35,12 +35,19 @@
     <!-- Menu -->
     <string name="menu_pizze">Menu Pizze</string>
     <string name="obiady">Dania obiadowe i inne</string>
-    <string name="promocje">Propocje</string>
+    <string name="promocje">Promocje</string>
     <string name="fb">Facebook</string>
     <string name="imprezy">Imprezy okolicznościowe</string>
     <string name="adres">Adres i kontakt</string>
+    <string name="price">Cena:</string>
+    <string name="fast_food">Dania obiadowe i fast foody</string>
+    <string name="salat">Sałatki</string>
+    <string name="zapieksy">Zapiekanki prosto z pieca!</string>
 
     <!-- UTILS -->
     <string name="google_android_map_api_key">AIzaSyBTl94XORxuPnN7QkTc_9JImOK3o6VJp3k</string>
+    <string name="services_error">Błąd serwisu</string>
+    <string name="zl">\u0020zł</string>
+    <string name="server_error">Błąd serwera. Sprawdź swoje połączenie z internetem</string>
 
 </resources>

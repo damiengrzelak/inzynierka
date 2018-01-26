@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/baground_gray"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/fragment_other_menu_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/left_right_padding"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/fragment_other_menu_rv_salat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_other_menu_rv"
+            android:layout_marginBottom="@dimen/left_right_padding" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/fragment_other_menu_rv_zap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_other_menu_rv_salat"
+            android:layout_marginBottom="@dimen/left_right_padding" />
+    </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
