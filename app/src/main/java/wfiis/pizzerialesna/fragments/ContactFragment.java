@@ -65,6 +65,9 @@ public class ContactFragment extends BaseFragment implements View.OnClickListene
     }
 
     private void initMap(View view, Bundle savedInstanceState) {
+        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
+
         mapView.onCreate(savedInstanceState);
         if (mapView != null) {
             mapView.getMapAsync(this);

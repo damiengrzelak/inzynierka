@@ -73,22 +73,6 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
 
     @Override
     public boolean navigateTo(BaseFragment fragment, boolean addToBackstack) {
-        drawerMenu.addDrawerListener(new DrawerLayout.DrawerListener() {
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {}
-
-            @Override
-            public void onDrawerOpened(View drawerView) {}
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                changeDrawerMenuState();
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {}
-        });
-        
         FragmentManager manager = getSupportFragmentManager();
 
         // Activity must be initialized and fragment non null to proceed
@@ -151,6 +135,12 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
             drawerMenu.openDrawer(GravityCompat.START);
         }
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        drawerMenu.addDrawerListener(this);
     }
 
     @Override
