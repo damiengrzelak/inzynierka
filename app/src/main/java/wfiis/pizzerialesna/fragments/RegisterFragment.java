@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -44,6 +45,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     private InputEditTextView zipCode;
     private CheckBox checkBox;
     private Button register;
+    private TextView permissionText;
 
     private boolean isValid;
     private FirebaseAuth  mAuth = FirebaseAuth.getInstance();
@@ -75,6 +77,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
     private void setListeners() {
         register.setOnClickListener(this);
         zipCode.getEdit().addTextChangedListener(new ZipCodeListener(zipCode.getEdit()));
+        permissionText.setOnClickListener(this);
     }
 
     private void findViews(View view) {
@@ -89,6 +92,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         zipCode = view.findViewById(R.id.fragment_register_zip_code);
         register = view.findViewById(R.id.fragment_register_register_button);
         checkBox = view.findViewById(R.id.fragment_register_checkbox);
+        permissionText = view.findViewById(R.id.fragment_register_permission_text);
 
         password.getEdit().setTransformationMethod(null);
 
@@ -104,6 +108,10 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
         if (view.getId() == R.id.fragment_register_register_button) {
             validate();
             register();
+        }
+
+        if (view.getId() == R.id.fragment_register_permission_text){
+            checkBox.setChecked(!checkBox.isChecked());
         }
     }
 
