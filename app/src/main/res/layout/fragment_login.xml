@@ -59,6 +59,14 @@
             android:textColor="@color/base_blue"
             android:textSize="@dimen/small_text"
             android:gravity="right"/>
+        <TextView
+            android:id="@+id/fragment_login_register_remind_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/forget_password"
+            android:textColor="@color/base_blue"
+            android:textSize="@dimen/small_text"
+            android:gravity="right"/>
 
     </LinearLayout>
 </RelativeLayout>

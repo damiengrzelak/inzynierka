@@ -1,8 +1,11 @@
 package wfiis.pizzerialesna.fragments;
 
+import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,6 +22,7 @@ import com.inverce.mod.core.IM;
 import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.base.BaseFragment;
 import wfiis.pizzerialesna.customViews.InputEditTextView;
+import wfiis.pizzerialesna.customViews.TopToast;
 import wfiis.pizzerialesna.firebase.CheckConnectionToFirebase;
 import wfiis.pizzerialesna.tools.AppendMessage;
 import wfiis.pizzerialesna.tools.sharedPref.UserUtils;
@@ -29,6 +34,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
     private InputEditTextView password;
     private Button loginButton;
     private TextView registerTextView;
+    private TextView forgetPassword;
 
     private boolean isValid;
 
@@ -63,6 +69,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
     private void setListeners() {
         loginButton.setOnClickListener(this);
         registerTextView.setOnClickListener(this);
+        forgetPassword.setOnClickListener(this);
     }
 
     private void findViews(View view) {
@@ -70,6 +77,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
         password = view.findViewById(R.id.fragment_login_password);
         loginButton = view.findViewById(R.id.fragment_login_login_button);
         registerTextView = view.findViewById(R.id.fragment_login_register_textView);
+        forgetPassword = view.findViewById(R.id.fragment_login_register_remind_password);
     }
 
     @Override
@@ -83,7 +91,15 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
             case R.id.fragment_login_register_textView:
                 getActions().navigateTo(RegisterFragment.newInstance(), true);
                 break;
+            case R.id.fragment_login_register_remind_password:
+                if (checkEmail()) {
+                    resetUserPassword(email.getText());
+                }
+                break;
         }
+    }
+    private boolean checkEmail(){
+        return Validator.isEmailValid(email.getText());
     }
 
     private void validate() {
@@ -129,4 +145,46 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
         }
         return isValid;
     }
+
+    private void resetUserPassword(String email) {
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(getContext());
+        }
+        builder.setTitle("Resetowanie hasła")
+                .setMessage("Czy jesteś pewien, że chesz zresetować swoje hasło?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        mAuth.sendPasswordResetEmail(email)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            TopToast.show(R.string.password_reset, TopToast.TYPE_SUCCESS, TopToast.DURATION_SHORT);
+                                        } else {
+                                            TopToast.show(R.string.acc_no_exist, TopToast.TYPE_ERROR, TopToast.DURATION_SHORT);
+                                        }
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                TopToast.show(R.string.acc_no_exist, TopToast.TYPE_ERROR, TopToast.DURATION_SHORT);
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+
+
+    }
+
+
 }
