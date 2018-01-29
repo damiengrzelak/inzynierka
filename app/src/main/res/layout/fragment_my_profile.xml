@@ -14,24 +14,43 @@
         android:paddingLeft="@dimen/left_right_padding"
         android:paddingRight="@dimen/left_right_padding"
         android:paddingTop="@dimen/left_right_padding"
-        app:layout_goneMarginRight="@dimen/left_right_padding">
+        app:layout_goneMarginRight="@dimen/left_right_padding"
+        android:focusableInTouchMode="true">
 
         <RelativeLayout
             android:id="@+id/fragment_my_profile_data_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="@dimen/small_text">
+            android:layout_marginBottom="@dimen/small_text"
+            android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
                 android:id="@+id/fragment_my_profile_header_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:padding="@dimen/left_right_padding"
-                android:textColor="@color/black"
-                android:textSize="@dimen/bigl_text"
-                android:text="Moje dane" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.0"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/view_spacing_small"
+                    android:text="Moje dane"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/bigl_text" />
+
+                <ImageView
+                    android:padding="3dp"
+                    android:id="@+id/fragment_my_profile_edit_data"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_weight="1.0"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/edit_btn" />
+            </LinearLayout>
+
 
             <View
                 android:layout_width="match_parent"
@@ -46,15 +65,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/between_input_margin"
-            app:hint="@string/name" />
+            app:hint="@string/name"
+            android:focusableInTouchMode="true"/>
 
         <wfiis.pizzerialesna.customViews.InputEditTextView
             android:id="@+id/fragment_my_profile_surname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/between_input_margin"
-            app:hint="@string/surnamee"
-            android:focusableInTouchMode="false"/>
+            android:focusableInTouchMode="true"
+            app:hint="@string/surnamee" />
 
         <wfiis.pizzerialesna.customViews.InputEditTextView
             android:id="@+id/fragment_my_profile_email"
@@ -120,21 +140,50 @@
 
         </LinearLayout>
 
+        <Button
+            android:background="@drawable/rounded_button_background"
+            style="@style/DefaultRoundedButton"
+            android:id="@+id/fragment_my_profile_save_data"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/form_input_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/button_bottom_text_small"
+            android:text="@string/save"
+            android:visibility="gone"/>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="@dimen/small_text">
+            android:layout_marginBottom="@dimen/small_text"
+            android:orientation="vertical">
 
-            <TextView
+
+            <LinearLayout
                 android:id="@+id/fragment_my_profile_permission_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:padding="@dimen/left_right_padding"
-                android:textColor="@color/black"
-                android:textSize="@dimen/bigl_text"
-                android:text="Moje zgody" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.0"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/view_spacing_small"
+                    android:text="Moje zgody"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/bigl_text" />
+
+                <ImageView
+                    android:padding="3dp"
+                    android:id="@+id/fragment_my_profile_edit_permission"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_weight="1.0"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/edit_btn" />
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -143,6 +192,7 @@
                 android:background="@color/base_brown"
                 android:gravity="bottom" />
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -164,5 +214,15 @@
                 android:textSize="@dimen/small_text" />
         </LinearLayout>
 
+        <Button
+            android:background="@drawable/rounded_button_background"
+            style="@style/DefaultRoundedButton"
+            android:id="@+id/fragment_my_profile_save_permission"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/form_input_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/button_bottom_text_small"
+            android:text="@string/save"
+            android:visibility="gone"/>
     </LinearLayout>
 </ScrollView>
