@@ -84,7 +84,7 @@ public class NavigationMenuView extends LinearLayout implements AdapterView.OnIt
         menuItems.add(new MenuItem("Settings", null, ContextCompat.getDrawable(getContext(), R.drawable.setting_icon), "Ustawienia", new MenuItem.ClickListener() {
             @Override
             public void onClick() {
-//             //   MainFragmentNavigator.goToFavourites();
+                LeftMenuNavigator.toSettings();
             }
         }));
 //

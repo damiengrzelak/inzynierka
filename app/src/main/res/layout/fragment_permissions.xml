@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Mapa i lokalizacja"
+        android:textColor="@color/black"
+        android:textSize="@dimen/bigl_text"
+        android:gravity="center_vertical"
+        android:padding="@dimen/view_spacing_small"
+        android:textAppearance="@style/CustomBold"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/gray_light" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/left_right_padding">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:text="@string/localization_permission"
+            android:textColor="@color/black"
+            android:textSize="@dimen/normall_text"
+            android:layout_gravity="center_vertical"/>
+
+        <Switch
+            android:id="@+id/fragment_permission_localization_switch"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_weight="3.0"
+            android:src="@drawable/back_button"
+            android:layout_gravity="center_vertical"
+            android:trackTint="@color/gray_light"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/gray_light" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Połączenia"
+        android:textColor="@color/black"
+        android:textSize="@dimen/bigl_text"
+        android:gravity="center_vertical"
+        android:padding="@dimen/view_spacing_small"
+        android:textAppearance="@style/CustomBold"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/gray_light" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/left_right_padding">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:text="@string/phone_permission"
+            android:textColor="@color/black"
+            android:textSize="@dimen/normall_text"
+            android:layout_gravity="center_vertical"/>
+
+        <Switch
+            android:id="@+id/fragment_permission_phone_switch"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_weight="3.0"
+            android:src="@drawable/back_button"
+            android:layout_gravity="center_vertical"
+            android:trackTint="@color/gray_light"/>
+    </LinearLayout>
+</LinearLayout>
