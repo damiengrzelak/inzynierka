@@ -1,21 +1,18 @@
 package wfiis.pizzerialesna.model;
 
-/**
- * Created by Damian on 16.01.2018.
- */
-
 public class User {
 
     public String uid;
     public String name;
-    public String surnmale;
+    public String lastname;
     public String email;
     public String password;
     public String phone;
     public String street;
-    public String houseNr;
+    public String flatNumber;
     public String city;
     public String zipCode;
+    public boolean permission;
 
 
     public String getName() {
@@ -26,12 +23,12 @@ public class User {
         this.name = name;
     }
 
-    public String getSurnmale() {
-        return surnmale;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setSurnmale(String surnmale) {
-        this.surnmale = surnmale;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -66,12 +63,12 @@ public class User {
         this.street = street;
     }
 
-    public String getHouseNr() {
-        return houseNr;
+    public String getFlatNumber() {
+        return flatNumber;
     }
 
-    public void setHouseNr(String houseNr) {
-        this.houseNr = houseNr;
+    public void setFlatNumber(String flatNumber) {
+        this.flatNumber = flatNumber;
     }
 
     public String getCity() {
@@ -90,15 +87,61 @@ public class User {
         this.zipCode = zipCode;
     }
 
-    public User(String name, String surnmale, String email, String password, String phone, String street, String houseNr, String city, String zipCode) {
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public boolean isPermission() {
+        return permission;
+    }
+
+    public void setPermission(boolean permission) {
+        this.permission = permission;
+    }
+
+    public User() {
+    }
+
+    public User(String name, String surnmale, String email, String password, String phone, String street, String houseNr, String city, String zipCode, boolean permission) {
         this.name = name;
-        this.surnmale = surnmale;
+        this.lastname = surnmale;
         this.email = email;
         this.password = password;
         this.phone = phone;
         this.street = street;
-        this.houseNr = houseNr;
+        this.flatNumber = houseNr;
         this.city = city;
         this.zipCode = zipCode;
+        this.permission = permission;
+    }
+
+    public void updateUser(String name, String surnmale, String email, String password, String phone, String street, String houseNr, String city, String zipCode, boolean permission) {
+        this.name = name;
+        this.lastname = surnmale;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.street = street;
+        this.flatNumber = houseNr;
+        this.city = city;
+        this.zipCode = zipCode;
+        this.permission = permission;
+    }
+
+    public void updateUserWithUser(User current) {
+        this.name = current.getName();
+        this.lastname = current.getLastname();
+        this.email = current.getEmail();
+        this.password = current.getPassword();
+        this.phone = current.getPhone();
+        this.street = current.getStreet();
+        this.flatNumber = current.getFlatNumber();
+        this.city = current.getCity();
+        this.zipCode = current.getZipCode();
+        this.permission = current.isPermission();
     }
 }

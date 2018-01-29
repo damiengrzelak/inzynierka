@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/baground_gray"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/left_right_padding"
+        android:paddingRight="@dimen/left_right_padding"
+        android:paddingTop="@dimen/left_right_padding"
+        app:layout_goneMarginRight="@dimen/left_right_padding"
+        android:focusableInTouchMode="true">
+
+        <RelativeLayout
+            android:id="@+id/fragment_my_profile_data_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/small_text"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/fragment_my_profile_header_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.0"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/view_spacing_small"
+                    android:text="Moje dane"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/bigl_text" />
+
+                <ImageView
+                    android:padding="3dp"
+                    android:id="@+id/fragment_my_profile_edit_data"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_weight="1.0"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/edit_btn" />
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/fragment_my_profile_header_text"
+                android:background="@color/base_brown"
+                android:gravity="bottom" />
+        </RelativeLayout>
+
+        <wfiis.pizzerialesna.customViews.InputEditTextView
+            android:id="@+id/fragment_my_profile_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/between_input_margin"
+            app:hint="@string/name"
+            android:focusableInTouchMode="true"/>
+
+        <wfiis.pizzerialesna.customViews.InputEditTextView
+            android:id="@+id/fragment_my_profile_surname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/between_input_margin"
+            android:focusableInTouchMode="true"
+            app:hint="@string/surnamee" />
+
+        <wfiis.pizzerialesna.customViews.InputEditTextView
+            android:id="@+id/fragment_my_profile_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/between_input_margin"
+            app:hint="@string/email" />
+
+        <wfiis.pizzerialesna.customViews.InputEditTextView
+            android:id="@+id/fragment_my_profile_tel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/between_input_margin"
+            android:inputType="number"
+            app:hint="@string/phone_nr" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <wfiis.pizzerialesna.customViews.InputEditTextView
+                android:id="@+id/fragment_my_profile_street"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/between_input_margin"
+                android:layout_marginRight="@dimen/between_input_margin"
+                android:layout_weight="1.0"
+                app:hint="@string/street" />
+
+            <wfiis.pizzerialesna.customViews.InputEditTextView
+                android:id="@+id/fragment_my_profile_street_nr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/between_input_margin"
+                android:layout_weight="1.5"
+                app:hint="@string/house_nr" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <wfiis.pizzerialesna.customViews.InputEditTextView
+                android:id="@+id/fragment_my_profile_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/between_input_margin"
+                android:layout_marginRight="@dimen/between_input_margin"
+                android:layout_weight="1.0"
+                app:hint="@string/city" />
+
+            <wfiis.pizzerialesna.customViews.InputEditTextView
+                android:id="@+id/fragment_my_profile_zip_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/between_input_margin"
+                android:layout_weight="1.5"
+                android:inputType="number"
+                app:hint="@string/zip_code" />
+
+        </LinearLayout>
+
+        <Button
+            android:background="@drawable/rounded_button_background"
+            style="@style/DefaultRoundedButton"
+            android:id="@+id/fragment_my_profile_save_data"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/form_input_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/button_bottom_text_small"
+            android:text="@string/save"
+            android:visibility="gone"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/small_text"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/fragment_my_profile_permission_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.0"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/view_spacing_small"
+                    android:text="Moje zgody"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/bigl_text" />
+
+                <ImageView
+                    android:padding="3dp"
+                    android:id="@+id/fragment_my_profile_edit_permission"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_weight="1.0"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/edit_btn" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/fragment_my_profile_permission_header"
+                android:background="@color/base_brown"
+                android:gravity="bottom" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/between_input_margin"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/fragment_my_profile_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:buttonTint="@color/base_brown" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Wyrażam dobrowolną zgodę na przetwarzanie danych osobowych podanych przeze mnie za pośrednictwem aplikacji Pizzerii Leśnej."
+                android:textColor="@color/base_blue"
+                android:textSize="@dimen/small_text" />
+        </LinearLayout>
+
+        <Button
+            android:background="@drawable/rounded_button_background"
+            style="@style/DefaultRoundedButton"
+            android:id="@+id/fragment_my_profile_save_permission"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/form_input_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/button_bottom_text_small"
+            android:text="@string/save"
+            android:visibility="gone"/>
+    </LinearLayout>
+</ScrollView>

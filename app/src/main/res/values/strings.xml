@@ -7,6 +7,7 @@
     <string name="dont_have_acc_register">Nie masz konta? Zarejestruj się!</string>
     <string name="register_success">Zarejestrowano!</string>
     <string name="open_app">Uruchamianie aplikacji</string>
+    <string name="save">Zapisz</string>
 
     <!-- Validation -->
     <string name="name_incorect">Wprowadź poprawne imię</string>
@@ -31,6 +32,8 @@
     <string name="house_nr">Nr domu</string>
     <string name="city">Miejscowość</string>
     <string name="zip_code">Kod pocztowy</string>
+
+    <string name="edit_success">Zapisano nowe dane.</string>
     
     <!-- Menu -->
     <string name="menu_pizze">Menu Pizze</string>
