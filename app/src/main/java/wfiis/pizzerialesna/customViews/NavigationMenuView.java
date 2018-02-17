@@ -16,8 +16,10 @@ import java.util.List;
 
 import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.customViews.customViewAdapters.NavigationMenuViewAdapter;
+import wfiis.pizzerialesna.tools.LeftMenuNavigator;
+import wfiis.pizzerialesna.tools.sharedPref.UserUtils;
 
-public class NavigationMenuView extends LinearLayout implements AdapterView.OnItemClickListener {
+public class NavigationMenuView extends LinearLayout implements AdapterView.OnItemClickListener{
 
     private ListView menuListView;
     private NavigationMenuViewAdapter menuAdapter;
@@ -63,36 +65,38 @@ public class NavigationMenuView extends LinearLayout implements AdapterView.OnIt
     private List<MenuItem> createMenuItems() {
         List<MenuItem> menuItems = new ArrayList<>();
 
-        menuItems.add(new MenuItem("Logo", ContextCompat.getDrawable(getContext(), R.drawable.pizzeria_logo), new MenuItem.ClickListener() {
+        menuItems.add(new MenuItem("Logo", ContextCompat.getDrawable(getContext(), R.drawable.pizzeria_logo), null, "", new MenuItem.ClickListener() {
             @Override
             public void onClick() {
 
             }
         }));
 
-//        //Latest posts
-//        menuItems.add(new MenuItem("Najnowsze", ContextCompat.getDrawable(getContext(), R.drawable.menu_najnowsze), new MenuItem.ClickListener() {
-//            @Override
-//            public void onClick() {
-//            //    MainFragmentNavigator.goToHome();
-//            }
-//        }));
+//        //My profil
+        menuItems.add(new MenuItem("My profile", null, ContextCompat.getDrawable(getContext(), R.drawable.my_profile_icon), "Mój profil", new MenuItem.ClickListener() {
+            @Override
+            public void onClick() {
+                LeftMenuNavigator.toMyProfile();
+            }
+        }));
 //
-//        //Favourites
-//        menuItems.add(new MenuItem("Ulubione", ContextCompat.getDrawable(getContext(), R.drawable.menu_ulubione), new MenuItem.ClickListener() {
-//            @Override
-//            public void onClick() {
+//        //settings
+        menuItems.add(new MenuItem("Settings", null, ContextCompat.getDrawable(getContext(), R.drawable.setting_icon), "Ustawienia", new MenuItem.ClickListener() {
+            @Override
+            public void onClick() {
 //             //   MainFragmentNavigator.goToFavourites();
-//            }
-//        }));
+            }
+        }));
 //
-//
-//        menuItems.add(new MenuItem("O blogu", ContextCompat.getDrawable(getContext(), R.drawable.menu_o_blogu), new MenuItem.ClickListener() {
-//            @Override
-//            public void onClick() {
-//              ///  MainFragmentNavigator.goToAboutUs();
-//            }
-//        }));
+//      //wyloguj
+        menuItems.add(new MenuItem("Logout", null, ContextCompat.getDrawable(getContext(), R.drawable.logout_icon), "Wyloguj", new MenuItem.ClickListener() {
+            @Override
+            public void onClick() {
+                UserUtils userUtils = new UserUtils();
+                userUtils.logOut();
+                LeftMenuNavigator.logOut();
+           }
+        }));
 //
 //        //About
 //        menuItems.add(new MenuItem("Apptento", ContextCompat.getDrawable(getContext(), R.drawable.menu_apptento), new MenuItem.ClickListener() {
@@ -118,14 +122,26 @@ public class NavigationMenuView extends LinearLayout implements AdapterView.OnIt
         private Drawable drawable;
         private ClickListener clickListener;
 
-        public MenuItem(String name, Drawable drawable, ClickListener clickListener) {
+        private String itemName;
+        private Drawable itemImg;
+
+        public MenuItem(String name, Drawable drawable, Drawable itemdrawable, String itemText, ClickListener clickListener) {
             this.name = name;
             this.drawable = drawable;
             this.clickListener = clickListener;
+            this.itemImg = itemdrawable;
+            this.itemName = itemText;
         }
 
         public Drawable getDrawable() {
             return drawable;
+        }
+
+        public Drawable getItemImg(){
+            return itemImg;
+        }
+        public String getItemName(){
+            return itemName;
         }
 
         public String getName() {

@@ -16,7 +16,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -68,6 +67,7 @@ public class FloatingLabelEditText extends LinearLayout implements View.OnFocusC
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         inflate(context, R.layout.floating_label_edittext, this);
+        UI.hideSoftInputForce();
         findViews();
         setResources();
         setValidator(null, Conditions::notNullOrEmpty);

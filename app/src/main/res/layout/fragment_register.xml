@@ -9,26 +9,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/baground_gray"
         android:orientation="vertical"
         android:paddingLeft="@dimen/left_right_padding"
         android:paddingRight="@dimen/left_right_padding"
         android:paddingTop="@dimen/left_right_padding"
-        app:layout_goneMarginRight="@dimen/left_right_padding"
-        android:background="@drawable/baground_gray">
+        app:layout_goneMarginRight="@dimen/left_right_padding">
 
         <wfiis.pizzerialesna.customViews.InputEditTextView
             android:id="@+id/fragment_register_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/between_input_margin"
-            app:hint="@string/name" />
+            app:hint="@string/name"
+            android:inputType="textCapSentences"/>
 
         <wfiis.pizzerialesna.customViews.InputEditTextView
             android:id="@+id/fragment_register_surname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/between_input_margin"
-            app:hint="@string/surnamee" />
+            app:hint="@string/surnamee"
+            android:inputType="textCapSentences"/>
 
         <wfiis.pizzerialesna.customViews.InputEditTextView
             android:id="@+id/fragment_register_email"
@@ -65,7 +67,8 @@
                 android:layout_marginBottom="@dimen/between_input_margin"
                 android:layout_marginRight="@dimen/between_input_margin"
                 android:layout_weight="1.0"
-                app:hint="@string/street" />
+                app:hint="@string/street"
+                android:inputType="textCapSentences"/>
 
             <wfiis.pizzerialesna.customViews.InputEditTextView
                 android:id="@+id/fragment_register_street_nr"
@@ -89,7 +92,8 @@
                 android:layout_marginBottom="@dimen/between_input_margin"
                 android:layout_marginRight="@dimen/between_input_margin"
                 android:layout_weight="1.0"
-                app:hint="@string/city" />
+                app:hint="@string/city"
+                android:inputType="textCapSentences"/>
 
             <wfiis.pizzerialesna.customViews.InputEditTextView
                 android:id="@+id/fragment_register_zip_code"
@@ -102,15 +106,36 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/between_input_margin"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/fragment_register_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:buttonTint="@color/base_brown" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Wyrażam dobrowolną zgodę na przetwarzanie danych osobowych podanych przeze mnie za pośrednictwem aplikacji Pizzerii Leśnej."
+                android:textColor="@color/base_blue"
+                android:textSize="@dimen/small_text" />
+        </LinearLayout>
+
         <Button
             android:id="@+id/fragment_register_register_button"
             style="@style/DefaultRoundedButton"
             android:layout_width="match_parent"
             android:layout_height="@dimen/form_input_height"
             android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/view_spacing_small"
             android:background="@drawable/rounded_button_background"
-            android:text="@string/register"
-            android:layout_marginBottom="@dimen/view_spacing_small"/>
+            android:text="@string/register" />
 
     </LinearLayout>
 </ScrollView>

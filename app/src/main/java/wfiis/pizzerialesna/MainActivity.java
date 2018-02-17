@@ -15,6 +15,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import wfiis.pizzerialesna.base.BaseFragment;
 import wfiis.pizzerialesna.customViews.Preloader;
+import wfiis.pizzerialesna.fragments.HomeFragment;
 import wfiis.pizzerialesna.fragments.SplashFragment;
 import wfiis.pizzerialesna.interactions.ActivityInteractions;
 import wfiis.pizzerialesna.interactions.TopBarInteractions;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
             changeDrawerMenuState();
         } else {
             super.onBackPressed();
+            drawerMenu.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNDEFINED);
         }
     }
 
@@ -73,22 +75,6 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
 
     @Override
     public boolean navigateTo(BaseFragment fragment, boolean addToBackstack) {
-        drawerMenu.addDrawerListener(new DrawerLayout.DrawerListener() {
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {}
-
-            @Override
-            public void onDrawerOpened(View drawerView) {}
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                changeDrawerMenuState();
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {}
-        });
-        
         FragmentManager manager = getSupportFragmentManager();
 
         // Activity must be initialized and fragment non null to proceed
@@ -109,6 +95,11 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
         transaction.replace(R.id.activity_content, fragment);
         if (addToBackstack) {
             transaction.addToBackStack(fragment.toString());
+        }
+        if (fragment instanceof HomeFragment) {
+            drawerMenu.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNDEFINED);
+        } else {
+            drawerMenu.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         }
         transaction.commit();
         return true;
@@ -151,6 +142,12 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
             drawerMenu.openDrawer(GravityCompat.START);
         }
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        drawerMenu.addDrawerListener(this);
     }
 
     @Override

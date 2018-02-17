@@ -47,8 +47,6 @@ public class OtherMenuFragment extends BaseFragment {
     private List<Zapiekanka> zapiekankaList;
     private List<Salatka> salatkaList;
 
-    private boolean downloadinEnded;
-
     public static OtherMenuFragment newInstance() {
         return new OtherMenuFragment();
     }
