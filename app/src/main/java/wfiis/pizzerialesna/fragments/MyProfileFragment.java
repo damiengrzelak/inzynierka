@@ -207,7 +207,7 @@ public class MyProfileFragment extends BaseFragment implements View.OnClickListe
     private void editData() {
         name.setInputEnabled(true);
         surname.setInputEnabled(true);
-        email.setInputEnabled(true);
+        email.setInputEnabled(false);
         phone.setInputEnabled(true);
         street.setInputEnabled(true);
         homeNr.setInputEnabled(true);

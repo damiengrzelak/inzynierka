@@ -21,7 +21,10 @@
     <string name="zip_code_incorrect">Wprowadź poprawny kod pocztowy</string>
     <string name="incorrect_sing_in_pass">Niepoprany email lub hasło</string>
     <string name="register_problem">Nieudało się zarejestrować użytkownika</string>
-    
+    <string name="forget_password">Nie pamiętasz hasła?</string>
+
+    <string name="incorect_new_password">Hasła się nie zgadzają</string>
+    <string name="incorect_oldw_password">Niepoprawne hasło</string>
     <!-- Data -->
     <string name="name">Imię</string>
     <string name="surnamee">Nazwisko</string>
@@ -33,7 +36,17 @@
     <string name="city">Miejscowość</string>
     <string name="zip_code">Kod pocztowy</string>
 
+    <string name="old_password">Stare hasło</string>
+    <string name="new_password">Nowe hasło</string>
+    <string name="confirm_password">Potwierdź nowe hasło</string>
+
     <string name="edit_success">Zapisano nowe dane.</string>
+
+    <string name="password_reset">Na twoją pocztę email zostały wysłane instrukcje zmiany hasła</string>
+    <string name="acc_no_exist">Brak użytkownika o podanym e-mailu w bazie</string>
+
+    <string name="change_password">Zmień hasło</string>
+    <string name="change_pass_succ">Zmieniono hasło</string>
     
     <!-- Menu -->
     <string name="menu_pizze">Menu Pizze</string>
@@ -52,5 +65,6 @@
     <string name="services_error">Błąd serwisu</string>
     <string name="zl">\u0020zł</string>
     <string name="server_error">Błąd serwera. Sprawdź swoje połączenie z internetem</string>
-
+    <string name="phone_permission">Zezwalaj aplikacji <b>Pizzeria Leśna</b> na nawiązywanie połączeń telefonicznych i zarządzanie nimi</string>
+    <string name="localization_permission">Zezwalaj aplikacji <b>Pizzeria Leśna</b> na dostęp do informacji o lokalizacji tego urządzenia</string>
 </resources>
