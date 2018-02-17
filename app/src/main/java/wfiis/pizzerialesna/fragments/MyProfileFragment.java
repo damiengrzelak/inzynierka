@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -48,6 +49,7 @@ public class MyProfileFragment extends BaseFragment implements View.OnClickListe
     private InputEditTextView city;
     private InputEditTextView zipCode;
     private CheckBox checkBox;
+    private TextView permText;
 
     private ImageView editDataBtn;
     private ImageView editPermissionBtn;
@@ -92,6 +94,7 @@ public class MyProfileFragment extends BaseFragment implements View.OnClickListe
         editPermissionBtn.setOnClickListener(this);
         savePermission.setOnClickListener(this);
         saveData.setOnClickListener(this);
+        permText.setOnClickListener(this);
     }
 
     private void findViews(View view) {
@@ -116,6 +119,8 @@ public class MyProfileFragment extends BaseFragment implements View.OnClickListe
 
         saveData = view.findViewById(R.id.fragment_my_profile_save_data);
         savePermission = view.findViewById(R.id.fragment_my_profile_save_permission);
+
+        permText = view.findViewById(R.id.fragment_my_profile_perm_text);
 
     }
 
@@ -200,6 +205,9 @@ public class MyProfileFragment extends BaseFragment implements View.OnClickListe
                 break;
             case R.id.fragment_my_profile_save_permission:
                 savePermissionFinish();
+                break;
+            case R.id.fragment_my_profile_perm_text:
+                checkBox.setChecked(!checkBox.isChecked());
                 break;
         }
     }
