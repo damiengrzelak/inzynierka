@@ -46,6 +46,9 @@ public class InneMenuAdapter extends RecyclerView.Adapter<InneMenuAdapter.ViewHo
         }
 
         holder.inneName.setText(i.getName());
+        if(i.getIngredients() != null){
+            holder.inneIngredients.setText(i.getIngredients());
+        }
         SpanUtils.on(holder.innePrize).convertToMoney(i.getPrice());
 
         if (i.getType() != 0) {
@@ -80,6 +83,7 @@ public class InneMenuAdapter extends RecyclerView.Adapter<InneMenuAdapter.ViewHo
         private TextView inneName;
         private TextView innePrize;
         private ImageView inneType;
+        private TextView inneIngredients;
 
         private RelativeLayout header;
         private TextView headerText;
@@ -90,6 +94,7 @@ public class InneMenuAdapter extends RecyclerView.Adapter<InneMenuAdapter.ViewHo
             inneName = rootView.findViewById(R.id.list_other_item_name);
             innePrize = rootView.findViewById(R.id.list_other_item_price);
             inneType = rootView.findViewById(R.id.list_other_item_status_type);
+            inneIngredients = rootView.findViewById(R.id.list_other_item_content);
 
             header = rootView.findViewById(R.id.list_order_item_header);
             headerText = rootView.findViewById(R.id.list_order_item_header_text);
