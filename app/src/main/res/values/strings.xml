@@ -59,6 +59,7 @@
     <string name="fast_food">Dania obiadowe i fast foody</string>
     <string name="salat">Sałatki</string>
     <string name="zapieksy">Zapiekanki prosto z pieca!</string>
+    <string name="inne_menu">Inne</string>
 
     <!-- UTILS -->
     <string name="google_android_map_api_key">AIzaSyBTl94XORxuPnN7QkTc_9JImOK3o6VJp3k</string>
