@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,16 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wfiis.pizzerialesna.R;
+import wfiis.pizzerialesna.model.Extras;
 import wfiis.pizzerialesna.model.Pizza;
 import wfiis.pizzerialesna.enums.PizzaStatusType;
+import wfiis.pizzerialesna.model.Warianty;
 import wfiis.pizzerialesna.tools.SpanUtils;
 
 public class PizzaMenuAdapter extends RecyclerView.Adapter<PizzaMenuAdapter.ViewHolder> {
 
-    private List<Pizza> data;
+    private List<Object> data;
     private Drawable d;
 
-    public PizzaMenuAdapter(List<Pizza> pizzaList) {
+    public PizzaMenuAdapter(List<Object> pizzaList) {
         data = new ArrayList<>();
         this.data = pizzaList;
     }
@@ -35,28 +38,87 @@ public class PizzaMenuAdapter extends RecyclerView.Adapter<PizzaMenuAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Pizza pizza = data.get(position);
+        if (data.get(position) instanceof Pizza) {
+            Pizza pizza = (Pizza) data.get(position);
 
-        holder.pizzaName.setText(pizza.getNumber() + ". " + pizza.getName());
-        holder.pizzaContent.setText(pizza.getIngredients());
-        SpanUtils.on(holder.cm28).convertToMoney(data.get(position).getPrice28());
-        SpanUtils.on(holder.cm34).convertToMoney(data.get(position).getPrice34());
-        SpanUtils.on(holder.cm44).convertToMoney(data.get(position).getPrice44());
+            holder.pizzaName.setText(pizza.getNumber() + ". " + pizza.getName());
+            holder.pizzaContent.setText(pizza.getIngredients());
+            holder.cm28.setVisibility(View.VISIBLE);
+            holder.cm34.setVisibility(View.VISIBLE);
+            holder.cm44.setVisibility(View.VISIBLE);
+            holder.cm28Bt.setVisibility(View.VISIBLE);
+            holder.cm34Bt.setVisibility(View.VISIBLE);
+            holder.cm44Bt.setVisibility(View.VISIBLE);
+            SpanUtils.on(holder.cm28).convertToMoney(pizza.getPrice28());
+            SpanUtils.on(holder.cm34).convertToMoney(pizza.getPrice34());
+            SpanUtils.on(holder.cm44).convertToMoney(pizza.getPrice44());
 
-        if (data.get(position).getType() != 0) {
-            holder.statusType.setVisibility(View.VISIBLE);
-            if (data.get(position).getType() == 1) {
-                d = PizzaStatusType.HOT.d;
-            } else if (data.get(position).getType() == 2) {
-                d = PizzaStatusType.NEW.d;
-            } else if (data.get(position).getType() == 3) {
-                d = PizzaStatusType.OUR.d;
+            if (pizza.getType() != 0) {
+                holder.statusType.setVisibility(View.VISIBLE);
+                if (pizza.getType() == 1) {
+                    d = PizzaStatusType.HOT.d;
+                } else if (pizza.getType() == 2) {
+                    d = PizzaStatusType.NEW.d;
+                } else if (pizza.getType() == 3) {
+                    d = PizzaStatusType.OUR.d;
+                }
+
+                holder.statusType.setImageDrawable(d);
+            } else {
+                holder.statusType.setVisibility(View.GONE);
+            }
+        } else {
+            Extras extras = (Extras) data.get(position);
+
+            holder.pizzaName.setText(extras.getNumber() + ". " + extras.getName());
+            if (extras.getVariants() != null && extras.getVariants().size() > 0) {
+                String content = "";
+                int size = extras.getVariants().size();
+                for (int i = 0; i < size; i++) {
+                    if (i != size - 1) {
+                        content = content + extras.getVariants().get(i).getName() + ", ";
+                    } else {
+                        content = content + extras.getVariants().get(i).getName();
+                    }
+                }
+                holder.pizzaContent.setText(content);
+            } else {
+                holder.pizzaContent.setText("");
             }
 
-            holder.statusType.setImageDrawable(d);
-        } else {
+            if (extras.getLowPrice() > 0) {
+                if (extras.getMediumPrice() > 0 || extras.getHighPrice() > 0) {
+                    SpanUtils.on(holder.cm28).convertToMoney(extras.getLowPrice());
+                    holder.cm28Bt.setVisibility(View.VISIBLE);
+                } else {
+                    SpanUtils.on(holder.cm28).convertToMoney(extras.getLowPrice());
+                    holder.cm28Bt.setVisibility(View.GONE);
+                }
+            } else {
+                holder.cm28.setVisibility(View.GONE);
+                holder.cm28Bt.setVisibility(View.GONE);
+            }
+
+            if (extras.getMediumPrice() > 0) {
+                SpanUtils.on(holder.cm34).convertToMoney(extras.getMediumPrice());
+                holder.cm34Bt.setVisibility(View.VISIBLE);
+            } else {
+                holder.cm34.setVisibility(View.GONE);
+                holder.cm34Bt.setVisibility(View.GONE);
+            }
+
+            if (extras.getHighPrice() > 0) {
+                SpanUtils.on(holder.cm44).convertToMoney(extras.getHighPrice());
+                holder.cm44Bt.setVisibility(View.VISIBLE);
+            } else {
+                holder.cm44.setVisibility(View.GONE);
+                holder.cm44Bt.setVisibility(View.GONE);
+            }
+
             holder.statusType.setVisibility(View.GONE);
         }
+
+
     }
 
     @Override
@@ -64,8 +126,9 @@ public class PizzaMenuAdapter extends RecyclerView.Adapter<PizzaMenuAdapter.View
         return data.size();
     }
 
-    public void updateAdapter(List<Pizza> pizzaList) {
+    public void updateAdapter(List<Object> pizzaList) {
         data.clear();
+        data = new ArrayList<>();
         this.data = pizzaList;
         notifyDataSetChanged();
     }
@@ -77,6 +140,9 @@ public class PizzaMenuAdapter extends RecyclerView.Adapter<PizzaMenuAdapter.View
         private TextView cm34;
         private TextView cm44;
         private ImageView statusType;
+        private Button cm28Bt;
+        private Button cm34Bt;
+        private Button cm44Bt;
 
 
         public ViewHolder(View rootView) {
@@ -86,6 +152,9 @@ public class PizzaMenuAdapter extends RecyclerView.Adapter<PizzaMenuAdapter.View
             cm28 = rootView.findViewById(R.id.list_pizza_item_28);
             cm34 = rootView.findViewById(R.id.list_pizza_item_34);
             cm44 = rootView.findViewById(R.id.list_pizza_item_44);
+            cm28Bt = rootView.findViewById(R.id.cm28);
+            cm34Bt = rootView.findViewById(R.id.cm34);
+            cm44Bt = rootView.findViewById(R.id.cm44);
             statusType = rootView.findViewById(R.id.list_pizza_item_status_type);
         }
     }
