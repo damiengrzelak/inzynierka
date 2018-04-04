@@ -4,6 +4,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class Inne {
+    private String ingredients;
     private String name;
     private int number;
     private double price;
@@ -12,12 +13,17 @@ public class Inne {
     public Inne() {
     }
 
-    public Inne(String name, int number, double price, int type) {
+    public Inne(String ingredients, String name, int number, double price, int type) {
+        this.ingredients = ingredients;
         this.name = name;
         this.number = number;
         this.price = price;
         this.type = type;
     }
+
+    public String getIngredients() { return ingredients; }
+
+    public void setIngredients(String ingredients) { this.ingredients = ingredients; }
 
     public String getName() {
         return name;

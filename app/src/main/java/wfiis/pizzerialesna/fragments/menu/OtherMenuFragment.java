@@ -151,7 +151,7 @@ public class OtherMenuFragment extends BaseFragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                     Inne i = singleSnapshot.getValue(Inne.class);
-                    inneList.add(new Inne(i.getName(), i.getNumber(), i.getPrice(), i.getType()));
+                    inneList.add(new Inne(i.getIngredients(), i.getName(), i.getNumber(), i.getPrice(), i.getType()));
                     inneMenuAdapter.notifyDataSetChanged();
                 }
                 dissMissPreloader();
