@@ -42,6 +42,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
 
         getActions().topBar().showBackIcon(false );
         getActions().topBar().showMenuIcon(true);
+        getActions().topBar().showBasketIcon(true);
 
 
         return view;

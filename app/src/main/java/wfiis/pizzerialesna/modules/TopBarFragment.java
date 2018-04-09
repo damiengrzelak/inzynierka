@@ -12,6 +12,7 @@ import java.lang.ref.WeakReference;
 
 import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.base.BaseFragment;
+import wfiis.pizzerialesna.fragments.basket.BasketFragment;
 import wfiis.pizzerialesna.interactions.ActivityInteractions;
 import wfiis.pizzerialesna.interactions.TopBarInteractions;
 import wfiis.pizzerialesna.tools.Tools;
@@ -19,6 +20,7 @@ import wfiis.pizzerialesna.tools.Tools;
 public class TopBarFragment extends BaseFragment implements TopBarInteractions, View.OnClickListener {
     private View goBackBtn;
     private View menuBtn;
+    private View basketBtn;
 
     @Nullable
     @Override
@@ -28,6 +30,7 @@ public class TopBarFragment extends BaseFragment implements TopBarInteractions, 
         goBackBtn = view.findViewById(R.id.go_back_btn);
         //title = view.findViewById(R.id.top_bar_title);
         menuBtn = view.findViewById(R.id.menu_btn);
+        basketBtn = view.findViewById(R.id.basket_bt);
 
         goBackBtn.setOnClickListener(this);
         menuBtn.setOnClickListener(this);
@@ -50,6 +53,11 @@ public class TopBarFragment extends BaseFragment implements TopBarInteractions, 
     }
 
     @Override
+    public void showBasketIcon(boolean visible) {
+        basketBtn.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
     public int isMenuIconVisible() {
         return menuBtn.getVisibility();
     }
@@ -69,6 +77,10 @@ public class TopBarFragment extends BaseFragment implements TopBarInteractions, 
                 break;
             case R.id.menu_btn:
                 onClickMenu(view);
+                break;
+            case R.id.basket_bt:
+                assert getActions() != null;
+                getActions().navigateTo(BasketFragment.newInstance(), true);
                 break;
         }
     }

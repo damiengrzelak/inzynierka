@@ -72,6 +72,7 @@ public class OtherMenuFragment extends BaseFragment {
 
         getActions().topBar().showBackIcon(false);
         getActions().topBar().showMenuIcon(false);
+        getActions().topBar().showBasketIcon(true);
         return view;
     }
 
