@@ -154,7 +154,7 @@ public class PizzaMenuFragment extends BaseFragment implements View.OnClickListe
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        pizzaMenuAdapter = new PizzaMenuAdapter(pizzaList);
+        pizzaMenuAdapter = new PizzaMenuAdapter(pizzaList, true);
         recyclerView.setAdapter(pizzaMenuAdapter);
     }
 
@@ -183,7 +183,7 @@ public class PizzaMenuFragment extends BaseFragment implements View.OnClickListe
         switch (id) {
             case R.id.fragment_pizza_menu_pizzes:
                 getPizzas();
-                pizzaMenuAdapter.updateAdapter(pizzaList);
+                pizzaMenuAdapter.updateAdapter(pizzaList, true);
                 pizzaMenuAdapter.notifyDataSetChanged();
                 special.setBackgroundColor(getResources().getColor(R.color.white));
                 pizzes.setBackgroundColor(getResources().getColor(R.color.gray_border));
@@ -191,7 +191,7 @@ public class PizzaMenuFragment extends BaseFragment implements View.OnClickListe
                 break;
             case R.id.fragment_pizza_menu_special:
                 getSpecial();
-                pizzaMenuAdapter.updateAdapter(pizzaList);
+                pizzaMenuAdapter.updateAdapter(pizzaList, true);
                 pizzaMenuAdapter.notifyDataSetChanged();
                 pizzes.setBackgroundColor(getResources().getColor(R.color.white));
                 special.setBackgroundColor(getResources().getColor(R.color.gray_border));
@@ -199,7 +199,7 @@ public class PizzaMenuFragment extends BaseFragment implements View.OnClickListe
                 break;
             case R.id.fragment_pizza_menu_extras:
                 getExtras();
-                pizzaMenuAdapter.updateAdapter(pizzaList);
+                pizzaMenuAdapter.updateAdapter(pizzaList, false);
                 pizzaMenuAdapter.notifyDataSetChanged();
                 special.setBackgroundColor(getResources().getColor(R.color.white));
                 pizzes.setBackgroundColor(getResources().getColor(R.color.white));
@@ -207,6 +207,7 @@ public class PizzaMenuFragment extends BaseFragment implements View.OnClickListe
                 break;
         }
     }
+
 
     @Override
     public void onStart() {

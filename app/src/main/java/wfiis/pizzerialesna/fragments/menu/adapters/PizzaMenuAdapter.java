@@ -9,10 +9,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.inverce.mod.core.IM;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import wfiis.pizzerialesna.R;
+import wfiis.pizzerialesna.customDialogs.OrderCustomDialog;
 import wfiis.pizzerialesna.model.Extras;
 import wfiis.pizzerialesna.model.Pizza;
 import wfiis.pizzerialesna.enums.PizzaStatusType;
@@ -23,10 +26,13 @@ public class PizzaMenuAdapter extends RecyclerView.Adapter<PizzaMenuAdapter.View
 
     private List<Object> data;
     private Drawable d;
+    private boolean isClicable;
+    private int pos = 0;
 
-    public PizzaMenuAdapter(List<Object> pizzaList) {
+    public PizzaMenuAdapter(List<Object> pizzaList, boolean isClicable) {
         data = new ArrayList<>();
         this.data = pizzaList;
+        this.isClicable = isClicable;
     }
 
     @Override
@@ -68,6 +74,7 @@ public class PizzaMenuAdapter extends RecyclerView.Adapter<PizzaMenuAdapter.View
                 holder.statusType.setVisibility(View.GONE);
             }
         } else {
+            //holder.itemView.setOnClickListener(null);
             Extras extras = (Extras) data.get(position);
 
             holder.pizzaName.setText(extras.getNumber() + ". " + extras.getName());
@@ -126,14 +133,22 @@ public class PizzaMenuAdapter extends RecyclerView.Adapter<PizzaMenuAdapter.View
         return data.size();
     }
 
-    public void updateAdapter(List<Object> pizzaList) {
+    public void updateAdapter(List<Object> pizzaList, boolean isClicable) {
         data.clear();
         data = new ArrayList<>();
         this.data = pizzaList;
+        this.isClicable = isClicable;
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+//    @Override
+//    public void onClick(View view) {
+//        pos = view.getVerticalScrollbarPosition();
+//        OrderCustomDialog ord = new OrderCustomDialog(data.get(pos));
+//        ord.show(IM.activity().getFragmentManager(), IM.activity().getFragmentManager().getClass().toString());
+//    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView pizzaName;
         private TextView pizzaContent;
         private TextView cm28;
@@ -156,6 +171,20 @@ public class PizzaMenuAdapter extends RecyclerView.Adapter<PizzaMenuAdapter.View
             cm34Bt = rootView.findViewById(R.id.cm34);
             cm44Bt = rootView.findViewById(R.id.cm44);
             statusType = rootView.findViewById(R.id.list_pizza_item_status_type);
+
+            rootView.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View view) {
+            pos = getAdapterPosition();
+            if(data.get(pos) instanceof Extras) {
+                return;
+            }
+
+            OrderCustomDialog ord = new OrderCustomDialog(data.get(pos));
+            ord.show(IM.activity().getFragmentManager(), IM.activity().getFragmentManager().getClass().toString());
         }
     }
 }

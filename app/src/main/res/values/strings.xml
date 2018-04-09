@@ -62,6 +62,15 @@
     <string name="inne_menu">Inne</string>
     <string name="extras">DODATKI</string>
 
+    <string name="pizza_rozmiar">Wybierz rozmiar pizzy</string>
+    <string name="wybierz_pizze">Dodaj pizze do koszyka</string>
+    <string name="rozmiar_hint">Rozmiar</string>
+
+    <string name="kebab_rodzaj">Dodaj kebab do koszyka</string>
+    <string name="mieso_rodzaj">Wybierz mięso</string>
+    <string name="mieso_hint">Mięso</string>
+
+    <string name="dodaj_do_koszyka">Dodaj do koszyka</string>
     <!-- UTILS -->
     <string name="google_android_map_api_key">AIzaSyBTl94XORxuPnN7QkTc_9JImOK3o6VJp3k</string>
     <string name="services_error">Błąd serwisu</string>
