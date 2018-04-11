@@ -34,6 +34,7 @@ public class TopBarFragment extends BaseFragment implements TopBarInteractions, 
 
         goBackBtn.setOnClickListener(this);
         menuBtn.setOnClickListener(this);
+        basketBtn.setOnClickListener(this);
 
         return view;
     }

@@ -12,4 +12,5 @@ public class Cfg {
     public static String pizza_extras_table = "dodatkiDoPizzy";
 
     public static String users_table = "users";
+    public static String basket_table = "basket";
 }

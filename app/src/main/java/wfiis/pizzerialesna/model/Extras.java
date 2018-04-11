@@ -1,6 +1,7 @@
 package wfiis.pizzerialesna.model;
 
 import com.google.firebase.database.IgnoreExtraProperties;
+import com.raizlabs.android.dbflow.annotation.Column;
 
 import java.util.List;
 
