@@ -49,7 +49,7 @@ public class OtherMenuAdapter extends RecyclerView.Adapter<OtherMenuAdapter.View
             holder.header.setVisibility(View.GONE);
         }
 
-        holder.otherName.setText(o.getName());
+        holder.otherName.setText(o.getNumber()+". "+o.getName());
         holder.otherContent.setText(o.getIngredients());
         SpanUtils.on(holder.ontherPrize).convertToMoney(obiady.get(position).getPrice());
 

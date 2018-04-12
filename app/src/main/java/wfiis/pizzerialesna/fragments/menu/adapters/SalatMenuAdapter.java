@@ -49,7 +49,7 @@ public class SalatMenuAdapter extends RecyclerView.Adapter<SalatMenuAdapter.View
             holder.header.setVisibility(View.GONE);
         }
 
-        holder.otherName.setText(s.getName());
+        holder.otherName.setText(s.getNumber()+". "+s.getName());
         holder.otherContent.setText(s.getIngredients());
         SpanUtils.on(holder.ontherPrize).convertToMoney(salatki.get(position).getPrice());
 

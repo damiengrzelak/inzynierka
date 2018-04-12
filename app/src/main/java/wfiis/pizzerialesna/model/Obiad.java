@@ -10,14 +10,16 @@ public class Obiad{
     private String ingredients;
     private double price;
     private int type;
+    private int number;
 
     public Obiad() {}
 
-    public Obiad(String name, String ingredients, double prize, int type) {
+    public Obiad(String name, String ingredients, double prize, int type, int number) {
         this.name = name;
         this.ingredients = ingredients;
         this.price = prize;
         this.type = type;
+        this.number = number;
     }
 
     public String getName() {
@@ -50,5 +52,13 @@ public class Obiad{
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }

@@ -17,14 +17,9 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.inverce.mod.core.IM;
-import com.inverce.mod.core.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,7 +34,6 @@ import wfiis.pizzerialesna.model.Inne;
 import wfiis.pizzerialesna.model.Obiad;
 import wfiis.pizzerialesna.model.Pizza;
 import wfiis.pizzerialesna.model.Salatka;
-import wfiis.pizzerialesna.model.User;
 import wfiis.pizzerialesna.model.Zapiekanka;
 import wfiis.pizzerialesna.tools.Util;
 
@@ -153,6 +147,7 @@ public class OrderCustomDialog extends DialogFragment implements AdapterView.OnI
             item.setType(((Pizza) data).getType());
         } else if (data instanceof Obiad) {
             item.setName(((Obiad) data).getName());
+            item.setNumber(((Obiad) data).getNumber());
             item.setPrize(((Obiad) data).getPrice());
             item.setType(((Obiad) data).getType());
             if (selectedSpinnerId == 0) {
@@ -165,16 +160,19 @@ public class OrderCustomDialog extends DialogFragment implements AdapterView.OnI
             item.setIsPizza(false);
         } else if (data instanceof Inne) {
             item.setName(((Inne) data).getName());
+            item.setNumber(((Inne) data).getNumber());
             item.setIsPizza(false);
             item.setType(((Inne) data).getType());
             item.setPrize(((Inne) data).getPrice());
         } else if (data instanceof Salatka) {
             item.setName(((Salatka) data).getName());
+            item.setNumber(((Salatka) data).getNumber());
             item.setPrize(((Salatka) data).getPrice());
             item.setIsPizza(false);
             item.setType(((Salatka) data).getType());
         } else if (data instanceof Zapiekanka) {
             item.setName(((Zapiekanka) data).getName());
+            item.setNumber(((Zapiekanka) data).getNumber());
             item.setType(((Zapiekanka) data).getType());
             item.setIsPizza(false);
             item.setPrize(((Zapiekanka) data).getPrice());

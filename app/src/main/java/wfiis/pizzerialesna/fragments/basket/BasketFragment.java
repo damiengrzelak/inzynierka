@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.inverce.mod.events.Event;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +29,13 @@ import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.base.BaseFragment;
 import wfiis.pizzerialesna.fragments.basket.adapter.BasketAdapter;
 import wfiis.pizzerialesna.model.Basket;
+import wfiis.pizzerialesna.model.Extras;
 
 import static wfiis.pizzerialesna.Cfg.basket_table;
+import static wfiis.pizzerialesna.Cfg.pizza_extras_table;
 import static wfiis.pizzerialesna.Cfg.users_table;
 
-public class BasketFragment extends BaseFragment {
+public class BasketFragment extends BaseFragment implements BasketInterActions {
     private TextView emptyBasketText;
     private RecyclerView recyclerView;
     private BasketAdapter adapter;
@@ -44,9 +48,20 @@ public class BasketFragment extends BaseFragment {
     private FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
+
+
+
+    private List<Extras> dodatkiList = new ArrayList<>();
+
+
+
+
+
+
     public static BasketFragment newInstance() {
         return new BasketFragment();
     }
+
 
 
     @Nullable
@@ -58,6 +73,8 @@ public class BasketFragment extends BaseFragment {
         findViews(view);
         prepareRecycler();
         getUserBasket();
+        downloadDodatki();
+
         getActions().topBar().showBackIcon(true);
         getActions().topBar().showMenuIcon(false);
         getActions().topBar().showBasketIcon(false);
@@ -67,10 +84,16 @@ public class BasketFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        Event.Bus.register(BasketInterActions.class, this);
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        Event.Bus.unregister(BasketInterActions.class, this);
     }
 
     private void getUserBasket() {
-
         ref = ref.child(users_table);
         Query userBasketQuerry = ref.child(mAuth.getUid()).child(basket_table);
         showPreloader();
@@ -96,7 +119,7 @@ public class BasketFragment extends BaseFragment {
 
                     }
                 }
-                adapter.updateAdapter(zamowienieList);
+                adapter.updateAdapter(zamowienieList, dodatkiList);
                 adapter.notifyDataSetChanged();
                 recyclerView.invalidate();
                 prepareView();
@@ -109,6 +132,8 @@ public class BasketFragment extends BaseFragment {
                 dissMissPreloader();
             }
         });
+
+
     }
 
     private void findViews(View view) {
@@ -123,7 +148,7 @@ public class BasketFragment extends BaseFragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        adapter = new BasketAdapter(zamowienieList, wybranaPozycja);
+        adapter = new BasketAdapter(zamowienieList, wybranaPozycja, dodatkiList);
         recyclerView.setAdapter(adapter);
 
         recyclerView.refreshDrawableState();
@@ -142,5 +167,36 @@ public class BasketFragment extends BaseFragment {
             recyclerView.setVisibility(View.VISIBLE);
             goNext.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void deleteFromBaseket(int position) {
+        getUserBasket();
+        zamowienieList.remove(position);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void downloadDodatki() {
+        dodatkiList = new ArrayList<>();
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference ref = database.child(pizza_extras_table);
+        Query extrasQuerry = ref.orderByChild("number");
+        extrasQuerry.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
+                    Extras e = singleSnapshot.getValue(Extras.class);
+                    if (e != null) {
+                        dodatkiList.add(new Extras(e.getHighPrice(), e.getLowPrice(), e.getMediumPrice(), e.getName(), e.getNumber(), e.getVariants()));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("ERROR", "onCancelled", databaseError.toException());
+            }
+        });
     }
 }

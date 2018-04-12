@@ -48,7 +48,7 @@ public class InneMenuAdapter extends RecyclerView.Adapter<InneMenuAdapter.ViewHo
             holder.header.setVisibility(View.GONE);
         }
 
-        holder.inneName.setText(i.getName());
+        holder.inneName.setText(i.getNumber()+". "+i.getName());
         if(i.getIngredients() != null){
             holder.inneIngredients.setText(i.getIngredients());
         }

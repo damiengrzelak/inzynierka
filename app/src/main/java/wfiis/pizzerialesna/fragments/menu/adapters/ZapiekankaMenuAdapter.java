@@ -48,7 +48,7 @@ public class ZapiekankaMenuAdapter extends RecyclerView.Adapter<ZapiekankaMenuAd
             holder.header.setVisibility(View.GONE);
         }
 
-        holder.otherName.setText(z.getName());
+        holder.otherName.setText(z.getNumber()+". "+z.getName());
         SpanUtils.on(holder.ontherPrize).convertToMoney(data.get(position).getPrice());
 
         if (data.get(position).getType() != 0) {
