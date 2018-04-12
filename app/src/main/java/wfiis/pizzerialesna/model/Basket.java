@@ -74,12 +74,12 @@ public class Basket {
         this.number = number;
     }
 
-    public Boolean getPizza() {
+    public Boolean getIsPizza() {
         return isPizza;
     }
 
-    public void setPizza(Boolean pizza) {
-        isPizza = pizza;
+    public void setIsPizza(Boolean isPizza) {
+        this.isPizza = isPizza;
     }
 
     public String getSize() {

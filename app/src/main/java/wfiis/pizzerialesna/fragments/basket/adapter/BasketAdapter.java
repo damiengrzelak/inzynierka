@@ -10,10 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.enums.PizzaStatusType;
+import wfiis.pizzerialesna.model.Basket;
 import wfiis.pizzerialesna.model.Inne;
 import wfiis.pizzerialesna.model.Obiad;
 import wfiis.pizzerialesna.model.Pizza;
@@ -27,7 +29,11 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
     private Drawable d;
     private int pos;
 
-    public BasketAdapter(List<Object> zamowienieList, int wybranaPozycja) {
+    public BasketAdapter(HashMap<Integer, Object> zamowienieList, int wybranaPozycja) {
+        if (zamowienieList.size() <= 0) {
+            zamowienieList = new ArrayList<>();
+        }
+
         this.zamowienie = zamowienieList;
         this.wybranaPozycja = wybranaPozycja;
     }
@@ -39,49 +45,75 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if (zamowienie.get(position) instanceof Pizza) {
-            Pizza pizza = (Pizza) zamowienie.get(position);
+        Basket order = (Basket) zamowienie.get(position);
+        holder.dodajSkladniki.setVisibility(order.getIsPizza() ? View.VISIBLE : View.INVISIBLE);
 
-            holder.name.setText(pizza.getNumber() + ". " + pizza.getName());
-            holder.dodatki.setText("");
+        holder.name.setText(setOrderName(order));
 
-            if (wybranaPozycja == 0) {
-                SpanUtils.on(holder.cena).convertToMoney(pizza.getPrice28());
-
-            } else if (wybranaPozycja == 1) {
-                SpanUtils.on(holder.cena).convertToMoney(pizza.getPrice34());
-            } else if (wybranaPozycja == 2) {
-                SpanUtils.on(holder.cena).convertToMoney(pizza.getPrice44());
-            }
-            if (pizza.getType() != 0) {
-                holder.statusImg.setVisibility(View.VISIBLE);
-                if (pizza.getType() == 1) {
-                    d = PizzaStatusType.HOT.d;
-                } else if (pizza.getType() == 2) {
-                    d = PizzaStatusType.NEW.d;
-                } else if (pizza.getType() == 3) {
-                    d = PizzaStatusType.OUR.d;
-                }
-
-                holder.statusImg.setImageDrawable(d);
-
-                holder.dodajSkladniki.setVisibility(View.VISIBLE);
-            }
-
-
-        } else if (zamowienie.get(position) instanceof Obiad) {
-            Obiad obiad = (Obiad) zamowienie.get(position);
-
-        } else if (zamowienie.get(position) instanceof Inne) {
-            Inne inne = (Inne) zamowienie.get(position);
-
-        } else if (zamowienie.get(position) instanceof Salatka) {
-            Salatka salatka = (Salatka) zamowienie.get(position);
-
-        } else if (zamowienie.get(position) instanceof Zapiekanka) {
-            Zapiekanka zapiekanka = (Zapiekanka) zamowienie.get(position);
-        }
+//        if (zamowienie.get(position) instanceof Pizza) {
+//            Pizza pizza = (Pizza) zamowienie.get(position);
+//
+//            holder.name.setText(pizza.getNumber() + ". " + pizza.getName());
+//            holder.dodatki.setText("");
+//
+//            if (wybranaPozycja == 0) {
+//                SpanUtils.on(holder.cena).convertToMoney(pizza.getPrice28());
+//
+//            } else if (wybranaPozycja == 1) {
+//                SpanUtils.on(holder.cena).convertToMoney(pizza.getPrice34());
+//            } else if (wybranaPozycja == 2) {
+//                SpanUtils.on(holder.cena).convertToMoney(pizza.getPrice44());
+//            }
+//            if (pizza.getType() != 0) {
+//                holder.statusImg.setVisibility(View.VISIBLE);
+//                if (pizza.getType() == 1) {
+//                    d = PizzaStatusType.HOT.d;
+//                } else if (pizza.getType() == 2) {
+//                    d = PizzaStatusType.NEW.d;
+//                } else if (pizza.getType() == 3) {
+//                    d = PizzaStatusType.OUR.d;
+//                }
+//
+//                holder.statusImg.setImageDrawable(d);
+//
+//                holder.dodajSkladniki.setVisibility(View.VISIBLE);
+//            }
+//
+//
+//        } else if (zamowienie.get(position) instanceof Obiad) {
+//            Obiad obiad = (Obiad) zamowienie.get(position);
+//
+//        } else if (zamowienie.get(position) instanceof Inne) {
+//            Inne inne = (Inne) zamowienie.get(position);
+//
+//        } else if (zamowienie.get(position) instanceof Salatka) {
+//            Salatka salatka = (Salatka) zamowienie.get(position);
+//
+//        } else if (zamowienie.get(position) instanceof Zapiekanka) {
+//            Zapiekanka zapiekanka = (Zapiekanka) zamowienie.get(position);
+//        }
     }
+
+    private String setOrderName(Basket order) {
+        String name = "";
+        if (!order.getIsPizza()) {
+            name = order.getName();
+        } else {
+            switch (wybranaPozycja) {
+                case 0:
+                    name =  order.getName() +" - mini";
+                    break;
+                case 1:
+                    name = order.getName() +" - mała";
+                    break;
+                case 2:
+                    name = order.getName() +" - średnia";
+                    break;
+            }
+        }
+        return name;
+    }
+
 
     @Override
     public int getItemViewType(int position) {
@@ -90,10 +122,18 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        if (zamowienie == null) {
+        if (zamowienie.size() <= 0) {
             zamowienie = new ArrayList<>();
         }
         return zamowienie.size();
+    }
+
+    public void updateAdapter(List<Object> objectList) {
+        if (objectList.size() > 0) {
+            zamowienie = new ArrayList<>();
+            this.zamowienie = objectList;
+            notifyDataSetChanged();
+        }
     }
 
 
