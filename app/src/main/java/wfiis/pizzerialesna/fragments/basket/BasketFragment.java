@@ -56,19 +56,12 @@ public class BasketFragment extends BaseFragment implements BasketInterActions, 
     private DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
 
-
-
     private List<Extras> dodatkiList = new ArrayList<>();
-
-
-
-
 
 
     public static BasketFragment newInstance() {
         return new BasketFragment();
     }
-
 
 
     @Nullable
@@ -96,7 +89,7 @@ public class BasketFragment extends BaseFragment implements BasketInterActions, 
     }
 
     @Override
-    public void onStop(){
+    public void onStop() {
         super.onStop();
         Event.Bus.unregister(BasketInterActions.class, this);
         Event.Bus.unregister(DodatkiAddInteractions.class, this);
@@ -215,23 +208,31 @@ public class BasketFragment extends BaseFragment implements BasketInterActions, 
         dodatkiValue = dodatkiCena;
         arrayList = listaDodatkow;
 
-        updateZamowienie(arrayList, arrayList, position);
+        updateZamowienie(arrayList, arrayList, dodatkiValue, position);
         adapter.updateChosenExtras(dodatkiText, dodatkiValue, arrayList, position);
         adapter.notifyDataSetChanged();
     }
 
-    private void updateZamowienie(ArrayList<String> list, ArrayList<String> arrayList, int position) {
+    private void updateZamowienie(ArrayList<String> list, ArrayList<String> arrayList, double dodatkiValue, int position) {
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
         ref = FirebaseDatabase.getInstance().getReference();
-        Basket orderKey = (Basket)zamowienieList.get(position);
+        Basket orderKey = (Basket) zamowienieList.get(position);
         ref = ref.child(users_table).child(mAuth.getUid()).child(basket_table).child(orderKey.getKey());
 
 
-        for(int i = 0; i <list.size(); i++){
+        ref.child("ingredients/").removeValue();
+        for (int i = 0; i < list.size(); i++) {
             Map<String, Object> dodatki = new HashMap<>();
             dodatki.put(String.valueOf(i), list.get(i));
             ref.child("ingredients/").updateChildren(dodatki);
         }
-
+        Map<String, Object> dodatkiCena = new HashMap<>();
+        if (dodatkiValue > 0.0) {
+            dodatkiCena.put("priceIngredients", dodatkiValue);
+        } else {
+            dodatkiCena.put("priceIngredients", 0);
+        }
+        ref.updateChildren(dodatkiCena);
+        adapter.notifyDataSetChanged();
     }
 }

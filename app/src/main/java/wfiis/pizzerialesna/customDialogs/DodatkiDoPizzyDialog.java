@@ -193,13 +193,13 @@ public class DodatkiDoPizzyDialog extends DialogFragment implements AdapterView.
             if (!gratisyTextl.getText().toString().contains("GRAT")){
                 dodatkiText = dodatkiText + gratisyTextl.getText();
                 listaDodatkow.add( gratisyTextl.getText().toString());
-                if (size == 0) {
-                    dodatkiCena = dodatkiCena + dodatkiList.get(5).getLowPrice();
-                } else if (size == 1) {
-                    dodatkiCena = dodatkiCena + dodatkiList.get(5).getMediumPrice();
-                } else if (size == 2) {
-                    dodatkiCena = dodatkiCena + dodatkiList.get(5).getHighPrice();
-                }
+               // if (size == 0) {
+                    dodatkiCena = dodatkiCena;// + dodatkiList.get(5).getLowPrice();
+                //} else if (size == 1) {
+               //     dodatkiCena = dodatkiCena + dodatkiList.get(5).getMediumPrice();
+               // } else if (size == 2) {
+               //     dodatkiCena = dodatkiCena + dodatkiList.get(5).getHighPrice();
+               // }
             }
 
             Event.Bus.post(DodatkiAddInteractions.class).onExtrasAdded(dodatkiText, dodatkiCena, listaDodatkow, position);

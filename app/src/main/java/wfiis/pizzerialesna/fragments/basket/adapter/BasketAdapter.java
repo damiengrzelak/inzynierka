@@ -100,8 +100,18 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
         holder.dodajSkladniki.setVisibility(order.getIsPizza() ? View.VISIBLE : View.INVISIBLE);
 
         holder.name.setText(setOrderName(order));
-        holder.dodatki.setText("Dodatki: "+setOrderDodatki(order));
-        SpanUtils.on(holder.cena).convertToMoney(order.getPrize());
+        if (!setOrderDodatki(order).equals("")) {
+            holder.dodatki.setText("Dodatki: " + setOrderDodatki(order));
+        } else {
+            holder.dodatki.setText("");
+        }
+
+        if (order.getPriceIngredients() > 0.0) {
+            double cena = order.getPrize() + order.getPriceIngredients();
+            SpanUtils.on(holder.cena).convertToMoney(cena);
+        } else {
+            SpanUtils.on(holder.cena).convertToMoney(order.getPrize());
+        }
 
         if (order.getType() != 0) {
             holder.statusImg.setVisibility(View.VISIBLE);
@@ -121,8 +131,17 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
             String str = "";
             if (dodatkiText != null && dodatkiText.length() > 0 && dodatkiText.charAt(dodatkiText.length() - 1) == ' ') {
                 str = dodatkiText.substring(0, dodatkiText.length() - 2);
+            } else {
+                str = dodatkiText;
             }
             holder.dodatki.setText("Dodatki: " + str);
+        } else if (dodatkiText.equals("") && order.getIngredients() == null) {
+            holder.dodatki.setText("");
+        }
+
+        if (dodatkiValue > 0.0 && dodatkiPozycja == position) {
+            double cena = dodatkiValue + order.getPrize();
+            SpanUtils.on(holder.cena).convertToMoney(cena);
         }
 
         holder.usun.setOnClickListener(view -> usunProdukt(order, position));
@@ -159,13 +178,15 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
                 for (int i = 0; i < order.getIngredients().size(); i++) {
                     if (i == 0) {
                         dodatki = order.getIngredients().get(i);
-                    } else if (i == order.getIngredients().size() - 1){
+                    } else if (i == order.getIngredients().size() - 1) {
                         dodatki = dodatki + ", " + order.getIngredients().get(i);
                     } else {
-                        dodatki = dodatki + ", " + order.getIngredients().get(i)+", ";
+                        dodatki = dodatki + ", " + order.getIngredients().get(i) + ", ";
                     }
 
                 }
+            } else {
+                dodatki = "";
             }
         }
         return dodatki;
