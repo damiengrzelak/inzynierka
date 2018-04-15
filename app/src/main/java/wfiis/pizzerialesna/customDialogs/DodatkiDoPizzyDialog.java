@@ -37,7 +37,6 @@ public class DodatkiDoPizzyDialog extends DialogFragment implements AdapterView.
     private int size;
     private List<Extras> dodatkiList = new ArrayList<>();
 
-    private boolean isDownloaded;
     private int switchClicked = -1;
 
     private CheckBox ser, ciasto;
@@ -158,8 +157,8 @@ public class DodatkiDoPizzyDialog extends DialogFragment implements AdapterView.
                 }
             }
             if (!miesoText.getText().toString().contains("DODATEK")) {
-                dodatkiText = dodatkiText + miesoText.getText()+", ";
-                listaDodatkow.add( miesoText.getText().toString());
+                dodatkiText = dodatkiText + miesoText.getText() + ", ";
+                listaDodatkow.add(miesoText.getText().toString());
                 if (size == 0) {
                     dodatkiCena = dodatkiCena + dodatkiList.get(1).getLowPrice();
                 } else if (size == 1) {
@@ -169,8 +168,9 @@ public class DodatkiDoPizzyDialog extends DialogFragment implements AdapterView.
                 }
             }
             if (!owoceText.getText().toString().contains("OWOCE")) {
-                dodatkiText = dodatkiText + owoceText.getText()+", ";;
-                listaDodatkow.add( owoceText.getText().toString());
+                dodatkiText = dodatkiText + owoceText.getText() + ", ";
+                ;
+                listaDodatkow.add(owoceText.getText().toString());
                 if (size == 0) {
                     dodatkiCena = dodatkiCena + dodatkiList.get(2).getLowPrice();
                 } else if (size == 1) {
@@ -180,8 +180,9 @@ public class DodatkiDoPizzyDialog extends DialogFragment implements AdapterView.
                 }
             }
             if (!warzywaText.getText().toString().contains("WARZY")) {
-                dodatkiText = dodatkiText + warzywaText.getText()+", ";;
-                listaDodatkow.add( warzywaText.getText().toString());
+                dodatkiText = dodatkiText + warzywaText.getText() + ", ";
+                ;
+                listaDodatkow.add(warzywaText.getText().toString());
                 if (size == 0) {
                     dodatkiCena = dodatkiCena + dodatkiList.get(3).getLowPrice();
                 } else if (size == 1) {
@@ -190,16 +191,10 @@ public class DodatkiDoPizzyDialog extends DialogFragment implements AdapterView.
                     dodatkiCena = dodatkiCena + dodatkiList.get(3).getHighPrice();
                 }
             }
-            if (!gratisyTextl.getText().toString().contains("GRAT")){
+            if (!gratisyTextl.getText().toString().contains("GRAT")) {
                 dodatkiText = dodatkiText + gratisyTextl.getText();
-                listaDodatkow.add( gratisyTextl.getText().toString());
-               // if (size == 0) {
-                    dodatkiCena = dodatkiCena;// + dodatkiList.get(5).getLowPrice();
-                //} else if (size == 1) {
-               //     dodatkiCena = dodatkiCena + dodatkiList.get(5).getMediumPrice();
-               // } else if (size == 2) {
-               //     dodatkiCena = dodatkiCena + dodatkiList.get(5).getHighPrice();
-               // }
+                listaDodatkow.add(gratisyTextl.getText().toString());
+                dodatkiCena = dodatkiCena;
             }
 
             Event.Bus.post(DodatkiAddInteractions.class).onExtrasAdded(dodatkiText, dodatkiCena, listaDodatkow, position);
