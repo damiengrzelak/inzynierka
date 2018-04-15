@@ -23,10 +23,13 @@ import com.google.firebase.database.ValueEventListener;
 import com.inverce.mod.events.Event;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.base.BaseFragment;
+import wfiis.pizzerialesna.customDialogs.DodatkiAddInteractions;
 import wfiis.pizzerialesna.fragments.basket.adapter.BasketAdapter;
 import wfiis.pizzerialesna.model.Basket;
 import wfiis.pizzerialesna.model.Extras;
@@ -35,7 +38,7 @@ import static wfiis.pizzerialesna.Cfg.basket_table;
 import static wfiis.pizzerialesna.Cfg.pizza_extras_table;
 import static wfiis.pizzerialesna.Cfg.users_table;
 
-public class BasketFragment extends BaseFragment implements BasketInterActions {
+public class BasketFragment extends BaseFragment implements BasketInterActions, DodatkiAddInteractions {
     private TextView emptyBasketText;
     private RecyclerView recyclerView;
     private BasketAdapter adapter;
@@ -44,6 +47,10 @@ public class BasketFragment extends BaseFragment implements BasketInterActions {
     private Button goNext;
     private int wybranaPozycja = -1;
 
+
+    private String dodatkiText = "";
+    private double dodatkiValue = 0.0;
+    private ArrayList<String> arrayList = new ArrayList<>();
 
     private FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -85,12 +92,14 @@ public class BasketFragment extends BaseFragment implements BasketInterActions {
     public void onResume() {
         super.onResume();
         Event.Bus.register(BasketInterActions.class, this);
+        Event.Bus.register(DodatkiAddInteractions.class, this);
     }
 
     @Override
     public void onStop(){
         super.onStop();
         Event.Bus.unregister(BasketInterActions.class, this);
+        Event.Bus.unregister(DodatkiAddInteractions.class, this);
     }
 
     private void getUserBasket() {
@@ -198,5 +207,31 @@ public class BasketFragment extends BaseFragment implements BasketInterActions {
                 Log.e("ERROR", "onCancelled", databaseError.toException());
             }
         });
+    }
+
+    @Override
+    public void onExtrasAdded(String dodatki, double dodatkiCena, ArrayList<String> listaDodatkow, int position) {
+        dodatkiText = dodatki;
+        dodatkiValue = dodatkiCena;
+        arrayList = listaDodatkow;
+
+        updateZamowienie(arrayList, arrayList, position);
+        adapter.updateChosenExtras(dodatkiText, dodatkiValue, arrayList, position);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void updateZamowienie(ArrayList<String> list, ArrayList<String> arrayList, int position) {
+        mAuth = FirebaseAuth.getInstance().getCurrentUser();
+        ref = FirebaseDatabase.getInstance().getReference();
+        Basket orderKey = (Basket)zamowienieList.get(position);
+        ref = ref.child(users_table).child(mAuth.getUid()).child(basket_table).child(orderKey.getKey());
+
+
+        for(int i = 0; i <list.size(); i++){
+            Map<String, Object> dodatki = new HashMap<>();
+            dodatki.put(String.valueOf(i), list.get(i));
+            ref.child("ingredients/").updateChildren(dodatki);
+        }
+
     }
 }

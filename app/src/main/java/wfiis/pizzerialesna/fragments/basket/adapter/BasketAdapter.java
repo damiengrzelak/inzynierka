@@ -25,23 +25,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wfiis.pizzerialesna.R;
+import wfiis.pizzerialesna.customDialogs.DodatkiAddInteractions;
 import wfiis.pizzerialesna.customDialogs.DodatkiDoPizzyDialog;
 import wfiis.pizzerialesna.enums.PizzaStatusType;
 import wfiis.pizzerialesna.fragments.basket.BasketInterActions;
 import wfiis.pizzerialesna.model.Basket;
 import wfiis.pizzerialesna.model.Extras;
-import wfiis.pizzerialesna.model.Inne;
-import wfiis.pizzerialesna.model.Obiad;
-import wfiis.pizzerialesna.model.Pizza;
-import wfiis.pizzerialesna.model.Salatka;
-import wfiis.pizzerialesna.model.Zapiekanka;
 import wfiis.pizzerialesna.tools.SpanUtils;
 
 import static wfiis.pizzerialesna.Cfg.basket_table;
 import static wfiis.pizzerialesna.Cfg.pizza_extras_table;
 import static wfiis.pizzerialesna.Cfg.users_table;
 
-public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder> {
+public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder> implements DodatkiAddInteractions {
     private List<Object> zamowienie;
     private List<Extras> dodatkiList;
     private int wybranaPozycja = -1;
@@ -50,6 +46,11 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
 
     private FirebaseUser mAuth;
     private DatabaseReference ref;
+
+    private String dodatkiText = "";
+    private double dodatkiValue;
+    private ArrayList<String> arrayList = new ArrayList<>();
+    private int dodatkiPozycja = -1;
 
     public BasketAdapter(List<Object> zamowienieList, int wybranaPozycja, List<Extras> dodatkiList) {
         if (zamowienieList.size() <= 0) {
@@ -99,7 +100,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
         holder.dodajSkladniki.setVisibility(order.getIsPizza() ? View.VISIBLE : View.INVISIBLE);
 
         holder.name.setText(setOrderName(order));
-        holder.dodatki.setText(setOrderDodatki(order));
+        holder.dodatki.setText("Dodatki: "+setOrderDodatki(order));
         SpanUtils.on(holder.cena).convertToMoney(order.getPrize());
 
         if (order.getType() != 0) {
@@ -116,10 +117,18 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
         } else {
             holder.statusImg.setVisibility(View.GONE);
         }
+        if (!dodatkiText.equals("") && dodatkiPozycja == position) {
+            String str = "";
+            if (dodatkiText != null && dodatkiText.length() > 0 && dodatkiText.charAt(dodatkiText.length() - 1) == ' ') {
+                str = dodatkiText.substring(0, dodatkiText.length() - 2);
+            }
+            holder.dodatki.setText("Dodatki: " + str);
+        }
 
         holder.usun.setOnClickListener(view -> usunProdukt(order, position));
 
         holder.dodajSkladniki.setOnClickListener(view -> dodajSkladnikiDoProduktu(position));
+
     }
 
     private String setOrderName(Basket order) {
@@ -146,7 +155,18 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
                 dodatki = "Mięso: " + order.getMeat();
             }
         } else {
-            //TODO WHEN DODATKI ADDED
+            if (order.getIsPizza() && order.getIngredients() != null && order.getIngredients().size() > 0) {
+                for (int i = 0; i < order.getIngredients().size(); i++) {
+                    if (i == 0) {
+                        dodatki = order.getIngredients().get(i);
+                    } else if (i == order.getIngredients().size() - 1){
+                        dodatki = dodatki + ", " + order.getIngredients().get(i);
+                    } else {
+                        dodatki = dodatki + ", " + order.getIngredients().get(i)+", ";
+                    }
+
+                }
+            }
         }
         return dodatki;
     }
@@ -197,8 +217,22 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
             size = 2;
         }
 
-        DodatkiDoPizzyDialog dodatkiDialog = new DodatkiDoPizzyDialog(dodatkiList, size);
+        DodatkiDoPizzyDialog dodatkiDialog = new DodatkiDoPizzyDialog(dodatkiList, size, position);
         dodatkiDialog.show(IM.activity().getFragmentManager(), IM.activity().getFragmentManager().getClass().toString());
+    }
+
+    @Override
+    public void onExtrasAdded(String dodatki, double dodatkiCena, ArrayList<String> listaDodatkow, int position) {
+        dodatkiText = dodatki;
+        dodatkiValue = dodatkiCena;
+        arrayList = listaDodatkow;
+    }
+
+    public void updateChosenExtras(String dodatkiText, double dodatkiValue, ArrayList<String> arrayList, int pozycja) {
+        this.dodatkiText = dodatkiText;
+        this.dodatkiValue = dodatkiValue;
+        this.arrayList = arrayList;
+        this.dodatkiPozycja = pozycja;
     }
 
 

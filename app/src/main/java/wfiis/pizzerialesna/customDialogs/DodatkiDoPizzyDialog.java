@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.inverce.mod.core.IM;
+import com.inverce.mod.events.Event;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,6 +38,7 @@ public class DodatkiDoPizzyDialog extends DialogFragment implements AdapterView.
     private List<Extras> dodatkiList = new ArrayList<>();
 
     private boolean isDownloaded;
+    private int switchClicked = -1;
 
     private CheckBox ser, ciasto;
     private TextView serCena, ciastoCena;
@@ -44,6 +46,10 @@ public class DodatkiDoPizzyDialog extends DialogFragment implements AdapterView.
     private LinearLayout mieso, owoceMorza, warzywa, gratisy;
     private Button done;
 
+    private double dodatkiCena;
+
+
+    private int position = -1;
 
     private FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -54,9 +60,10 @@ public class DodatkiDoPizzyDialog extends DialogFragment implements AdapterView.
     }
 
     @SuppressLint("ValidFragment")
-    public DodatkiDoPizzyDialog(List<Extras> dodatkiList, int size) {
+    public DodatkiDoPizzyDialog(List<Extras> dodatkiList, int size, int position) {
         this.size = size;
         this.dodatkiList = dodatkiList;
+        this.position = position;
     }
 
     @Override
@@ -86,6 +93,8 @@ public class DodatkiDoPizzyDialog extends DialogFragment implements AdapterView.
         owoceText = rootView.findViewById(R.id.dodatek_owoce_text);
         warzywaText = rootView.findViewById(R.id.dodatek_warzywa_text);
         gratisyTextl = rootView.findViewById(R.id.dodatek_gratisy_text);
+
+        done = rootView.findViewById(R.id.dodatki_dialog_done);
     }
 
     private void fillViews() {
@@ -122,6 +131,80 @@ public class DodatkiDoPizzyDialog extends DialogFragment implements AdapterView.
         owoceMorza.setOnClickListener(view -> showPopUp(this.owoceMorza));
         warzywa.setOnClickListener(view -> showPopUp(this.warzywa));
         gratisy.setOnClickListener(view -> showPopUp(this.gratisy));
+
+        done.setOnClickListener(view -> {
+            String dodatkiText = "";
+            ArrayList<String> listaDodatkow = new ArrayList<>();
+            if (ser.isChecked()) {
+                dodatkiText = dodatkiText + "ser, ";
+                listaDodatkow.add("ser");
+                if (size == 0) {
+                    dodatkiCena = dodatkiCena + dodatkiList.get(0).getLowPrice();
+                } else if (size == 1) {
+                    dodatkiCena = dodatkiCena + dodatkiList.get(0).getMediumPrice();
+                } else if (size == 2) {
+                    dodatkiCena = dodatkiCena + dodatkiList.get(0).getHighPrice();
+                }
+            }
+            if (ciasto.isChecked()) {
+                dodatkiText = dodatkiText + "ciasto, ";
+                listaDodatkow.add("ciasto");
+                if (size == 0) {
+                    dodatkiCena = dodatkiCena + dodatkiList.get(4).getLowPrice();
+                } else if (size == 1) {
+                    dodatkiCena = dodatkiCena + dodatkiList.get(4).getMediumPrice();
+                } else if (size == 2) {
+                    dodatkiCena = dodatkiCena + dodatkiList.get(4).getHighPrice();
+                }
+            }
+            if (!miesoText.getText().toString().contains("DODATEK")) {
+                dodatkiText = dodatkiText + miesoText.getText()+", ";
+                listaDodatkow.add( miesoText.getText().toString());
+                if (size == 0) {
+                    dodatkiCena = dodatkiCena + dodatkiList.get(1).getLowPrice();
+                } else if (size == 1) {
+                    dodatkiCena = dodatkiCena + dodatkiList.get(1).getMediumPrice();
+                } else if (size == 2) {
+                    dodatkiCena = dodatkiCena + dodatkiList.get(1).getHighPrice();
+                }
+            }
+            if (!owoceText.getText().toString().contains("OWOCE")) {
+                dodatkiText = dodatkiText + owoceText.getText()+", ";;
+                listaDodatkow.add( owoceText.getText().toString());
+                if (size == 0) {
+                    dodatkiCena = dodatkiCena + dodatkiList.get(2).getLowPrice();
+                } else if (size == 1) {
+                    dodatkiCena = dodatkiCena + dodatkiList.get(2).getMediumPrice();
+                } else if (size == 2) {
+                    dodatkiCena = dodatkiCena + dodatkiList.get(2).getHighPrice();
+                }
+            }
+            if (!warzywaText.getText().toString().contains("WARZY")) {
+                dodatkiText = dodatkiText + warzywaText.getText()+", ";;
+                listaDodatkow.add( warzywaText.getText().toString());
+                if (size == 0) {
+                    dodatkiCena = dodatkiCena + dodatkiList.get(3).getLowPrice();
+                } else if (size == 1) {
+                    dodatkiCena = dodatkiCena + dodatkiList.get(3).getMediumPrice();
+                } else if (size == 2) {
+                    dodatkiCena = dodatkiCena + dodatkiList.get(3).getHighPrice();
+                }
+            }
+            if (!gratisyTextl.getText().toString().contains("GRAT")){
+                dodatkiText = dodatkiText + gratisyTextl.getText();
+                listaDodatkow.add( gratisyTextl.getText().toString());
+                if (size == 0) {
+                    dodatkiCena = dodatkiCena + dodatkiList.get(5).getLowPrice();
+                } else if (size == 1) {
+                    dodatkiCena = dodatkiCena + dodatkiList.get(5).getMediumPrice();
+                } else if (size == 2) {
+                    dodatkiCena = dodatkiCena + dodatkiList.get(5).getHighPrice();
+                }
+            }
+
+            Event.Bus.post(DodatkiAddInteractions.class).onExtrasAdded(dodatkiText, dodatkiCena, listaDodatkow, position);
+            dismiss();
+        });
     }
 
     private void showPopUp(View view) {
@@ -129,6 +212,7 @@ public class DodatkiDoPizzyDialog extends DialogFragment implements AdapterView.
         int[] to = {R.id.item_view};
         switch (view.getId()) {
             case R.id.dodatki_dialog_mieso:
+                switchClicked = 1;
                 for (int i = 0; i < dodatkiList.get(1).getVariants().size(); i++) {
                     HashMap<String, String> spinnerItems = new HashMap<>();
                     spinnerItems.put("Mięso", dodatkiList.get(1).getVariants().get(i).getName());
@@ -144,10 +228,15 @@ public class DodatkiDoPizzyDialog extends DialogFragment implements AdapterView.
                 popupWindow.setAnchorView(view);
                 popupWindow.setAdapter(adapter);
                 popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
-                popupWindow.setOnItemClickListener(this);
+                popupWindow.setOnItemClickListener((adapterView, view1, i, l) -> {
+                    miesoText.setText(adapterView.getItemAtPosition(i).toString().replace("{Mięso=", "").replace("}", ""));
+                    miesoText.setTextColor(IM.resources().getColor(R.color.black));
+                    popupWindow.dismiss();
+                });
                 popupWindow.show();
                 break;
             case R.id.dodatki_dialog_owoce_morza:
+                switchClicked = 2;
                 for (int i = 0; i < dodatkiList.get(2).getVariants().size(); i++) {
                     HashMap<String, String> spinnerItems = new HashMap<>();
                     spinnerItems.put("OwoceMorza", dodatkiList.get(2).getVariants().get(i).getName());
@@ -163,10 +252,15 @@ public class DodatkiDoPizzyDialog extends DialogFragment implements AdapterView.
                 popupWindow.setAnchorView(view);
                 popupWindow.setAdapter(adapter2);
                 popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
-                popupWindow.setOnItemClickListener(this);
+                popupWindow.setOnItemClickListener((adapterView, view1, i, l) -> {
+                    owoceText.setText(adapterView.getItemAtPosition(i).toString().replace("{OwoceMorza=", "").replace("}", ""));
+                    owoceText.setTextColor(IM.resources().getColor(R.color.black));
+                    popupWindow.dismiss();
+                });
                 popupWindow.show();
                 break;
             case R.id.dodatki_dialog_warzywa:
+                switchClicked = 3;
                 for (int i = 0; i < dodatkiList.get(3).getVariants().size(); i++) {
                     HashMap<String, String> spinnerItems = new HashMap<>();
                     spinnerItems.put("OwoceMorza", dodatkiList.get(3).getVariants().get(i).getName());
@@ -182,10 +276,15 @@ public class DodatkiDoPizzyDialog extends DialogFragment implements AdapterView.
                 popupWindow.setAnchorView(view);
                 popupWindow.setAdapter(adapter3);
                 popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
-                popupWindow.setOnItemClickListener(this);
+                popupWindow.setOnItemClickListener((adapterView, view1, i, l) -> {
+                    warzywaText.setText(adapterView.getItemAtPosition(i).toString().replace("{OwoceMorza=", "").replace("}", ""));
+                    warzywaText.setTextColor(IM.resources().getColor(R.color.black));
+                    popupWindow.dismiss();
+                });
                 popupWindow.show();
                 break;
             case R.id.dodatki_dialog_gratisy:
+                switchClicked = 4;
                 for (int i = 0; i < dodatkiList.get(5).getVariants().size(); i++) {
                     HashMap<String, String> spinnerItems = new HashMap<>();
                     spinnerItems.put("Gratisy", dodatkiList.get(5).getVariants().get(i).getName());
@@ -201,51 +300,15 @@ public class DodatkiDoPizzyDialog extends DialogFragment implements AdapterView.
                 popupWindow.setAnchorView(view);
                 popupWindow.setAdapter(adapter4);
                 popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
-                popupWindow.setOnItemClickListener(this);
+                popupWindow.setOnItemClickListener((adapterView, view1, i, l) -> {
+                    gratisyTextl.setText(adapterView.getItemAtPosition(i).toString().replace("{Gratisy=", "").replace("}", ""));
+                    gratisyTextl.setTextColor(IM.resources().getColor(R.color.black));
+                    popupWindow.dismiss();
+                });
                 popupWindow.show();
                 break;
         }
-
-//        HashMap<String, String> spinnerItems = new HashMap<>();
-//        HashMap<String, String> spinnerItems2 = new HashMap<>();
-//        HashMap<String, String> spinnerItems3 = new HashMap<>();
-//
-//        if (data instanceof Pizza) {
-//            spinnerItems.put("name",
-//                    "Mini - " + String.valueOf(Util.decimPlace(((Pizza) data).getPrice28(), 2)) + IM.context().getResources().getString(R.string.zl));
-//            haszList.add(spinnerItems);
-//            spinnerItems2.put("name",
-//                    "Mała - " + String.valueOf(Util.decimPlace(((Pizza) data).getPrice34(), 2)) + IM.context().getResources().getString(R.string.zl));
-//            haszList.add(spinnerItems2);
-//            spinnerItems3.put("name",
-//                    "Średnia - " + String.valueOf(Util.decimPlace(((Pizza) data).getPrice44(), 2)) + IM.context().getResources().getString(R.string.zl));
-//            haszList.add(spinnerItems3);
-//        } else {
-//            spinnerItems.put("name", "Mięso mieszane");
-//            haszList.add(spinnerItems);
-//            spinnerItems2.put("name", "Wołowe");
-//            haszList.add(spinnerItems2);
-//            spinnerItems3.put("name", "Drobiowe");
-//            haszList.add(spinnerItems3);
-//        }
-//        String[] from = {"name"};
-//        int[] to = {R.id.item_view};
-//
-//
-//        ListAdapter adapter = new SimpleAdapter(
-//                IM.context(),
-//                haszList,
-//                R.layout.drop_down_item,
-//                from,
-//                to
-//        );
-//
-//
-//        popupWindow.setAnchorView(spinner);
-//        popupWindow.setAdapter(adapter);
-//        popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
-//        popupWindow.setOnItemClickListener(this);
-//        popupWindow.show();
+        switchClicked = -1;
     }
 
     @Override
@@ -258,7 +321,6 @@ public class DodatkiDoPizzyDialog extends DialogFragment implements AdapterView.
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        popupWindow.dismiss();
     }
 }
 
