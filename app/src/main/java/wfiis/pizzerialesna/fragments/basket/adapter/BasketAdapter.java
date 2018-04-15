@@ -100,11 +100,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
         holder.dodajSkladniki.setVisibility(order.getIsPizza() ? View.VISIBLE : View.INVISIBLE);
 
         holder.name.setText(setOrderName(order));
-        if (!setOrderDodatki(order).equals("")) {
-            holder.dodatki.setText("Dodatki: " + setOrderDodatki(order));
-        } else {
-            holder.dodatki.setText("");
-        }
+        holder.dodatki.setText(setOrderDodatki(order));
 
         if (order.getPriceIngredients() > 0.0) {
             double cena = order.getPrize() + order.getPriceIngredients();
@@ -134,9 +130,11 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
             } else {
                 str = dodatkiText;
             }
-            holder.dodatki.setText("Dodatki: " + str);
-        } else if (dodatkiText.equals("") && order.getIngredients() == null) {
-            holder.dodatki.setText("");
+            if (order.getIsPizza()) {
+                holder.dodatki.setText("Dodatki: " + str);
+            } else {
+                holder.dodatki.setText(str);
+            }
         }
 
         if (dodatkiValue > 0.0 && dodatkiPozycja == position) {
@@ -185,6 +183,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
                     }
 
                 }
+                dodatki = "Dodatki: " + dodatki;
             } else {
                 dodatki = "";
             }

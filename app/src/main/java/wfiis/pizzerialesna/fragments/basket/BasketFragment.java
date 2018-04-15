@@ -31,6 +31,7 @@ import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.base.BaseFragment;
 import wfiis.pizzerialesna.customDialogs.DodatkiAddInteractions;
 import wfiis.pizzerialesna.fragments.basket.adapter.BasketAdapter;
+import wfiis.pizzerialesna.fragments.delivery.DeliveryFragment;
 import wfiis.pizzerialesna.model.Basket;
 import wfiis.pizzerialesna.model.Extras;
 
@@ -143,6 +144,23 @@ public class BasketFragment extends BaseFragment implements BasketInterActions, 
         recyclerView = view.findViewById(R.id.basket_recycler);
         goNext = view.findViewById(R.id.basket_go_next);
 
+
+        goNext.setOnClickListener(v -> {
+            double sum = calculateAmount();
+            getActions().navigateTo(DeliveryFragment.newInstance(sum), true);
+        });
+    }
+
+    private double calculateAmount() {
+        double sumOfPrizes = 0.0;
+        for (Object b : zamowienieList) {
+            Basket basket = (Basket) b;
+            sumOfPrizes += basket.getPrize();
+            if (basket.getPriceIngredients() > 0.0) {
+                sumOfPrizes += basket.getPriceIngredients();
+            }
+        }
+        return sumOfPrizes;
     }
 
     private void prepareRecycler() {

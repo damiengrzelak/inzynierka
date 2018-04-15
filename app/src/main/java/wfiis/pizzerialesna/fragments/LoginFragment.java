@@ -98,7 +98,8 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
                 break;
         }
     }
-    private boolean checkEmail(){
+
+    private boolean checkEmail() {
         return Validator.isEmailValid(email.getText());
     }
 
@@ -147,44 +148,21 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
     }
 
     private void resetUserPassword(String email) {
-        AlertDialog.Builder builder;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Dialog_Alert);
-        } else {
-            builder = new AlertDialog.Builder(getContext());
-        }
-        builder.setTitle("Resetowanie hasła")
-                .setMessage("Czy jesteś pewien, że chesz zresetować swoje hasło?")
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        mAuth.sendPasswordResetEmail(email)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            TopToast.show(R.string.password_reset, TopToast.TYPE_SUCCESS, TopToast.DURATION_SHORT);
-                                        } else {
-                                            TopToast.show(R.string.acc_no_exist, TopToast.TYPE_ERROR, TopToast.DURATION_SHORT);
-                                        }
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                TopToast.show(R.string.acc_no_exist, TopToast.TYPE_ERROR, TopToast.DURATION_SHORT);
-                            }
-                        });
+        mAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            TopToast.show(R.string.password_reset, TopToast.TYPE_SUCCESS, TopToast.DURATION_SHORT);
+                        } else {
+                            TopToast.show(R.string.acc_no_exist, TopToast.TYPE_ERROR, TopToast.DURATION_SHORT);
+                        }
                     }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
-                    }
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
-
-
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                TopToast.show(R.string.acc_no_exist, TopToast.TYPE_ERROR, TopToast.DURATION_SHORT);
+            }
+        });
     }
-
-
 }

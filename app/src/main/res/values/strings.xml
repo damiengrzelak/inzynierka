@@ -5,7 +5,7 @@
     <string name="login">Zaloguj</string>
     <string name="loggout">Wyloguj</string>
     <string name="dont_have_acc_register">Nie masz konta? Zarejestruj się!</string>
-    <string name="register_success">Zarejestrowano!</string>
+    <string name="register_success">Rejestracja przebiegła pomyślnie!</string>
     <string name="open_app">Uruchamianie aplikacji</string>
     <string name="save">Zapisz</string>
 
@@ -21,7 +21,7 @@
     <string name="zip_code_incorrect">Wprowadź poprawny kod pocztowy</string>
     <string name="incorrect_sing_in_pass">Niepoprany email lub hasło</string>
     <string name="register_problem">Nieudało się zarejestrować użytkownika</string>
-    <string name="forget_password">Nie pamiętasz hasła?</string>
+    <string name="forget_password">Zresetuj hasło</string>
 
     <string name="incorect_new_password">Hasła się nie zgadzają</string>
     <string name="incorect_oldw_password">Niepoprawne hasło</string>
@@ -51,15 +51,15 @@
     <!-- Menu -->
     <string name="menu_pizze">Menu Pizze</string>
     <string name="obiady">Dania obiadowe i inne</string>
-    <string name="promocje">Promocje</string>
+    <string name="promocje">Promocje i\n wydarzenia</string>
     <string name="fb">Facebook</string>
-    <string name="imprezy">Imprezy okolicznościowe</string>
+    <string name="imprezy">Imprezy\n okolicznościowe</string>
     <string name="adres">Adres i kontakt</string>
     <string name="price">Cena:</string>
-    <string name="fast_food">Dania obiadowe i fast foody</string>
+    <string name="fast_food">Kebab</string>
     <string name="salat">Sałatki</string>
-    <string name="zapieksy">Zapiekanki prosto z pieca!</string>
-    <string name="inne_menu">Inne</string>
+    <string name="zapieksy">Zapiekanki</string>
+    <string name="inne_menu">Hod-dogi, Hamburgery i inne</string>
     <string name="extras">DODATKI</string>
 
     <string name="pizza_rozmiar">Wybierz rozmiar pizzy</string>
@@ -78,4 +78,8 @@
     <string name="server_error">Błąd serwera. Sprawdź swoje połączenie z internetem</string>
     <string name="phone_permission">Zezwalaj aplikacji <b>Pizzeria Leśna</b> na nawiązywanie połączeń telefonicznych i zarządzanie nimi</string>
     <string name="localization_permission">Zezwalaj aplikacji <b>Pizzeria Leśna</b> na dostęp do informacji o lokalizacji tego urządzenia</string>
+
+    <string name="fa_info_icon">&#xf05a;</string>
+    <string name="fa_checked">&#xf058;</string>
+    <string name="fa_unchecked">&#xf111;</string>
 </resources>

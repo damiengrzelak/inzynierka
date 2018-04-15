@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/baground_gray"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/delivery_next_btn_container"
+        android:layout_marginLeft="@dimen/view_spacing_small"
+        android:layout_marginRight="@dimen/view_spacing_small"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/between_input_margin">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:elevation="0dp"
+            app:cardBackgroundColor="@color/base_brown"
+            app:cardCornerRadius="20dp"
+            app:contentPadding="1dp">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:elevation="0dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/delivery_osobisty_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/delivery_osobisty"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/view_spacing_small"
+                            android:gravity="center_vertical"
+                            android:text="@string/fa_checked"
+                            android:textColor="@color/base_brown"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/view_spacing_small"
+                            android:gravity="center_vertical"
+                            android:text="odbiór osobisty"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/view_spacing_small"
+                        android:background="@color/base_brown"
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:id="@+id/delivery_dostawa_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/view_spacing_small"
+                        android:layout_weight="1">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|right">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="@dimen/view_spacing_small"
+                                android:layout_toLeftOf="@+id/delivery_dostawa"
+                                android:gravity="center_vertical"
+                                android:text="dostawa"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/delivery_dostawa"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="@dimen/view_spacing_small"
+                                android:gravity="right|center_vertical"
+                                android:text="@string/fa_unchecked"
+                                android:textColor="@color/base_brown"
+                                android:textSize="14sp" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/delivery_platnosc_container"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/view_spacing_small"
+            android:elevation="0dp"
+            android:visibility="visible"
+            app:cardBackgroundColor="@color/base_brown"
+            app:cardCornerRadius="20dp"
+            app:contentPadding="1dp">
+
+            <android.support.v7.widget.CardView
+
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:elevation="0dp"
+                android:visibility="visible"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/delivery_gotowka_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/delivery_gotowka"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/view_spacing_small"
+                            android:gravity="center_vertical"
+                            android:text="@string/fa_checked"
+                            android:textColor="@color/base_brown"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/view_spacing_small"
+                            android:gravity="center_vertical"
+                            android:text="płatność gotówką"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/view_spacing_small"
+                        android:background="@color/base_brown"
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:id="@+id/delivery_karta_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/view_spacing_small"
+                        android:layout_weight="1">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|right">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="@dimen/view_spacing_small"
+                                android:layout_toLeftOf="@+id/delivery_karta"
+                                android:gravity="center_vertical"
+                                android:text="płatność kartą"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/delivery_karta"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="@dimen/view_spacing_small"
+                                android:gravity="right|center_vertical"
+                                android:text="@string/fa_unchecked"
+                                android:textColor="@color/base_brown"
+                                android:textSize="14sp" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/delivery_title_adress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/view_spacing_small"
+            android:layout_marginTop="@dimen/left_right_padding"
+            android:text="Adres dostawy"
+            android:textAppearance="@style/CustomBold"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <wfiis.pizzerialesna.customViews.InputEditTextView
+                android:id="@+id/delivery_street"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/between_input_margin"
+                android:layout_marginRight="@dimen/between_input_margin"
+                android:layout_weight="1.0"
+                app:hint="@string/street" />
+
+            <wfiis.pizzerialesna.customViews.InputEditTextView
+                android:id="@+id/delivery_nr_domu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/between_input_margin"
+                android:layout_weight="1.5"
+                app:hint="@string/house_nr" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <wfiis.pizzerialesna.customViews.InputEditTextView
+                android:id="@+id/delivery_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/between_input_margin"
+                android:layout_marginRight="@dimen/between_input_margin"
+                android:layout_weight="1.0"
+                app:hint="@string/city" />
+
+            <wfiis.pizzerialesna.customViews.InputEditTextView
+                android:id="@+id/delivery_zip_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/between_input_margin"
+                android:layout_weight="1.5"
+                android:inputType="number"
+                app:hint="@string/zip_code" />
+
+        </LinearLayout>
+
+        <wfiis.pizzerialesna.customViews.InputEditTextView
+            android:id="@+id/delivery_tel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/between_input_margin"
+            android:inputType="number"
+            app:hint="@string/phone_nr" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/delivery_next_btn_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/base_brown" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/view_spacing_small">
+
+            <TextView
+                android:id="@+id/delivery_cena"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Koszt: 47,0 zł"
+                android:textColor="@color/black"
+                android:textSize="@dimen/normall_text" />
+
+            <TextView
+                android:id="@+id/delivery_cena_dostawa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/delivery_cena"
+                android:text="+ cena dostawy"
+                android:textColor="@color/black"
+                android:textSize="@dimen/normall_text"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/delivery_delivery_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/normall_text"
+                android:text="@string/fa_info_icon"
+                android:textColor="@color/base_brown"
+                android:textSize="@dimen/normall_text"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/delivery_go_next"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginBottom="@dimen/view_spacing_small"
+            android:layout_marginLeft="@dimen/view_spacing_small"
+            android:layout_marginRight="@dimen/view_spacing_small"
+            android:background="@drawable/rounded_button_background"
+            android:text="Przejdź do podsumowania"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/bigl_text"
+            android:visibility="visible" />
+    </LinearLayout>
+</RelativeLayout>

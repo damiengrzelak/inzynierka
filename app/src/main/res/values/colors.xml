@@ -7,17 +7,20 @@
 
 
     <!-- TopToast -->
-    <color name="error_background">#fad3d8</color>
-    <item name="l_warning_red" type="color">#e8001b</item>
-    <color name="success_background">#e4e4e4</color>
-    <color name="success_text">#006112</color>
+    <color name="error_background">#FAD3D8</color>
+    <item name="l_warning_red" type="color">#EF2322</item>
+    <color name="success_background">#D9E9D8</color>
+    <color name="success_text">#002512</color>
 
 
     <!-- Buttons -->
     <color name="base_brown">#936744</color>
+    <color name="base_brown_opacity">#50936744</color>
+
+    <color name="bg_color_headr">#EBEBEC</color>
     <!--TEMPORARY-->
     <color name="gray_light">#999999</color>
-    <color name="base_blue">#0072b7</color>
+    <color name="base_blue">#0096FF</color>
     <item name="blue" type="color">#33b5e5</item>
     <item name="red" type="color">#FFFF4444</item>
     <item name="white" type="color">#ffffff</item>

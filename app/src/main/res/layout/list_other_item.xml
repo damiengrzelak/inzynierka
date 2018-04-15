@@ -23,13 +23,10 @@
             android:textSize="@dimen/bigl_text"
             tools:text="FASTFOOR"
             android:gravity="center_vertical"
-            android:padding="@dimen/left_right_padding"/>
-        <View
-            android:layout_below="@+id/list_order_item_header_text"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/gray_border"
-            android:gravity="bottom" />
+            android:padding="8dp"
+            android:textAppearance="@style/CustomBold"
+            android:background="@color/bg_color_headr"/>
+
     </RelativeLayout>
 
     <LinearLayout

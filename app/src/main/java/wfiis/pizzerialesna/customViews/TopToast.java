@@ -291,7 +291,7 @@ public class TopToast extends RelativeLayout {
             icon.setVisibility(VISIBLE);
         } else if (type == TYPE_SUCCESS) {
             container.setBackgroundResource(R.color.success_background);
-            messageText.setTextColor(ResourcesCompat.getColor(IM.resources(), R.color.gray_light, null));
+            messageText.setTextColor(ResourcesCompat.getColor(IM.resources(), R.color.success_text, null));
             icon.setVisibility(VISIBLE);
         }
     }

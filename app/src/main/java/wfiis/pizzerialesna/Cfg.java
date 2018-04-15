@@ -13,4 +13,5 @@ public class Cfg {
 
     public static String users_table = "users";
     public static String basket_table = "basket";
+    public static String basket_info_table = "basketInformation";
 }

@@ -135,13 +135,13 @@ public class OrderCustomDialog extends DialogFragment implements AdapterView.OnI
             item.setNumber(((Pizza) data).getNumber());
             if (selectedSpinnerId == 0) {
                 item.setPrize(((Pizza) data).getPrice28());
-                item.setSize("Mini - " + String.valueOf(Util.decimPlace(((Pizza) data).getPrice28(), 2)) + IM.context().getResources().getString(R.string.zl));
+                item.setSize("Mini - 28cm");
             } else if (selectedSpinnerId == 1) {
                 item.setPrize(((Pizza) data).getPrice34());
-                item.setSize("Mała - " + String.valueOf(Util.decimPlace(((Pizza) data).getPrice34(), 2)) + IM.context().getResources().getString(R.string.zl));
+                item.setSize("Mała - 34cm");
             } else if (selectedSpinnerId == 2) {
                 item.setPrize(((Pizza) data).getPrice44());
-                item.setSize("Średnia - " + String.valueOf(Util.decimPlace(((Pizza) data).getPrice44(), 2)) + IM.context().getResources().getString(R.string.zl));
+                item.setSize("Średnia - 4cm");
             }
             item.setIsPizza(true);
             item.setType(((Pizza) data).getType());
