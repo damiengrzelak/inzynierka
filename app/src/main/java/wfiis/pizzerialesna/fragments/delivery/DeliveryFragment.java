@@ -199,7 +199,7 @@ public class DeliveryFragment extends BaseFragment implements View.OnClickListen
             BasketInformation basketInformation = new BasketInformation();
 
             if (isOdbiorOsobisty) {
-                getUserData();
+                basketInformation = getUserData();
             } else {
                 basketInformation.setCity(city.getText());
                 basketInformation.setStreet(ulica.getText());
@@ -216,24 +216,24 @@ public class DeliveryFragment extends BaseFragment implements View.OnClickListen
         }
     }
 
-    private void getUserData() {
+    private BasketInformation getUserData() {
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
         ref = FirebaseDatabase.getInstance().getReference();
         ref = ref.child(users_table);
         Query userQuerry = ref.child(mAuth.getUid());
-        basketInformation = new BasketInformation();
+        BasketInformation basketInformation2 = new BasketInformation();
         userQuerry.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User u = dataSnapshot.getValue(User.class);
-                basketInformation.setCity(u.getCity());
-                basketInformation.setStreet(u.getStreet());
-                basketInformation.setFlatNumber(u.getFlatNumber());
-                basketInformation.setInCache(true);
-                basketInformation.setPersonal(true);
-                basketInformation.setPhone(u.getPhone());
-                basketInformation.setZipCode(u.getZipCode());
+                basketInformation2.setCity(u.getCity());
+                basketInformation2.setStreet(u.getStreet());
+                basketInformation2.setFlatNumber(u.getFlatNumber());
+                basketInformation2.setInCache(true);
+                basketInformation2.setPersonal(true);
+                basketInformation2.setPhone(u.getPhone());
+                basketInformation2.setZipCode(u.getZipCode());
             }
 
             @Override
@@ -241,6 +241,8 @@ public class DeliveryFragment extends BaseFragment implements View.OnClickListen
                 Log.e("ERROR", "onCancelled", databaseError.toException());
             }
         });
+
+        return basketInformation2;
     }
 
     private void setDostawa(boolean isDostawa) {
@@ -250,6 +252,7 @@ public class DeliveryFragment extends BaseFragment implements View.OnClickListen
             dostawa.setText(IM.context().getText(R.string.fa_unchecked));
             cena.setText("Koszt: " + String.valueOf(Util.decimPlace(getArguments().getDouble(SUM_OF_PRIZE), 2)) + IM.context().getResources().getString(R.string.zl));
             setDeliveryVisibility(false);
+            findUser();
         } else {
             isOdbiorOsobisty = false;
             odbior.setText(IM.context().getText(R.string.fa_unchecked));
@@ -265,7 +268,6 @@ public class DeliveryFragment extends BaseFragment implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.delivery_osobisty_container:
-                findUser();
                 setDostawa(false);
                 break;
             case R.id.delivery_dostawa_container:
