@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/baground_gray"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:overScrollMode="never"
+        android:id="@+id/imprezy_info_rv"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="@dimen/left_right_padding" />
+
+    <ScrollView
+        android:overScrollMode="never"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/left_right_padding">
+
+        <TextView
+            android:id="@+id/imprezy_info_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:lineSpacingExtra="5dp"
+            android:paddingLeft="@dimen/left_right_padding"
+            android:paddingRight="@dimen/left_right_padding"
+            android:text="@string/text_imprezy"
+            android:textColor="@color/black"
+            android:textSize="@dimen/pietnaszcesp" />
+    </ScrollView>
+</LinearLayout>

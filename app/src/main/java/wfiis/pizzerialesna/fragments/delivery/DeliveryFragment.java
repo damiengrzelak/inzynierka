@@ -27,6 +27,7 @@ import java.util.Map;
 
 import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.base.BaseFragment;
+import wfiis.pizzerialesna.customDialogs.DostawaInfoDialog;
 import wfiis.pizzerialesna.customViews.InputEditTextView;
 import wfiis.pizzerialesna.customViews.ZipCodeListener;
 import wfiis.pizzerialesna.model.Basket;
@@ -69,6 +70,8 @@ public class DeliveryFragment extends BaseFragment implements View.OnClickListen
     private boolean isValid;
 
     private BasketInformation basketInformation = new BasketInformation();
+    private BasketInformation odbiorBasketInfromation = new BasketInformation();
+
 
     public static DeliveryFragment newInstance(double sum) {
         DeliveryFragment deliveryFragment = new DeliveryFragment();
@@ -88,6 +91,7 @@ public class DeliveryFragment extends BaseFragment implements View.OnClickListen
         findViews(view);
         setListener();
         fillViews();
+        odbiorBasketInfromation = getUserData();
 
         getActions().topBar().showBackIcon(true);
         getActions().topBar().showMenuIcon(false);
@@ -188,6 +192,10 @@ public class DeliveryFragment extends BaseFragment implements View.OnClickListen
         gotowkaClick.setOnClickListener(this);
         kartaClick.setOnClickListener(this);
 
+        info.setOnClickListener((View v) -> {
+            DostawaInfoDialog dostawaInfoDialog = new DostawaInfoDialog();
+            dostawaInfoDialog.show(IM.activity().getFragmentManager(), IM.activity().getFragmentManager().getClass().toString());
+        });
         goNext.setOnClickListener(this::podsumowanie);
     }
 
@@ -199,7 +207,7 @@ public class DeliveryFragment extends BaseFragment implements View.OnClickListen
             BasketInformation basketInformation = new BasketInformation();
 
             if (isOdbiorOsobisty) {
-                basketInformation = getUserData();
+                basketInformation = odbiorBasketInfromation;
             } else {
                 basketInformation.setCity(city.getText());
                 basketInformation.setStreet(ulica.getText());
@@ -268,9 +276,11 @@ public class DeliveryFragment extends BaseFragment implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.delivery_osobisty_container:
+                findUser();
                 setDostawa(false);
                 break;
             case R.id.delivery_dostawa_container:
+                findUser();
                 setDostawa(true);
                 break;
             case R.id.delivery_gotowka_container:

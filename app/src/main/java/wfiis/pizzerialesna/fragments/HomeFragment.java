@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 
 import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.base.BaseFragment;
+import wfiis.pizzerialesna.fragments.imprezy.ImprezyFragment;
 import wfiis.pizzerialesna.fragments.menu.OtherMenuFragment;
 import wfiis.pizzerialesna.fragments.menu.PizzaMenuFragment;
 
@@ -82,6 +83,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
                 goToFacebook(getContext());
                 break;
             case R.id.fragment_menu_party:
+                getActions().navigateTo(ImprezyFragment.newInstance(), true);
                 break;
             case R.id.fragment_menu_adress:
                 getActions().navigateTo(ContactFragment.newInstance(), true);

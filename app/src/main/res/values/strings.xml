@@ -82,4 +82,8 @@
     <string name="fa_info_icon">&#xf05a;</string>
     <string name="fa_checked">&#xf058;</string>
     <string name="fa_unchecked">&#xf111;</string>
+
+
+    <string name="info_text">Strefa 1: \nKosz dostawy na terenie miasta Kraśniewice wynosi 3zł\nPrzy zamówieniu powyżej 50 zł dostawa gratis.\n Strefa 2: \nPoza terenem miasta koszt dostawy uzależniony jest od odległości:\n1 km = 1.5zł.</string>
+    <string name="text_imprezy">Nasza pizzeria organizuje imprezy okolicznościowe - zarówno rodzinne, szkolne czy okolicznościowe. Naszym Klientom proponujemy ułożenie jadłospisu zgodnie z własnymi gustami. Ogromnym atutem naszej oferty jest możliwość skomponowania indywidualnej karty, zawierającej kilka pozycji, spośród których Zaproszeni mogą wybrać coś dla siebie. Z uwagą słuchamy i wdrażamy pomysły naszych Klientów w życie. Dbamy o to, by wszystkie czynniki współgrały ze sobą, wpływając pomyślnie na satysfakcję i zadowolenie wszystkich uczestników uroczystości.   \n\n\nSzczególną popularnością wśród naszych Gości cieszą się imprezy rodzinne. Chrzciny w przyjaznej atmosferze, komunie z najbliższymi, wzruszające jubileusze – te i inne okazje sprzyjają spotkaniom przy wspólnym stole i pozwalają zacieśnić więzy między dawno niewidzianymi osobami. Dbamy o to, aby wszyscy uczestnicy mogli odpowiednio celebrować ważne dla nich wydarzenie, a ich rozmowom towarzyszyło smaczne jedzenie, elegancki wystrój, podkreślający podniosłość chwili oraz profesjonalna obsługa gotowa spełnić wszystkie życzenia.</string>
 </resources>
