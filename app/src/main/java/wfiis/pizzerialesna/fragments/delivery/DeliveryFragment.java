@@ -30,18 +30,14 @@ import wfiis.pizzerialesna.base.BaseFragment;
 import wfiis.pizzerialesna.customDialogs.DostawaInfoDialog;
 import wfiis.pizzerialesna.customViews.InputEditTextView;
 import wfiis.pizzerialesna.customViews.ZipCodeListener;
-import wfiis.pizzerialesna.model.Basket;
+import wfiis.pizzerialesna.fragments.basket.posumowanie.PodsumowanieFragment;
 import wfiis.pizzerialesna.model.BasketInformation;
 import wfiis.pizzerialesna.model.User;
 import wfiis.pizzerialesna.tools.AppendMessage;
-import wfiis.pizzerialesna.tools.SpanUtils;
 import wfiis.pizzerialesna.tools.Util;
 import wfiis.pizzerialesna.validation.Validator;
 
 import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-import static wfiis.pizzerialesna.Cfg.basket_info_table;
-import static wfiis.pizzerialesna.Cfg.basket_table;
 import static wfiis.pizzerialesna.Cfg.users_table;
 
 public class DeliveryFragment extends BaseFragment implements View.OnClickListener {
@@ -218,9 +214,10 @@ public class DeliveryFragment extends BaseFragment implements View.OnClickListen
                 basketInformation.setPhone(tel.getText());
             }
             Map<String, Object> delivery = new HashMap<>();
-
             delivery.put("basketInformation", basketInformation);
             ref.child(users_table).child(mAuth.getUid()).updateChildren(delivery);
+            getActions().navigateTo(PodsumowanieFragment.newInstance(cena.getText().toString()), true);
+
         }
     }
 
