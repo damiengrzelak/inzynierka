@@ -1,7 +1,6 @@
 package wfiis.pizzerialesna.base;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
@@ -42,34 +41,4 @@ public class BaseFragment extends Fragment {
         super.onDetach();
         actions = null;
     }
-
-    // Fragment utils method may go here :)
-
-
-    // For example our argument utils
-    public BaseFragment addArgumentInt(String name, int value) {
-        Bundle args = getArguments() != null ? getArguments() : new Bundle();
-        args.putInt(name, value);
-        setArguments(args);
-        return this;
-    }
-
-    public BaseFragment addArgumentString(String name, String value) {
-        Bundle args = getArguments() != null ? getArguments() : new Bundle();
-        args.putString(name, value);
-        setArguments(args);
-        return this;
-    }
-
-    public int getArgumentInt(String name, int fallback) {
-        Bundle args = getArguments();
-        return args == null ? fallback : args.getInt(name, fallback);
-    }
-
-    public String getArgumentString(String name, String fallback) {
-        Bundle args = getArguments();
-        return args == null ? fallback : args.getString(name, fallback);
-    }
-
-
 }
