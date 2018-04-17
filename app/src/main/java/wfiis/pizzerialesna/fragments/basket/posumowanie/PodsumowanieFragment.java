@@ -105,7 +105,7 @@ public class PodsumowanieFragment extends BaseFragment {
                     zamowienie = "pizza nr: " + basketList.get(i).getNumber();
                     if (basketList.get(i).getIngredients() != null && basketList.get(i).getIngredients().size() > 0) {
                         cena += basketList.get(i).getPriceIngredients();
-                        dodatki = "";
+                        dodatki = " + ";
                         for (int j = 0; j < basketList.get(i).getIngredients().size(); j++) {
                             if (j == basketList.get(i).getIngredients().size() - 1) {
                                 dodatki = dodatki + basketList.get(i).getIngredients().get(j) + "\n";
@@ -125,7 +125,7 @@ public class PodsumowanieFragment extends BaseFragment {
                 }
             }
 
-            message += "suma: " + String.valueOf(cena) + " zł";
+            message += "\nsuma: " + String.valueOf(cena) + " zł";
 
             if (!basketInformation.isPersonal()) {
                 if (basketInformation.isInCache()) {
