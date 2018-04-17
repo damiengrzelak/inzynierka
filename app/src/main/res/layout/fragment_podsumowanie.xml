@@ -175,7 +175,7 @@
         android:padding="@dimen/view_spacing_small">
 
         <Button
-            android:id="@+id/basket_go_next"
+            android:id="@+id/zloz_zamowienie"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height"
             android:background="@drawable/rounded_button_background"

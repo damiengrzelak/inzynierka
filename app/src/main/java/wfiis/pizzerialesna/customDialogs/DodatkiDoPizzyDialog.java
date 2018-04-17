@@ -169,7 +169,6 @@ public class DodatkiDoPizzyDialog extends DialogFragment implements AdapterView.
             }
             if (!owoceText.getText().toString().contains("OWOCE")) {
                 dodatkiText = dodatkiText + owoceText.getText() + ", ";
-                ;
                 listaDodatkow.add(owoceText.getText().toString());
                 if (size == 0) {
                     dodatkiCena = dodatkiCena + dodatkiList.get(2).getLowPrice();
