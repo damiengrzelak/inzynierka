@@ -63,6 +63,7 @@ public class PizzaMenuFragment extends BaseFragment implements View.OnClickListe
 
         getActions().topBar().showBackIcon(false);
         getActions().topBar().showMenuIcon(false);
+        getActions().topBar().showBasketIcon(true);
         return view;
     }
 
@@ -206,6 +207,7 @@ public class PizzaMenuFragment extends BaseFragment implements View.OnClickListe
                 break;
         }
     }
+
 
     @Override
     public void onStart() {

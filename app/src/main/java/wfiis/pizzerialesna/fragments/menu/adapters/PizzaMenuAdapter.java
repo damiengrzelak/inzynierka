@@ -9,10 +9,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.inverce.mod.core.IM;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import wfiis.pizzerialesna.R;
+import wfiis.pizzerialesna.customDialogs.OrderCustomDialog;
 import wfiis.pizzerialesna.model.Extras;
 import wfiis.pizzerialesna.model.Pizza;
 import wfiis.pizzerialesna.enums.PizzaStatusType;
@@ -23,6 +26,7 @@ public class PizzaMenuAdapter extends RecyclerView.Adapter<PizzaMenuAdapter.View
 
     private List<Object> data;
     private Drawable d;
+    private int pos = 0;
 
     public PizzaMenuAdapter(List<Object> pizzaList) {
         data = new ArrayList<>();
@@ -133,7 +137,7 @@ public class PizzaMenuAdapter extends RecyclerView.Adapter<PizzaMenuAdapter.View
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView pizzaName;
         private TextView pizzaContent;
         private TextView cm28;
@@ -156,6 +160,20 @@ public class PizzaMenuAdapter extends RecyclerView.Adapter<PizzaMenuAdapter.View
             cm34Bt = rootView.findViewById(R.id.cm34);
             cm44Bt = rootView.findViewById(R.id.cm44);
             statusType = rootView.findViewById(R.id.list_pizza_item_status_type);
+
+            rootView.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View view) {
+            pos = getAdapterPosition();
+            if(data.get(pos) instanceof Extras) {
+                return;
+            }
+
+            OrderCustomDialog ord = new OrderCustomDialog(data.get(pos));
+            ord.show(IM.activity().getFragmentManager(), IM.activity().getFragmentManager().getClass().toString());
         }
     }
 }

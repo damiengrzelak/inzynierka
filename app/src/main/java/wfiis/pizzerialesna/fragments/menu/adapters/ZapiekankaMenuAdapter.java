@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wfiis.pizzerialesna.R;
+import wfiis.pizzerialesna.customDialogs.OrderCustomDialog;
 import wfiis.pizzerialesna.enums.PizzaStatusType;
 import wfiis.pizzerialesna.model.Zapiekanka;
 import wfiis.pizzerialesna.tools.SpanUtils;
@@ -23,6 +24,7 @@ public class ZapiekankaMenuAdapter extends RecyclerView.Adapter<ZapiekankaMenuAd
 
     private List<Zapiekanka> data = new ArrayList<>();
     private Drawable d;
+    private int pos;
 
     public ZapiekankaMenuAdapter(List<Zapiekanka> data) {
         this.data = data;
@@ -46,7 +48,7 @@ public class ZapiekankaMenuAdapter extends RecyclerView.Adapter<ZapiekankaMenuAd
             holder.header.setVisibility(View.GONE);
         }
 
-        holder.otherName.setText(z.getName());
+        holder.otherName.setText(z.getNumber()+". "+z.getName());
         SpanUtils.on(holder.ontherPrize).convertToMoney(data.get(position).getPrice());
 
         if (data.get(position).getType() != 0) {
@@ -77,7 +79,7 @@ public class ZapiekankaMenuAdapter extends RecyclerView.Adapter<ZapiekankaMenuAd
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView otherName;
         private TextView ontherPrize;
         private ImageView statusType;
@@ -94,6 +96,15 @@ public class ZapiekankaMenuAdapter extends RecyclerView.Adapter<ZapiekankaMenuAd
 
             header = rootView.findViewById(R.id.list_order_item_header);
             headerText = rootView.findViewById(R.id.list_order_item_header_text);
+
+            rootView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            pos = getAdapterPosition();
+            OrderCustomDialog ord = new OrderCustomDialog(data.get(pos));
+            ord.show(IM.activity().getFragmentManager(), IM.activity().getFragmentManager().getClass().toString());
         }
     }
 }

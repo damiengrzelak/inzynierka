@@ -72,6 +72,7 @@ public class OtherMenuFragment extends BaseFragment {
 
         getActions().topBar().showBackIcon(false);
         getActions().topBar().showMenuIcon(false);
+        getActions().topBar().showBasketIcon(true);
         return view;
     }
 
@@ -98,7 +99,7 @@ public class OtherMenuFragment extends BaseFragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                     Obiad o = singleSnapshot.getValue(Obiad.class);
-                    otherList.add(new Obiad(o.getName(), o.getIngredients(), o.getPrice(), o.getType()));
+                    otherList.add(new Obiad(o.getName(), o.getIngredients(), o.getPrice(), o.getType(), o.getNumber()));
                     otherMenuAdapter.notifyDataSetChanged();
                 }
             }
@@ -115,7 +116,7 @@ public class OtherMenuFragment extends BaseFragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                     Salatka s = singleSnapshot.getValue(Salatka.class);
-                    salatkaList.add(new Salatka(s.getName(), s.getIngredients(), s.getPrice(), s.getType()));
+                    salatkaList.add(new Salatka(s.getName(), s.getIngredients(), s.getPrice(), s.getType(), s.getNumber()));
                     salatMenuAdapter.notifyDataSetChanged();
                 }
             }
@@ -132,7 +133,7 @@ public class OtherMenuFragment extends BaseFragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                     Zapiekanka z = singleSnapshot.getValue(Zapiekanka.class);
-                    zapiekankaList.add(new Zapiekanka(z.getName(), z.getPrice(), z.getType()));
+                    zapiekankaList.add(new Zapiekanka(z.getName(), z.getPrice(), z.getType(), z.getNumber()));
                     zapiekankaMenuAdapter.notifyDataSetChanged();
                 }
                 dissMissPreloader();

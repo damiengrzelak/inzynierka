@@ -1,10 +1,12 @@
 package wfiis.pizzerialesna.model;
 
 import com.google.firebase.database.IgnoreExtraProperties;
+import com.raizlabs.android.dbflow.annotation.Column;
 
 /**
  * Created by Damian on 04.04.2018.
  */
+
 @IgnoreExtraProperties
 public class Warianty {
     private String name;

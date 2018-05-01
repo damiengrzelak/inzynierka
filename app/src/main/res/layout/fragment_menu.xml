@@ -93,6 +93,7 @@
                     android:layout_height="match_parent"
                     android:layout_below="@id/block_3"
                     android:text="@string/promocje"
+                    android:gravity="center_horizontal"
                     android:textColor="@color/black"
                     android:layout_centerHorizontal="true"
                     android:textAppearance="@style/CustomBold"/>
@@ -151,6 +152,7 @@
                     android:layout_height="match_parent"
                     android:layout_below="@id/block_5"
                     android:text="@string/imprezy"
+                    android:gravity="center_horizontal"
                     android:textColor="@color/black"
                     android:layout_centerHorizontal="true"
                     android:textAppearance="@style/CustomBold"/>

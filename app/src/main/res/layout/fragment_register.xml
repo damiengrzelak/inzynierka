@@ -116,7 +116,7 @@
                 android:id="@+id/fragment_register_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+
                 android:buttonTint="@color/base_brown" />
 
             <TextView
@@ -124,15 +124,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Wyrażam dobrowolną zgodę na przetwarzanie danych osobowych podanych przeze mnie za pośrednictwem aplikacji Pizzerii Leśnej."
-                android:textColor="@color/base_blue"
-                android:textSize="@dimen/small_text" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/pietnaszcesp"
+                android:layout_marginBottom="5dp"/>
         </LinearLayout>
 
         <Button
             android:id="@+id/fragment_register_register_button"
             style="@style/DefaultRoundedButton"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/form_input_height"
+            android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/view_spacing_small"
             android:background="@drawable/rounded_button_background"

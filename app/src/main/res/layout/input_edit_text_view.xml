@@ -42,6 +42,7 @@
         android:layout_gravity="right"
         android:padding="15dp"
         android:src="@drawable/ic_eye"
+        android:tint="@color/base_brown_opacity"
         />
 
 </RelativeLayout>

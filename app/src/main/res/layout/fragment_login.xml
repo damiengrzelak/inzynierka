@@ -13,7 +13,7 @@
         android:layout_height="200dp"
         android:layout_marginLeft="@dimen/left_right_padding"
         android:layout_marginRight="@dimen/left_right_padding"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="50dp"
         android:src="@drawable/pizzeria_logo" />
 
     <LinearLayout
@@ -43,13 +43,13 @@
 
         <Button
             android:background="@drawable/rounded_button_background"
-            style="@style/DefaultRoundedButton"
             android:id="@+id/fragment_login_login_button"
             android:layout_width="match_parent"
             android:layout_height="@dimen/form_input_height"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/button_bottom_text_small"
-            android:text="@string/login"/>
+            android:text="@string/login"
+            android:textAllCaps="false"/>
         
         <TextView
             android:id="@+id/fragment_login_register_textView"
@@ -58,6 +58,7 @@
             android:text="@string/dont_have_acc_register"
             android:textColor="@color/base_blue"
             android:textSize="@dimen/small_text"
+            android:layout_marginBottom="@dimen/view_spacing_small"
             android:gravity="right"/>
         <TextView
             android:id="@+id/fragment_login_register_remind_password"

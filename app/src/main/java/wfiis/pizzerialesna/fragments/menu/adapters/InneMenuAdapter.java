@@ -14,6 +14,7 @@ import com.inverce.mod.core.IM;
 import java.util.List;
 
 import wfiis.pizzerialesna.R;
+import wfiis.pizzerialesna.customDialogs.OrderCustomDialog;
 import wfiis.pizzerialesna.enums.PizzaStatusType;
 import wfiis.pizzerialesna.model.Inne;
 import wfiis.pizzerialesna.tools.SpanUtils;
@@ -22,6 +23,7 @@ public class InneMenuAdapter extends RecyclerView.Adapter<InneMenuAdapter.ViewHo
 
     private List<Inne> inne;
     private Drawable d;
+    private int pos;
 
     public InneMenuAdapter(List<Inne> inne) {
         this.inne = inne;
@@ -37,6 +39,7 @@ public class InneMenuAdapter extends RecyclerView.Adapter<InneMenuAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Inne i = inne.get(position);
+        //pos = position;
 
         if (position == 0) {
             holder.header.setVisibility(View.VISIBLE);
@@ -45,7 +48,7 @@ public class InneMenuAdapter extends RecyclerView.Adapter<InneMenuAdapter.ViewHo
             holder.header.setVisibility(View.GONE);
         }
 
-        holder.inneName.setText(i.getName());
+        holder.inneName.setText(i.getNumber()+". "+i.getName());
         if(i.getIngredients() != null){
             holder.inneIngredients.setText(i.getIngredients());
         }
@@ -79,7 +82,7 @@ public class InneMenuAdapter extends RecyclerView.Adapter<InneMenuAdapter.ViewHo
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView inneName;
         private TextView innePrize;
         private ImageView inneType;
@@ -98,6 +101,15 @@ public class InneMenuAdapter extends RecyclerView.Adapter<InneMenuAdapter.ViewHo
 
             header = rootView.findViewById(R.id.list_order_item_header);
             headerText = rootView.findViewById(R.id.list_order_item_header_text);
+
+            rootView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            pos = getAdapterPosition();
+            OrderCustomDialog ord = new OrderCustomDialog(inne.get(pos));
+            ord.show(IM.activity().getFragmentManager(), IM.activity().getFragmentManager().getClass().toString());
         }
     }
 }
