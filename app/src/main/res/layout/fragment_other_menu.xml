@@ -16,7 +16,7 @@
             android:id="@+id/fragment_other_menu_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/left_right_padding"
+
             />
 
         <android.support.v7.widget.RecyclerView
@@ -24,14 +24,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/fragment_other_menu_rv"
-            android:layout_marginBottom="@dimen/left_right_padding" />
+
+            />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/fragment_other_menu_rv_zap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/fragment_other_menu_rv_salat"
-            android:layout_marginBottom="@dimen/left_right_padding" />
+             />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/fragment_other_menu_rv_inne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_other_menu_rv_zap"
+             />
     </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

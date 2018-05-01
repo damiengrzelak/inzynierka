@@ -37,6 +37,21 @@
                 android:text="PIZZE SPECJALNE"
                 android:textAlignment="center"
                 android:textColor="@color/black" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray_border" />
+
+            <TextView
+                android:id="@+id/fragment_pizza_menu_extras"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/extras"
+                android:textAlignment="center"
+                android:textColor="@color/black" />
+
         </LinearLayout>
 
         <View

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/basket_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Koszyk jest pusty"
+        android:textColor="@color/black"
+        android:textSize="@dimen/bigl_text"
+        android:visibility="gone"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:overScrollMode="never"
+        android:id="@+id/basket_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/basket_next_btn_container"/>
+
+    <LinearLayout
+        android:id="@+id/basket_next_btn_container"
+        android:padding="@dimen/view_spacing_small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+    <Button
+        android:id="@+id/basket_go_next"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="@dimen/bigl_text"
+        android:text="Przejdź dalej"
+        android:background="@drawable/rounded_button_background"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:visibility="gone"
+        />
+    </LinearLayout>
+</RelativeLayout>

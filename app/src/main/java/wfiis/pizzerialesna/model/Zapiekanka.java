@@ -7,14 +7,16 @@ public class Zapiekanka{
     private String name;
     private double price;
     private int type;
+    private int number;
 
     public Zapiekanka() {
     }
 
-    public Zapiekanka(String name, double price, int type) {
+    public Zapiekanka(String name, double price, int type, int number) {
         this.name = name;
         this.price = price;
         this.type = type;
+        this.number = number;
     }
 
     public String getName() {
@@ -39,5 +41,13 @@ public class Zapiekanka{
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }

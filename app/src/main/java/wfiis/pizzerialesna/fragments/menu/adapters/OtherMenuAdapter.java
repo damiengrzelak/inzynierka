@@ -1,4 +1,4 @@
-package wfiis.pizzerialesna.fragments.adapters;
+package wfiis.pizzerialesna.fragments.menu.adapters;
 
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
@@ -15,14 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wfiis.pizzerialesna.R;
+import wfiis.pizzerialesna.customDialogs.OrderCustomDialog;
 import wfiis.pizzerialesna.model.Obiad;
 import wfiis.pizzerialesna.enums.PizzaStatusType;
 import wfiis.pizzerialesna.tools.SpanUtils;
 
 public class OtherMenuAdapter extends RecyclerView.Adapter<OtherMenuAdapter.ViewHolder> {
 
-    private List<Obiad> obiady = new ArrayList<>();
+    private List<Obiad> obiady;
     private Drawable d;
+    private int pos;
 
     public OtherMenuAdapter(List<Obiad> obiady) {
         this.obiady = obiady;
@@ -38,6 +40,7 @@ public class OtherMenuAdapter extends RecyclerView.Adapter<OtherMenuAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Obiad o = obiady.get(position);
+        //pos = position;
 
         if (position == 0) {
             holder.header.setVisibility(View.VISIBLE);
@@ -46,7 +49,7 @@ public class OtherMenuAdapter extends RecyclerView.Adapter<OtherMenuAdapter.View
             holder.header.setVisibility(View.GONE);
         }
 
-        holder.otherName.setText(o.getName());
+        holder.otherName.setText(o.getNumber()+". "+o.getName());
         holder.otherContent.setText(o.getIngredients());
         SpanUtils.on(holder.ontherPrize).convertToMoney(obiady.get(position).getPrice());
 
@@ -78,7 +81,7 @@ public class OtherMenuAdapter extends RecyclerView.Adapter<OtherMenuAdapter.View
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView otherName;
         private TextView otherContent;
         private TextView ontherPrize;
@@ -97,6 +100,15 @@ public class OtherMenuAdapter extends RecyclerView.Adapter<OtherMenuAdapter.View
 
             header = rootView.findViewById(R.id.list_order_item_header);
             headerText = rootView.findViewById(R.id.list_order_item_header_text);
+
+            rootView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            pos = getAdapterPosition();
+            OrderCustomDialog ord = new OrderCustomDialog(obiady.get(pos));
+            ord.show(IM.activity().getFragmentManager(), IM.activity().getFragmentManager().getClass().toString());
         }
     }
 }

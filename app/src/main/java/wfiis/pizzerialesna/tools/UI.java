@@ -2,74 +2,15 @@ package wfiis.pizzerialesna.tools;
 
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.annotation.IdRes;
-import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.support.v4.app.Fragment;
-import android.view.KeyCharacterMap;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.inverce.mod.core.IM;
-import com.inverce.mod.core.Screen;
 import com.inverce.mod.core.Ui;
 
 public class UI extends Ui {
-
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null) {
-            // pre-condition
-            return;
-        }
-
-        int totalHeight = 0;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            try {
-                View listItem = listAdapter.getView(i, null, listView);
-                listItem.measure(0, 0);
-                totalHeight += listItem.getMeasuredHeight();
-            } catch (Exception ignored) {
-            }
-        }
-
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        listView.setLayoutParams(params);
-        listView.requestLayout();
-    }
-
-    @Nullable
-    public static Bitmap createScreenShoot(Fragment view) {
-        return view != null ? createScreenShoot(view.getView()) : null;
-    }
-
-    @Nullable
-    public static Bitmap createScreenShoot(View view) {
-        if (view == null) {
-            return null;
-        }
-        try {
-            // create bitmap screen capture
-            view.setDrawingCacheEnabled(true);
-            Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
-            view.setDrawingCacheEnabled(false);
-            return bitmap;
-        } catch (Throwable e) {
-            // Several error may come out with file handling or OOM
-            com.inverce.mod.core.Log.exs(e);
-        }
-
-        return null;
-    }
-
     public static void hideSoftInput(View view) {
         if (view == null) return;
         try {
@@ -78,10 +19,6 @@ public class UI extends Ui {
         } catch (Exception ignored) { /* safely ignore, as ex in here means we could not hide keyboard */ }
 
        // Tools.clearCurrentFocus();
-    }
-
-    public static void showSoftInput(View view) {
-        showSoftInput(view, false);
     }
 
     public static void showSoftInput(View view, boolean useImplicit) {
@@ -93,11 +30,6 @@ public class UI extends Ui {
                 imm.toggleSoftInput(0, 0);
             }
         } catch (Exception ignored) { /* safely ignore, as ex in here means we could not hide keyboard */ }
-    }
-
-
-    public static void makeToast(String message) {
-        Toast.makeText(IM.context(), message, Toast.LENGTH_SHORT).show();
     }
 
     public static String string() {

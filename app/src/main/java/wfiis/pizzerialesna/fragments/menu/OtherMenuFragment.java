@@ -1,4 +1,4 @@
-package wfiis.pizzerialesna.fragments;
+package wfiis.pizzerialesna.fragments.menu;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,13 +21,16 @@ import java.util.List;
 
 import wfiis.pizzerialesna.R;
 import wfiis.pizzerialesna.base.BaseFragment;
-import wfiis.pizzerialesna.fragments.adapters.OtherMenuAdapter;
-import wfiis.pizzerialesna.fragments.adapters.SalatMenuAdapter;
-import wfiis.pizzerialesna.fragments.adapters.ZapiekankaMenuAdapter;
+import wfiis.pizzerialesna.fragments.menu.adapters.InneMenuAdapter;
+import wfiis.pizzerialesna.fragments.menu.adapters.OtherMenuAdapter;
+import wfiis.pizzerialesna.fragments.menu.adapters.SalatMenuAdapter;
+import wfiis.pizzerialesna.fragments.menu.adapters.ZapiekankaMenuAdapter;
+import wfiis.pizzerialesna.model.Inne;
 import wfiis.pizzerialesna.model.Obiad;
 import wfiis.pizzerialesna.model.Salatka;
 import wfiis.pizzerialesna.model.Zapiekanka;
 
+import static wfiis.pizzerialesna.Cfg.inne_table;
 import static wfiis.pizzerialesna.Cfg.obiad_table;
 import static wfiis.pizzerialesna.Cfg.salatki_table;
 import static wfiis.pizzerialesna.Cfg.zapiekanki_table;
@@ -43,9 +46,13 @@ public class OtherMenuFragment extends BaseFragment {
     private RecyclerView zapRV;
     private ZapiekankaMenuAdapter zapiekankaMenuAdapter;
 
+    private RecyclerView inneRV;
+    private InneMenuAdapter inneMenuAdapter;
+
     private List<Obiad> otherList;
     private List<Zapiekanka> zapiekankaList;
     private List<Salatka> salatkaList;
+    private List<Inne> inneList;
 
     public static OtherMenuFragment newInstance() {
         return new OtherMenuFragment();
@@ -65,6 +72,7 @@ public class OtherMenuFragment extends BaseFragment {
 
         getActions().topBar().showBackIcon(false);
         getActions().topBar().showMenuIcon(false);
+        getActions().topBar().showBasketIcon(true);
         return view;
     }
 
@@ -72,14 +80,17 @@ public class OtherMenuFragment extends BaseFragment {
         otherList = new ArrayList<>();
         zapiekankaList = new ArrayList<>();
         salatkaList = new ArrayList<>();
+        inneList = new ArrayList<>();
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref = database.child(obiad_table);
         DatabaseReference ref2 = database.child(zapiekanki_table);
         DatabaseReference ref3 = database.child(salatki_table);
+        DatabaseReference ref4 = database.child(inne_table);
         Query obiadQuerry = ref;
         Query zapiekankaQuerry = ref2;
         Query salatkaQuerry = ref3;
+        Query inneQuerry = ref4;
 
         showPreloader();
         obiadQuerry.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -88,7 +99,7 @@ public class OtherMenuFragment extends BaseFragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                     Obiad o = singleSnapshot.getValue(Obiad.class);
-                    otherList.add(new Obiad(o.getName(), o.getIngredients(), o.getPrice(), o.getType()));
+                    otherList.add(new Obiad(o.getName(), o.getIngredients(), o.getPrice(), o.getType(), o.getNumber()));
                     otherMenuAdapter.notifyDataSetChanged();
                 }
             }
@@ -105,7 +116,7 @@ public class OtherMenuFragment extends BaseFragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                     Salatka s = singleSnapshot.getValue(Salatka.class);
-                    salatkaList.add(new Salatka(s.getName(), s.getIngredients(), s.getPrice(), s.getType()));
+                    salatkaList.add(new Salatka(s.getName(), s.getIngredients(), s.getPrice(), s.getType(), s.getNumber()));
                     salatMenuAdapter.notifyDataSetChanged();
                 }
             }
@@ -122,8 +133,27 @@ public class OtherMenuFragment extends BaseFragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                     Zapiekanka z = singleSnapshot.getValue(Zapiekanka.class);
-                    zapiekankaList.add(new Zapiekanka(z.getName(), z.getPrice(), z.getType()));
+                    zapiekankaList.add(new Zapiekanka(z.getName(), z.getPrice(), z.getType(), z.getNumber()));
                     zapiekankaMenuAdapter.notifyDataSetChanged();
+                }
+                dissMissPreloader();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("ERROR", "onCancelled", databaseError.toException());
+                dissMissPreloader();
+            }
+        });
+
+        inneQuerry.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
+                    Inne i = singleSnapshot.getValue(Inne.class);
+                    inneList.add(new Inne(i.getIngredients(), i.getName(), i.getNumber(), i.getPrice(), i.getType()));
+                    inneMenuAdapter.notifyDataSetChanged();
                 }
                 dissMissPreloader();
             }
@@ -150,6 +180,10 @@ public class OtherMenuFragment extends BaseFragment {
         linearLayoutManager3.setOrientation(LinearLayoutManager.VERTICAL);
         zapRV.setLayoutManager(linearLayoutManager3);
 
+        LinearLayoutManager linearLayoutManager4 = new LinearLayoutManager(getContext());
+        linearLayoutManager4.setOrientation(LinearLayoutManager.VERTICAL);
+        inneRV.setLayoutManager(linearLayoutManager4);
+
         otherMenuAdapter = new OtherMenuAdapter(otherList);
         recyclerView.setAdapter(otherMenuAdapter);
         //
@@ -158,6 +192,9 @@ public class OtherMenuFragment extends BaseFragment {
         //
         zapiekankaMenuAdapter = new ZapiekankaMenuAdapter(zapiekankaList);
         zapRV.setAdapter(zapiekankaMenuAdapter);
+        //
+        inneMenuAdapter = new InneMenuAdapter(inneList);
+        inneRV.setAdapter(inneMenuAdapter);
     }
 
     private void setListeners() {
@@ -167,6 +204,7 @@ public class OtherMenuFragment extends BaseFragment {
         recyclerView = view.findViewById(R.id.fragment_other_menu_rv);
         salatRV = view.findViewById(R.id.fragment_other_menu_rv_salat);
         zapRV = view.findViewById(R.id.fragment_other_menu_rv_zap);
+        inneRV = view.findViewById(R.id.fragment_other_menu_rv_inne);
     }
 
     @Override
