@@ -6,11 +6,17 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.crashlytics.android.Crashlytics;
+import com.inverce.mod.core.IM;
+import com.kaopiz.kprogresshud.KProgressHUD;
+
+import io.fabric.sdk.android.Fabric;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import wfiis.pizzerialesna.base.BaseFragment;
@@ -25,10 +31,12 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
     private Preloader preloader;
     private boolean isDrawerMenuOpen;
     private DrawerLayout drawerMenu;
+    private KProgressHUD progressHUD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
 
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                 .setDefaultFontPath("fonts/Maritime_Tropical_Neue.ttf")
@@ -37,6 +45,13 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
         );
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         setContentView(R.layout.activity_main);
+
+        progressHUD = KProgressHUD.create(this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setBackgroundColor(ContextCompat.getColor(IM.context(), R.color.transparent))
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         topBar = (TopBarInteractions) fragmentManager.findFragmentById(R.id.top_fragment);
@@ -119,14 +134,17 @@ public class MainActivity extends AppCompatActivity implements ActivityInteracti
 
     @Override
     public void showPreloader() {
-        preloader.show();
+
+        progressHUD.show();
+        //preloader.show();
     }
 
     @Override
     public void disMissPreloader() {
-        if (preloader != null) {
-            preloader.dissMiss();
-        }
+        if (progressHUD != null && progressHUD.isShowing()) {
+            progressHUD.dismiss();
+            //preloader.dissMiss();
+       }
     }
 
     @Override

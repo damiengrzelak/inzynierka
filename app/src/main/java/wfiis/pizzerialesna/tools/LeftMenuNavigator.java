@@ -2,6 +2,7 @@ package wfiis.pizzerialesna.tools;
 
 import java.lang.ref.WeakReference;
 
+import wfiis.pizzerialesna.fragments.ChangePasswordFragment;
 import wfiis.pizzerialesna.fragments.LoginFragment;
 import wfiis.pizzerialesna.fragments.MyProfileFragment;
 import wfiis.pizzerialesna.fragments.SetttingFragment;
@@ -28,7 +29,7 @@ public class LeftMenuNavigator {
     public static void toSettings() {
         WeakReference<ActivityInteractions> mainActivityInterface = Tools.getMainActivityInterface();
         if (mainActivityInterface != null) {
-            mainActivityInterface.get().navigateTo(SetttingFragment.newInstance(), true);
+            mainActivityInterface.get().navigateTo(ChangePasswordFragment.newInstance(), true);
             mainActivityInterface.get().changeDrawerMenuState();
         }
     }

@@ -33,6 +33,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="56fc999037974a230535ae940e6b38fad46b5f77" />
     </application>
     <meta-data
         android:name="wfiis.pizzerialesna.glide.HqGlideModule"

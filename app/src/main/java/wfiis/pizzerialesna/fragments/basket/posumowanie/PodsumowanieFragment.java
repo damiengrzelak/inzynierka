@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.telephony.SmsManager;
@@ -52,6 +53,9 @@ public class PodsumowanieFragment extends BaseFragment {
     private OrderListAdapter adapter;
     private List<Basket> basketList = new ArrayList<>();
     private Button zlozZamowienie;
+
+    private CardView adressContainer;
+    private TextView obiorosobitytext;
 
     public static PodsumowanieFragment newInstance() {
         return new PodsumowanieFragment();
@@ -273,13 +277,22 @@ public class PodsumowanieFragment extends BaseFragment {
         tel = view.findViewById(R.id.zamowienie_dostawa_tel);
         recyclerView = view.findViewById(R.id.podsumowanie_recycler);
         zlozZamowienie = view.findViewById(R.id.zloz_zamowienie);
+        adressContainer = view.findViewById(R.id.zamowieni_adrres_container);
+        obiorosobitytext = view.findViewById(R.id.obiorsobisttekst);
     }
 
     private void fillViews() {
         kosztZamowienia.setText(getArguments().getString(CENA));
 
-        city.setText(basketInformation.getStreet() + " " + basketInformation.getFlatNumber());
-        miasto.setText(basketInformation.getCity() + " " + basketInformation.getZipCode());
-        tel.setText("tel:" + basketInformation.getPhone());
+        if (!basketInformation.isPersonal()) {
+            city.setText(basketInformation.getStreet() + " " + basketInformation.getFlatNumber());
+            miasto.setText(basketInformation.getCity() + " " + basketInformation.getZipCode());
+            tel.setText("tel:" + basketInformation.getPhone());
+            obiorosobitytext.setVisibility(View.GONE);
+            adressContainer.setVisibility(View.VISIBLE);
+        } else {
+            obiorosobitytext.setVisibility(View.VISIBLE);
+            adressContainer.setVisibility(View.GONE);
+        }
     }
 }

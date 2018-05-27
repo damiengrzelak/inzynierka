@@ -141,7 +141,6 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
                                     isValid = false;
                                     AppendMessage.showSuccessOrError();
                                 }
-
                             }
                         });
             }

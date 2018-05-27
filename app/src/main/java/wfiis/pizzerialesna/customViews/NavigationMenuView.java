@@ -81,7 +81,7 @@ public class NavigationMenuView extends LinearLayout implements AdapterView.OnIt
         }));
 //
 //        //settings
-        menuItems.add(new MenuItem("Settings", null, ContextCompat.getDrawable(getContext(), R.drawable.setting_icon), "Ustawienia", new MenuItem.ClickListener() {
+        menuItems.add(new MenuItem("Zmiana hasła", null, ContextCompat.getDrawable(getContext(), R.drawable.setting_icon), "Ustawienia", new MenuItem.ClickListener() {
             @Override
             public void onClick() {
                 LeftMenuNavigator.toSettings();

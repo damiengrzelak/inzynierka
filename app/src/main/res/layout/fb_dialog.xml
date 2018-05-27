@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/custom_dialog_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:elevation="8dp"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background=""
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/top_rounded_bg"></LinearLayout>
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="@dimen/left_right_padding"
+            android:layout_marginLeft="@dimen/left_right_padding"
+            android:layout_marginRight="@dimen/left_right_padding"
+            android:layout_marginTop="@dimen/left_right_padding"
+            android:gravity="center_vertical|center_horizontal" />
+
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/left_right_padding"
+            android:layout_marginLeft="@dimen/left_right_padding"
+            android:layout_marginRight="@dimen/left_right_padding"
+            android:layout_marginTop="@dimen/left_right_padding"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/normall_text" />
+
+
+        <Button
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/left_right_padding"
+            android:layout_marginTop="@dimen/left_right_padding"
+            android:background="@drawable/rounded_button_background"
+            android:padding="15dp"
+            android:text="Zamknij"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>
